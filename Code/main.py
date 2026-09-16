@@ -1,5 +1,6 @@
 # External import
 
+import Path
 import _thread
 import pyosm
 import pynmea2
@@ -29,7 +30,13 @@ class CarNavApp:
 
             time.sleep(0.01)
 
+    def get_location_speed(self):
+        return self.lat_lng_speed
+
+    def get_location(self):
+        return [self.lat_lng_speed[0], self.lat_lng_speed[1]]
+
     def stop(self):
         self.running = False
 
-        self.GPsManager.stop()
+        self.GPSManager.stop()
