@@ -7,7 +7,7 @@ local_path.append("/Areas")
 class AreaLoader:
     def __init__(self, owner):
         self.owner = owner
-        self.location = {
+        self.locations = {
             "Belconnen": [
                 local_path / "BELC.osm.pbf",
                 local_path / "BELC.geojson",
@@ -206,19 +206,23 @@ class AreaLoader:
         }
 
         self.located = False
+        self.location = None
 
         self.load_area = 1  # Number of adjacent areas to load: 1 Just the immediete adjacent, 2 their adjacentcies.
 
     def load_area(self):
-        location = self.owner.get_location()  # in form [Lat, Lng]
+        lat_lng = self.owner.get_location()  # in form [Lat, Lng]
 
         if self.located:
             # Check adjacent
+
             pass
 
         else:
             # Check all
-            pass
+            for area in self.locations:
+                # Check if the areas.geojson has the current lat_lng in it
+                pass
 
 
 # When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others
