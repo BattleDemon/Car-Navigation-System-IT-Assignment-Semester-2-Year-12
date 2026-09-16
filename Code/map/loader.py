@@ -7,25 +7,82 @@ local_path.append("/Areas")
 class AreaLoader:
     def __init__(self):
         self.location = {
-            "Belconnen": local_path / "BELC.osm.pbf",
-            "Booth": local_path / "BOOT.osm.pbf",
-            "Canberra Cental": local_path / "CANB.osm.pbf",
-            "Coree": local_path / "CORE.osm.pbf",
-            "Cotter River": local_path / "COTT.osm.pbf",
-            "Gungahlin": local_path / "GUNG.osm.pbf",
-            "Hall": local_path / "HALL.osm.pbf",
-            "Jerrabomberra": local_path / "JERR.osm.pbf",
-            "Kowen": local_path / "KOWE.osm.pbf",
-            "Majura": local_path / "MAJU.osm.pbf",
-            "Molonglo Valley": local_path / "MOLO.osm.pbf",
-            "Mount Clear": local_path / "MOUN.osm.pbf",
-            "Paddys River": local_path / "PADD.osm.pbf",
-            "Rendezvous Creek": local_path / "REND.osm.pbf",
-            "Stromlo": local_path / "STRO.osm.pbf",
-            "Tennent": local_path / "TENN.osm.pbf",
-            "Tuggeranong": local_path / "TUGG.osm.pbf",
-            "Weston Creek": local_path / "WEST.osm.pbf",
-            "Woden Valley": local_path / "WODE.osm.pbf",
+            "Belconnen": [
+                local_path / "BELC.osm.pbf",
+                local_path / "BELC.geojson",
+            ],
+            "Booth": [
+                local_path / "BOOT.osm.pbf",
+                local_path / "BOOT.geojson",
+            ],
+            "Canberra Cental": [
+                local_path / "CANB.osm.pbf",
+                local_path / "CANB.geojson",
+            ],
+            "Coree": [
+                local_path / "CORE.osm.pbf",
+                local_path / "CORE.geojson",
+            ],
+            "Cotter River": [
+                local_path / "COTT.osm.pbf",
+                local_path / "COTT.geojson",
+            ],
+            "Gungahlin": [
+                local_path / "GUNG.osm.pbf",
+                local_path / "GUNG.geojson",
+            ],
+            "Hall": [
+                local_path / "HALL.osm.pbf",
+                local_path / "HALL.geojson",
+            ],
+            "Jerrabomberra": [
+                local_path / "JERR.osm.pbf",
+                local_path / "JERR.geojson",
+            ],
+            "Kowen": [
+                local_path / "KOWE.osm.pbf",
+                local_path / "KOWE.geojson",
+            ],
+            "Majura": [
+                local_path / "MAJU.osm.pbf",
+                local_path / "MAJU.geojson",
+            ],
+            "Molonglo Valley": [
+                local_path / "MOLO.osm.pbf",
+                local_path / "MOLO.geojson",
+            ],
+            "Mount Clear": [
+                local_path / "MOUN.osm.pbf",
+                local_path / "MOUN.geojson",
+            ],
+            "Paddys River": [
+                local_path / "PADD.osm.pbf",
+                local_path / "PADD.geojson",
+            ],
+            "Rendezvous Creek": [
+                local_path / "REND.osm.pbf",
+                local_path / "REND.geojson",
+            ],
+            "Stromlo": [
+                local_path / "STRO.osm.pbf",
+                local_path / "STRO.geojson",
+            ],
+            "Tennent": [
+                local_path / "TENN.osm.pbf",
+                local_path / "TENN.geojson",
+            ],
+            "Tuggeranong": [
+                local_path / "TUGG.osm.pbf",
+                local_path / "TUGG.geojson",
+            ],
+            "Weston Creek": [
+                local_path / "WEST.osm.pbf",
+                local_path / "WEST.geojson",
+            ],
+            "Woden Valley": [
+                local_path / "WODE.osm.pbf",
+                local_path / "WODE.geojson",
+            ],
         }
 
         self.adjacentcies = {
@@ -154,3 +211,6 @@ class AreaLoader:
 
     def load_region():
         pass
+
+
+# When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others
