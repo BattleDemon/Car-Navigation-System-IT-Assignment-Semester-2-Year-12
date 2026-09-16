@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Need to do currently.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Need to do currently"
+              "title": "README"
             }
           }
         ],
@@ -206,14 +206,14 @@
   },
   "active": "8b725b1c5ffc1958",
   "lastOpenFiles": [
-    "README.md",
     "Code/map/loader.py~",
-    "NEO-6_DataSheet_(GPS.G6-HW-09005).pdf",
+    "Preplanning/Proposal.md",
     "Need to do currently.md",
+    "README.md",
+    "NEO-6_DataSheet_(GPS.G6-HW-09005).pdf",
     "gpiozero-readthedocs-io-en-stable.pdf",
     "Preplanning/Raspberry-Pi-5-Pinout--1210x642.jpg",
     "Preplanning/Raspberry-Pi-5-Pinout_Highlighted.jpg",
-    "Preplanning/Proposal.md",
     "Documentation/260822_23h31m26s_screenshot.png",
     "Documentation/Australia_ramusage_osmloading_screenshot.png",
     "Documentation/Australia_osmloading_screenshot.png",
