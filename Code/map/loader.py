@@ -211,7 +211,7 @@ class AreaLoader:
 
         self.load_area = 1  # Number of adjacent areas to load: 1 Just the immediete adjacent, 2 their adjacentcies.
 
-    def load_area(self):
+    def find_location(self):
         lat_lng = self.owner.get_location()  # in form [Lat, Lng]
         self.cordinates = Point(lat_lng[1], lat_lng[0])
 
