@@ -242,11 +242,12 @@ Designs (diagrams)
 
 #### Milestone 1: Initial set up of the Raspberry Pi 
 
+This milestone was the simplest to complete as it only involved, the ordering of parts and their initial setup. 
 
 
-#### Milestone 2: Extract data and GPS System
+#### Milestone 2: Gathering and Extraction of data and GPS System
 
-
+This is where the actual development and coding began, along with the gathering of data that will allow for the future systems. This began with finding the 
 
 #### Milestone 3: Navigation and Backend
 
@@ -291,6 +292,13 @@ Districts within ACT GEOJson data source
 https://actmapi-actgov.opendata.arcgis.com/datasets/actgov-district/about
 another pyrosm doc
 https://pyrosm.readthedocs.io/en/latest/api/pyrosm.OSM.to_graph.html#pyrosm.OSM.to_graph
+
+Need to add
+Shapely documentation (for handling geojsons)
+https://shapely.readthedocs.io/en/stable/
+Json also for geojsons
+https://python.readthedocs.io/fr/latest/library/json.html 
+
 
 Australian Government 2026, _Actgov division_, Arcgis.com, viewed 11 September 2026, <https://actmapi-actgov.opendata.arcgis.com/datasets/ACTGOV::actgov-division/explore?location=-35.520000,149.085000,9>.
 

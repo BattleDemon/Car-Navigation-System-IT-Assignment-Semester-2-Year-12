@@ -1,4 +1,6 @@
 import Path
+import json
+from shapely.geometry import Point, shape
 
 local_path = Path(__file__).parent.parent
 local_path.append("/Areas")
@@ -11,207 +13,207 @@ class AreaLoader:
             "Belconnen": [
                 local_path / "BELC.osm.pbf",
                 local_path / "BELC.geojson",
+                [
+                    "Coree",
+                    "Hall",
+                    "Gungahlin",
+                    "Canberra Central",
+                    "Molongolo Valley",
+                    "Stromlo",
+                ],
             ],
             "Booth": [
                 local_path / "BOOT.osm.pbf",
                 local_path / "BOOT.geojson",
+                [
+                    "Mount Clear",
+                    "Rendezvous Creek",
+                    "Tennent",
+                ],
             ],
             "Canberra Cental": [
                 local_path / "CANB.osm.pbf",
                 local_path / "CANB.geojson",
+                [
+                    "Belconnen",
+                    "Gungahlin",
+                    "Majura",
+                    "Jerrabomberra",
+                    "Woden Valley",
+                    "Weston Creek",
+                    "Molongolo Valley",
+                ],
             ],
             "Coree": [
                 local_path / "CORE.osm.pbf",
                 local_path / "CORE.geojson",
+                [
+                    "Belconnen",
+                    "Stromlo",
+                    "Paddys Creek",
+                    "Cotter River",
+                ],
             ],
             "Cotter River": [
                 local_path / "COTT.osm.pbf",
                 local_path / "COTT.geojson",
+                [
+                    "Coree",
+                    "Paddys Creek",
+                    "Tennent",
+                    "Rendezvous Creek",
+                ],
             ],
             "Gungahlin": [
                 local_path / "GUNG.osm.pbf",
                 local_path / "GUNG.geojson",
+                [
+                    "Hall",
+                    "Belconnen",
+                    "Canberra Central",
+                    "Majura",
+                ],
             ],
             "Hall": [
                 local_path / "HALL.osm.pbf",
                 local_path / "HALL.geojson",
+                [
+                    "Belconnen",
+                    "Gungahlin",
+                ],
             ],
             "Jerrabomberra": [
                 local_path / "JERR.osm.pbf",
                 local_path / "JERR.geojson",
+                [
+                    "Majura",
+                    "Canberra Central",
+                    "Woden Valley",
+                    "Tuggeranong",
+                ],
             ],
             "Kowen": [
                 local_path / "KOWE.osm.pbf",
                 local_path / "KOWE.geojson",
+                ["Majura"],
             ],
             "Majura": [
                 local_path / "MAJU.osm.pbf",
                 local_path / "MAJU.geojson",
+                [
+                    "Kowen",
+                    "Gungahlin",
+                    "Canberra Central",
+                    "Jerrabomberra",
+                ],
             ],
             "Molonglo Valley": [
                 local_path / "MOLO.osm.pbf",
                 local_path / "MOLO.geojson",
+                [
+                    "Stromlo",
+                    "Belconnen",
+                    "Canberra Central",
+                    "Weston Creek",
+                ],
             ],
             "Mount Clear": [
                 local_path / "MOUN.osm.pbf",
                 local_path / "MOUN.geojson",
+                [
+                    "Rendezvous Creek",
+                    "Booth",
+                ],
             ],
             "Paddys River": [
                 local_path / "PADD.osm.pbf",
                 local_path / "PADD.geojson",
+                [
+                    "Cotter River",
+                    "Coree",
+                    "Stromlo",
+                    "Tuggeranong",
+                    "Tennent",
+                ],
             ],
             "Rendezvous Creek": [
                 local_path / "REND.osm.pbf",
                 local_path / "REND.geojson",
+                [
+                    "Cotter River",
+                    "Tennent",
+                    "Booth",
+                    "Mount Clear",
+                ],
             ],
             "Stromlo": [
                 local_path / "STRO.osm.pbf",
                 local_path / "STRO.geojson",
+                [
+                    "Coree",
+                    "Belconnen",
+                    "Molongolo Valley",
+                    "Weston Creek",
+                    "Tuggeranong",
+                    "Paddys Creek",
+                ],
             ],
             "Tennent": [
                 local_path / "TENN.osm.pbf",
                 local_path / "TENN.geojson",
+                [
+                    "Cotter River",
+                    "Paddys River",
+                    "Tuggeranong",
+                    "Booth",
+                    "Rendezvous Creek",
+                ],
             ],
             "Tuggeranong": [
                 local_path / "TUGG.osm.pbf",
                 local_path / "TUGG.geojson",
+                [
+                    "Stromlo",
+                    "Weston Creek",
+                    "Woden Valley",
+                    "Jerrabomberra",
+                    "Tennent",
+                    "Paddys River",
+                ],
             ],
             "Weston Creek": [
                 local_path / "WEST.osm.pbf",
                 local_path / "WEST.geojson",
+                [
+                    "Stromlo",
+                    "Molongolo Valley",
+                    "Canberra Central",
+                    "Woden Valley",
+                    "Tuggeranong",
+                ],
             ],
             "Woden Valley": [
                 local_path / "WODE.osm.pbf",
                 local_path / "WODE.geojson",
-            ],
-        }
-
-        self.adjacentcies = {
-            "Belconnen": [
-                "Hall",
-                "Gungahlin",
-                "Canberra Central",
-                "Molongolo Valley",
-                "Stromlo",
-                "Coree",
-            ],
-            "Booth": [
-                "Mount Clear",
-                "Rendezvous Creek",
-                "Tennent",
-            ],
-            "Canberra Central": [
-                "Belconnen",
-                "Gungahlin",
-                "Majura",
-                "Jerrabomberra",
-                "Woden Valley",
-                "Weston Creek",
-                "Molongolo Valley",
-            ],
-            "Coree": [
-                "Belconnen",
-                "Stromlo",
-                "Paddys Creek",
-                "Cotter River",
-            ],
-            "Cotter River": [
-                "Coree",
-                "Paddys Creek",
-                "Tennent",
-                "Rendezvous Creek",
-            ],
-            "Gungahlin": [
-                "Hall",
-                "Belconnen",
-                "Canberra Central",
-                "Majura",
-            ],
-            "Hall": [
-                "Belconnen",
-                "Gungahlin",
-            ],
-            "Jerrabomberra": [
-                "Majura",
-                "Canberra Central",
-                "Woden Valley",
-                "Tuggeranong",
-            ],
-            "Kowen": ["Majura"],
-            "Majura": [
-                "Kowen",
-                "Gungahlin",
-                "Canberra Central",
-                "Jerrabomberra",
-            ],
-            "Molongolo Valley": [
-                "Stromlo",
-                "Belconnen",
-                "Canberra Central",
-                "Weston Creek",
-            ],
-            "Mount Clear": [
-                "Rendezvous Creek",
-                "Booth",
-            ],
-            "Paddys River": [
-                "Cotter River",
-                "Coree",
-                "Stromlo",
-                "Tuggeranong",
-                "Tennent",
-            ],
-            "Rendezvous Creek": [
-                "Cotter River",
-                "Tennent",
-                "Booth",
-                "Mount Clear",
-            ],
-            "Stromlo": [
-                "Coree",
-                "Belconnen",
-                "Molongolo Valley",
-                "Weston Creek",
-                "Tuggeranong",
-                "Paddys Creek",
-            ],
-            "Tennent": [
-                "Cotter River",
-                "Paddys River",
-                "Tuggeranong",
-                "Booth",
-                "Rendezvous Creek",
-            ],
-            "Tuggeranong": [
-                "Stromlo",
-                "Weston Creek",
-                "Woden Valley",
-                "Jerrabomberra",
-                "Tennent",
-                "Paddys River",
-            ],
-            "Weston Creek": [
-                "Stromlo",
-                "Molongolo Valley",
-                "Canberra Central",
-                "Woden Valley",
-                "Tuggeranong",
-            ],
-            "Woden Valley": [
-                "Weston Creek",
-                "Canberra Central",
-                "Jerrabomberra",
-                "Tuggeranong",
+                [
+                    "Weston Creek",
+                    "Canberra Central",
+                    "Jerrabomberra",
+                    "Tuggeranong",
+                ],
             ],
         }
 
         self.located = False
         self.location = None
 
+        self.coordinates = None
+
         self.load_area = 1  # Number of adjacent areas to load: 1 Just the immediete adjacent, 2 their adjacentcies.
 
     def load_area(self):
         lat_lng = self.owner.get_location()  # in form [Lat, Lng]
+        self.cordinates = Point(lat_lng[1], lat_lng[0])
 
         if self.located:
             # Check adjacent
@@ -222,7 +224,17 @@ class AreaLoader:
             # Check all
             for area in self.locations:
                 # Check if the areas.geojson has the current lat_lng in it
-                pass
+                with open(area[1], "r") as f:
+                    geojson_date = json.load(f)
+
+                is_inside = False
+                for feature in geojson_date["features"]:
+                    polygon = shape(feature["geometry"])
+                    if polygon.contains(self.coordinates):
+                        is_inside = True
+                        self.location = area
+                        self.located = True
+                        break
 
 
 # When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others
