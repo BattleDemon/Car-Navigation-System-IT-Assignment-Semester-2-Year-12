@@ -218,7 +218,18 @@ class AreaLoader:
         if self.located:
             # Check adjacent
 
-            pass
+            for area1 in self.located[2]:
+                area = list(self.locations.keys()).index(area1)
+
+                with open(area[1], "r") as f:
+                    geojson_date = json.load(f)
+
+                for feature in geojson_date["features"]:
+                    polygon = shape(feature["geometry"])
+                    if polygon.contains(self.coordinates):
+                        self.location = area1
+                        self.located = True
+                        break
 
         else:
             # Check all
@@ -227,11 +238,9 @@ class AreaLoader:
                 with open(area[1], "r") as f:
                     geojson_date = json.load(f)
 
-                is_inside = False
                 for feature in geojson_date["features"]:
                     polygon = shape(feature["geometry"])
                     if polygon.contains(self.coordinates):
-                        is_inside = True
                         self.location = area
                         self.located = True
                         break
