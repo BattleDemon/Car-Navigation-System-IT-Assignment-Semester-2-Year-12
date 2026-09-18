@@ -245,5 +245,8 @@ class AreaLoader:
                         self.located = True
                         break
 
+    def load_areas(self):
+        pass
+
 
 # When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others

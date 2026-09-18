@@ -207,6 +207,8 @@
   "active": "8b725b1c5ffc1958",
   "lastOpenFiles": [
     "Code/map/loader.py~",
+    "Need to do currently.md",
+    "README.md",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/urllib3/LICENSE.txt",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/truststore/LICENSE",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE",
@@ -216,7 +218,6 @@
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/requests/LICENSE",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/pygments/LICENSE",
-    "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
     "venv/lib/python3.14/site-packages/~ip/_vendor/idna/LICENSE.md",
     "venv/lib/python3.14/site-packages/~ip-26.1.2.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
@@ -231,9 +232,7 @@
     "Documentation/Australia_osmloading_screenshot.png",
     "Documentation/260822_23h43m04s_screenshot.png",
     "Documentation/260822_23h31m26s_screenshot.png",
-    "README.md",
     "Preplanning/Proposal.md",
-    "Need to do currently.md",
     "Documentation/documentation.md"
   ]
 }
