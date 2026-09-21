@@ -14,11 +14,14 @@ import time
 
 from gps.gps import GPSManager
 from map.osm_import import OSMImporter
+from map.loader import AreaLoader
 
 
 class CarNavApp:
     def __init__(self):
         self.GPSManager = GPSManager()
+        self.OSMImporter = OSMImporter()
+        self.AreaLoader = AreaLoader(self)
         self.lat_lng_speed = [0, 0, 0]
 
         self.update_thread = _thread.start_new_thread(self._update)
