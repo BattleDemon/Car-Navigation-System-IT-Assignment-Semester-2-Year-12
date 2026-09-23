@@ -1,4 +1,5 @@
 import Path
+import _thread
 import json
 from shapely.geometry import Point, shape
 
@@ -8,7 +9,9 @@ local_path.append("/Areas")
 
 class AreaLoader:
     def __init__(self, owner):
+        # Reference to the owner
         self.owner = owner
+        # Dictionary containing the files associated with the districts and their adjacentcies
         self.locations = {
             "Belconnen": [
                 local_path / "BELC.osm.pbf",
@@ -204,12 +207,17 @@ class AreaLoader:
             ],
         }
 
+        # If the location has been found and what it is
         self.located = False
         self.location = None
-
+        # Exact latitude and longitude
         self.coordinates = None
 
         self.load_area = 1  # Number of adjacent areas to load: 1 Just the immediete adjacent, 2 their adjacentcies.
+
+        # Running and its thread
+        self.running = True
+        self.update_thread = _thread.start_new_thread(self._update)
 
     def find_location(self):
         lat_lng = self.owner.get_location()  # in form [Lat, Lng]
@@ -247,6 +255,10 @@ class AreaLoader:
 
     def load_areas(self):
         pass
+
+    def _update(self):
+        while self.running:
+            pass
 
 
 # When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others
