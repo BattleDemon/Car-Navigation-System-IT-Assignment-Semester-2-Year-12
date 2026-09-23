@@ -296,9 +296,17 @@ Shapely documentation (for handling geojsons)
 https://shapely.readthedocs.io/en/stable/
 Json also for geojsons
 https://python.readthedocs.io/fr/latest/library/json.html 
+Pathfinding and Astar library
+https://pypi.org/project/pathfinding/
+Pathfinding GitHub
+https://github.com/brean/python-pathfinding/tree/main
 
 
 Australian Government 2026, _Actgov division_, Arcgis.com, viewed 11 September 2026, <https://actmapi-actgov.opendata.arcgis.com/datasets/ACTGOV::actgov-division/explore?location=-35.520000,149.085000,9>.
+
+brean 2026, _Brean/python-pathfinding: Implementation of common pathfinding algorithms_, GitHub, viewed 23 September 2026, <https://github.com/brean/python-pathfinding>.
+
+Bresser, A 2026, _Pathfinding: Pathfinding algorithms (based on pathfinding.JS)_, PyPI, viewed 23 September 2026, <https://pypi.org/project/pathfinding/>.
 
 Code Academy 2025, _A complete guide to Dijkstra’s shortest path algorithm_, Codecademy, viewed 11 September 2026, <https://www.codecademy.com/article/dijkstras-shortest-path-algorithm>.
 
