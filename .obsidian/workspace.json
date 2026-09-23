@@ -206,6 +206,7 @@
   },
   "active": "8b725b1c5ffc1958",
   "lastOpenFiles": [
+    "Code/map/loader.py~",
     "pathtest.py~",
     "pathtest.py",
     "temp.py~",
@@ -216,7 +217,6 @@
     "venv/lib/python3.14/site-packages/pathfinding/finder/__pycache__/finder.cpython-314.pyc",
     "venv/lib/python3.14/site-packages/pathfinding/finder/__pycache__/dijkstra.cpython-314.pyc",
     "venv/lib/python3.14/site-packages/pathfinding/finder/__pycache__/breadth_first.cpython-314.pyc",
-    "venv/lib/python3.14/site-packages/pathfinding/finder/__pycache__/bi_dijkstra.cpython-314.pyc",
     "Need to do currently.md",
     "README.md",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",

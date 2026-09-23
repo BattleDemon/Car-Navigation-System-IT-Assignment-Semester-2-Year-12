@@ -258,7 +258,18 @@ class AreaLoader:
 
     def _update(self):
         while self.running:
-            pass
+            lat_lng = self.owner.get_location()
+            self.coordinates = Point(lat_lng[1], lat_lng[0])
+
+            with open(self.location[1], "r") as f:
+                geojson_data = json.load(f)
+
+            for feature in geojson_data["features"]:
+                polygon = shape(feature["geometry"])
+                if polygon.contains(self.coordinates):
+                    break
+                else:
+                    self.find_location()
 
 
 # When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others
