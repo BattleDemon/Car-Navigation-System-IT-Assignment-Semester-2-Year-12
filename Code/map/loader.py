@@ -1,6 +1,7 @@
 import Path
 import _thread
 import json
+import time
 from shapely.geometry import Point, shape
 
 local_path = Path(__file__).parent.parent
@@ -270,6 +271,8 @@ class AreaLoader:
                     break
                 else:
                     self.find_location()
+
+    time.sleep(15)  # Checks every 15 seconds
 
 
 # When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others
