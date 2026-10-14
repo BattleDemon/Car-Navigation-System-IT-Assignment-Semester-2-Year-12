@@ -109,6 +109,10 @@ class Router:
                 last_node = node_id
                 continue
             else:
-                self.graph[last_node][node_id]
+                edge = self.graph[last_node][node_id]
+
+                print(edge)
+
+                length_speed.append([edge["length"], edge["maxspeed"]])
 
                 last_node = node_id
