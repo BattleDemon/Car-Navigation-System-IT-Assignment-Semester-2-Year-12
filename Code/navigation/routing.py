@@ -109,7 +109,7 @@ class Router:
                 last_node = node_id
                 continue
             else:
-                edge = self.graph[last_node][node_id]
+                edge = self.graph.get_edge_data(last_node, node_id)
 
                 print(edge)
 
