@@ -86,7 +86,7 @@ class Router:
                 self.graph,
                 start_node,
                 end_node,
-                est_distance=self.est_distance,
+                heuristic=self.est_distance,
                 weight="length"
             )
 
