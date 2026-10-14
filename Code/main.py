@@ -15,6 +15,8 @@ import time
 from gps.gps import GPSManager
 from map.osm_import import OSMImporter
 from map.loader import AreaLoader
+from map.road_graph import RoadGraph
+from navigation.navigation import NavigationController
 
 
 class CarNavApp:
@@ -26,6 +28,14 @@ class CarNavApp:
 
         self.update_thread = _thread.start_new_thread(self._update)
         self.running = True
+
+        self.RoadGraph = RoadGraph("Code/map/WEST.osm.pbf")
+        self.RoadGraph.load()
+
+        self.NavigationController = NavigationController(
+            self,
+            self.RoadGraph
+        )
 
     def _update(self):
         while self.running:
