@@ -58,3 +58,9 @@ class NavigationController:
         self.destination = None
         self.route = None
         self.route_coordinates = []
+
+
+# Go through each pair of nodes in the route and get the edge between them
+# Add each edge's "length" together to get the full route distance in metres
+# Convert that distance to km, then use an average speed to estimate travel time
+# Store the distance and time in NavigationController so the UI can use them later

@@ -17,6 +17,8 @@ class RoadGraph:
             network_type="driving",
             nodes=True
         )
+        
+        print(self.edges.columns)
 
         self.graph = self.osm.to_graph(
             self.nodes,
