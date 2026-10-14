@@ -20,10 +20,7 @@ class Router:
             node_lat = node["y"]
             node_lng = node["x"]
 
-            distance = (
-                (lat - node_lat) ** 2
-                + (lng - node_lng) ** 2
-            )
+            distance = (lat - node_lat) ** 2 + (lng - node_lng) ** 2
 
             if distance < closest_distance:
                 closest_distance = distance
@@ -36,19 +33,14 @@ class Router:
         first = self.graph.nodes[node1]
         second = self.graph.nodes[node2]
 
-        return self.distance(
-            first["y"],
-            first["x"],
-            second["y"],
-            second["x"]
-        )
+        return self.distance(first["y"], first["x"], second["y"], second["x"])
 
     def distance(self, lat1, lng1, lat2, lng2):
         # Calculate distance betwee GPS coordinates
         # using the Haversine formula. The result is returned in metres.
         earth_radius = 6371000
 
-        # Since lat and lng are basically just the angles from equator 
+        # Since lat and lng are basically just the angles from equator
         # they can be turned into radians
         lat1_rad = math.radians(lat1)
         lat2_rad = math.radians(lat2)
@@ -63,10 +55,7 @@ class Router:
             * math.sin(lng_difference / 2) ** 2
         )
 
-        c = 2 * math.atan2(
-            math.sqrt(a),
-            math.sqrt(1 - a)
-        )
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
         return earth_radius * c
 
@@ -87,7 +76,7 @@ class Router:
                 start_node,
                 end_node,
                 heuristic=self.est_distance,
-                weight="length"
+                weight="length",
             )
 
             return route
@@ -107,9 +96,19 @@ class Router:
         for node_id in route:
             node = self.graph.nodes[node_id]
 
-            coordinates.append([
-                node["y"],
-                node["x"]
-            ])
+            coordinates.append([node["y"], node["x"]])
 
         return coordinates
+
+    def get_route_legth_speed(self, route):
+        length_speed = []
+        last_node = None
+
+        for node_id in route:
+            if last_node == None:
+                last_node = node_id
+                continue
+            else:
+                self.graph[last_node][node_id]
+
+                last_node = node_id

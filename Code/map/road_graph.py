@@ -14,16 +14,12 @@ class RoadGraph:
         self.osm = OSM(self.osm_file)
 
         self.nodes, self.edges = self.osm.get_network(
-            network_type="driving",
-            nodes=True
+            network_type="driving", nodes=True
         )
-        
+
         print(self.edges.columns)
 
-        self.graph = self.osm.to_graph(
-            self.nodes,
-            self.edges,
-            graph_type="networkx"
-        )
+        self.graph = self.osm.to_graph(self.nodes, self.edges, graph_type="networkx")
 
         return self.graph
+

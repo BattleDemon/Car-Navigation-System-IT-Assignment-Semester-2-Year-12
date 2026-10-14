@@ -6,6 +6,7 @@ class NavigationController:
         # CarNavApp gives us access to the current GPS location.
         self.owner = owner
 
+        self.road_graph = road_graph
         # Router handles the actual pathfinding through the road network.
         self.router = Router(road_graph)
 
@@ -32,19 +33,15 @@ class NavigationController:
             return None
 
         self.route = self.router.calculate_route(
-            start[0],
-            start[1],
-            self.destination[0],
-            self.destination[1]
+            start[0], start[1], self.destination[0], self.destination[1]
         )
 
         if self.route is None:
             self.route_coordinates = []
             return None
 
-        self.route_coordinates = self.router.get_route_coordinates(
-            self.route
-        )
+        self.route_coordinates = self.router.get_route_coordinates(self.route)
+        self.route_length_speed = {}  # Key = node_id, element = [length, maxspeed]
 
         return self.route_coordinates
 
@@ -59,8 +56,12 @@ class NavigationController:
         self.route = None
         self.route_coordinates = []
 
+    def calculate_route_time(self):
+        default_speed = 50  # km/h
+
 
 # Go through each pair of nodes in the route and get the edge between them
 # Add each edge's "length" together to get the full route distance in metres
 # Convert that distance to km, then use an average speed to estimate travel time
 # Store the distance and time in NavigationController so the UI can use them later
+
