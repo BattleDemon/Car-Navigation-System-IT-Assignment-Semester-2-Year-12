@@ -56,12 +56,19 @@ class NavigationController:
         self.route = None
         self.route_coordinates = []
 
-    def calculate_route_time(self):
-        default_speed = 50  # km/h
+    def calculate_estimated_time(self):
+        if self.route is None:
+            return None
 
+        length_speed = self.router.get_route_legth_speed(self.route)
 
-# Go through each pair of nodes in the route and get the edge between them
-# Add each edge's "length" together to get the full route distance in metres
-# Convert that distance to km, then use an average speed to estimate travel time
-# Store the distance and time in NavigationController so the UI can use them later
+        total_minutes = 0
 
+        for length, speed in length_speed:
+            if speed is None:
+                speed = 50 # Assume default speed
+
+            distance_km = length / 1000
+            time_hours = distance_km / float(speed)
+
+            total_minutes += time_hours * 60

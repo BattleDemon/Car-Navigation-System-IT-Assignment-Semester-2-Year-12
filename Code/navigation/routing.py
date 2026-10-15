@@ -105,14 +105,22 @@ class Router:
         last_node = None
 
         for node_id in route:
-            if last_node == None:
+            if last_node is None:
                 last_node = node_id
                 continue
-            else:
-                edge = self.graph.get_edge_data(last_node, node_id)
 
-                print(edge)
+            edges = self.graph.get_edge_data(last_node, node_id)
 
-                length_speed.append([edge["length"], edge["maxspeed"]])
-
+            if edges is None:
                 last_node = node_id
+                continue
+
+            edge = list(edges.values())[0]
+
+            length_speed.append([
+                edge.get("length"),
+                edge.get("maxspeed")
+            ])
+            last_node = node_id
+
+        return length_speed
