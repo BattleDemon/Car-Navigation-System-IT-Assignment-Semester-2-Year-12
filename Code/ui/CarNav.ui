@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="CentralWidget">
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -23,19 +23,42 @@
       <height>471</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="CentalVlayout">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+      <layout class="QHBoxLayout" name="TopHLayout">
+       <item>
+        <widget class="QWidget" name="SpeedWoidget" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="LocationWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="TimeWidget" native="true"/>
+       </item>
+      </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QHBoxLayout" name="MiddleHLayout">
        <item>
         <widget class="QWidget" name="widget" native="true"/>
        </item>
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout"/>
+      <layout class="QHBoxLayout" name="BottomHLayout">
+       <item>
+        <widget class="QWidget" name="StopRouteWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="TravelAnimationWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="ETAWidget" native="true"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="DestSelectWidget" native="true"/>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>
