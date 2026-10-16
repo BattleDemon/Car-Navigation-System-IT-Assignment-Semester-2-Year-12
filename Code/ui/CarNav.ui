@@ -30,10 +30,21 @@
         <widget class="QWidget" name="SpeedWoidget" native="true"/>
        </item>
        <item>
-        <widget class="QWidget" name="LocationWidget" native="true"/>
+        <layout class="QVBoxLayout" name="TimeNameLayout">
+         <item>
+          <widget class="QWidget" name="NameWidget" native="true"/>
+         </item>
+         <item>
+          <widget class="QWidget" name="TimeWidget" native="true"/>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QWidget" name="TimeWidget" native="true"/>
+        <widget class="QWidget" name="LocationWidget" native="true">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
