@@ -14,3 +14,5 @@ class MainWindow(QMainWindow):
 
         main_layout = QVBoxLayout()
         central_widget.setLayout(main_layout)
+
+        
