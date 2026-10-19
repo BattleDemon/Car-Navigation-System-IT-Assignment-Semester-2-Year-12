@@ -57,17 +57,48 @@
      </item>
      <item>
       <layout class="QHBoxLayout" name="BottomHLayout">
+       <property name="sizeConstraint">
+        <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+       </property>
        <item>
-        <widget class="QWidget" name="StopRouteWidget" native="true"/>
+        <widget class="QWidget" name="StopRouteWidget" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QWidget" name="TravelAnimationWidget" native="true"/>
+        <widget class="QWidget" name="TravelAnimationWidget" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QWidget" name="ETAWidget" native="true"/>
+        <widget class="QWidget" name="ETAWidget" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QWidget" name="DestSelectWidget" native="true"/>
+        <widget class="QWidget" name="DestSelectWidget" native="true">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
