@@ -59,12 +59,11 @@ class MainWindow(QMainWindow):
         self.map_widget = QWidget()
 
         self.middle_glayout_widget = QWidget()
-        self.middle_glayout_widget.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.middle_glayout_widget.setStyleSheet("background-color: transparent; border: none;")
         self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.test_widget = QWidget()
         self.test_widget_opacity = QGraphicsOpacityEffect(self.test_widget)
-        self.test_widget_opacity.setOpacity(0.5)
+        self.test_widget_opacity.setOpacity(0.3)
         self.test_widget.setGraphicsEffect(self.test_widget_opacity)
         self.middle_glayout.addWidget(self.test_widget)
 
@@ -98,6 +97,7 @@ class MainWindow(QMainWindow):
             self.animation_widget: ("Travel Animation", "#4dd0e1"),
             self.eta_widget: ("ETA", "#f06292"),
             self.dest_select_widget: ("Destination Select", "#a1887f"),
+            self.test_widget: ("","#ffb74d" )
         }
 
         if debug:
