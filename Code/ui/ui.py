@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QApplication,
+    QGridLayout,
+    QStackedLayout
 )
 
 import sys
@@ -27,11 +29,11 @@ class MainWindow(QMainWindow):
         self.central_vlayout = QVBoxLayout(self.central_widget)
 
         self.top_hlayout = QHBoxLayout()
-        self.middle_hlayout = QHBoxLayout()
+        self.middle_slayout = QStackedLayout()
         self.bottom_hlayout = QHBoxLayout()
 
         self.central_vlayout.addLayout(self.top_hlayout)
-        self.central_vlayout.addLayout(self.middle_hlayout, 1)
+        self.central_vlayout.addLayout(self.middle_slayout, 1)
         self.central_vlayout.addLayout(self.bottom_hlayout)
 
         # Top layout widgets
@@ -52,7 +54,13 @@ class MainWindow(QMainWindow):
         # Middle layout widgets
         self.map_widget = QWidget()
 
-        self.middle_hlayout.addWidget(self.map_widget)
+        self.middle_glayout = QGridLayout()
+
+        self.test_widget = QWidget()
+        self.middle_glayout.addWidget(self.test_widget)
+
+        self.middle_slayout.addLayout(self.middle_glayout)
+        self.middle_slayout.addWidget(self.map_widget)
 
         # Bottom layout widgets
         self.stop_route_widget = QWidget()
