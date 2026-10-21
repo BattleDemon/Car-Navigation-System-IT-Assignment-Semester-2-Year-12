@@ -57,6 +57,8 @@ class MainWindow(QMainWindow):
         self.map_widget = QWidget()
 
         self.middle_glayout_widget = QWidget()
+        self.middle_glayout_widget.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        self.middle_glayout_widget.setStyleSheet("background-color: transparent; border: none;")
         self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.test_widget = QWidget()
         self.middle_glayout.addWidget(self.test_widget)
@@ -69,7 +71,6 @@ class MainWindow(QMainWindow):
         self.animation_widget = QWidget()
         self.eta_widget = QWidget()
         self.dest_select_widget = QWidget()
-
         self.stop_route_widget.setMaximumHeight(100)
         self.animation_widget.setMaximumHeight(100)
         self.eta_widget.setMaximumHeight(100)
@@ -92,6 +93,7 @@ class MainWindow(QMainWindow):
             self.animation_widget: ("Travel Animation", "#4dd0e1"),
             self.eta_widget: ("ETA", "#f06292"),
             self.dest_select_widget: ("Destination Select", "#a1887f"),
+            self.test_widget: ("Test Widget", "#ffffff00")
         }
 
         if debug:
