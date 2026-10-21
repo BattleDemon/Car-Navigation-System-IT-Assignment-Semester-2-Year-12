@@ -42,6 +42,8 @@ class MainWindow(QMainWindow):
         self.time_widget = QWidget()
         self.location_widget = QWidget()
 
+        self.speed_widget.setMaximumWidth(100)
+
         self.time_name_vlayout = QVBoxLayout()
 
         self.time_name_vlayout.addWidget(self.name_widget)
@@ -54,12 +56,12 @@ class MainWindow(QMainWindow):
         # Middle layout widgets
         self.map_widget = QWidget()
 
-        self.middle_glayout = QGridLayout()
-
+        self.middle_glayout_widget = QWidget()
+        self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.test_widget = QWidget()
         self.middle_glayout.addWidget(self.test_widget)
 
-        self.middle_slayout.addLayout(self.middle_glayout)
+        self.middle_slayout.addWidget(self.middle_glayout_widget)
         self.middle_slayout.addWidget(self.map_widget)
 
         # Bottom layout widgets
@@ -116,4 +118,3 @@ if __name__ == "__main__":
     w = MainWindow()
 
     sys.exit(app.exec())
-
