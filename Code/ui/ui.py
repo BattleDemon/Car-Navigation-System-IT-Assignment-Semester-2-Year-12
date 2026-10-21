@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout = QHBoxLayout()
 
         self.central_vlayout.addLayout(self.top_hlayout)
-        self.central_vlayout.addLayout(self.middle_hlayout)
+        self.central_vlayout.addLayout(self.middle_hlayout, 1)
         self.central_vlayout.addLayout(self.bottom_hlayout)
 
         # Top layout widgets
@@ -31,7 +31,6 @@ class MainWindow(QMainWindow):
         self.time_widget = QWidget()
         self.location_widget = QWidget()
 
-        # Nested layout for name and time
         self.time_name_vlayout = QVBoxLayout()
 
         self.time_name_vlayout.addWidget(self.name_widget)
@@ -61,6 +60,33 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout.addWidget(self.animation_widget)
         self.bottom_hlayout.addWidget(self.eta_widget)
         self.bottom_hlayout.addWidget(self.dest_select_widget)
+
+        # Debug styling
+        debug_widgets = {
+            self.speed_widget: ("Speed", "#e57373"),
+            self.name_widget: ("Name", "#ffb74d"),
+            self.time_widget: ("Time", "#fff176"),
+            self.location_widget: ("Location", "#81c784"),
+            self.map_widget: ("Map", "#64b5f6"),
+            self.stop_route_widget: ("Stop Route", "#ba68c8"),
+            self.animation_widget: ("Travel Animation", "#4dd0e1"),
+            self.eta_widget: ("ETA", "#f06292"),
+            self.dest_select_widget: ("Destination Select", "#a1887f"),
+        }
+
+        for widget, (name, colour) in debug_widgets.items():
+            widget.setStyleSheet(
+                f"background-color: {colour};"
+                "border: 2px solid #333333;"
+                "border-radius: 4px;"
+            )
+
+            label = QLabel(name, widget)
+            label.setAlignment(Qt.AlignCenter)
+            label.setStyleSheet("background: transparent; border: none;")
+
+            layout = QVBoxLayout(widget)
+            layout.addWidget(label)
 
         self.show()
 
