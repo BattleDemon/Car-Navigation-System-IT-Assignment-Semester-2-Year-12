@@ -4,6 +4,7 @@ import sys
 
 from PyQt5.QtCore import Qt
 
+debug = True
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -63,6 +64,7 @@ class MainWindow(QMainWindow):
 
         # Debug styling
         debug_widgets = {
+            # https://htmlcolorcodes.com/
             self.speed_widget: ("Speed", "#e57373"),
             self.name_widget: ("Name", "#ffb74d"),
             self.time_widget: ("Time", "#fff176"),
@@ -74,19 +76,20 @@ class MainWindow(QMainWindow):
             self.dest_select_widget: ("Destination Select", "#a1887f"),
         }
 
-        for widget, (name, colour) in debug_widgets.items():
-            widget.setStyleSheet(
-                f"background-color: {colour};"
-                "border: 2px solid #333333;"
-                "border-radius: 4px;"
-            )
+        if debug:
+            for widget, (name, colour) in debug_widgets.items():
+                widget.setStyleSheet(
+                    f"background-color: {colour};"
+                    "border: 2px solid #333333;"
+                    "border-radius: 4px;"
+                )
 
-            label = QLabel(name, widget)
-            label.setAlignment(Qt.AlignCenter)
-            label.setStyleSheet("background: transparent; border: none;")
+                label = QLabel(name, widget)
+                label.setAlignment(Qt.AlignCenter)
+                label.setStyleSheet("background: transparent; border: none;")
 
-            layout = QVBoxLayout(widget)
-            layout.addWidget(label)
+                layout = QVBoxLayout(widget)
+                layout.addWidget(label)
 
         self.show()
 
