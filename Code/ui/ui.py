@@ -1,10 +1,18 @@
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import (
+    QMainWindow,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QLabel,
+    QApplication,
+)
 
 import sys
 
 from PyQt5.QtCore import Qt
 
 debug = True
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -100,3 +108,4 @@ if __name__ == "__main__":
     w = MainWindow()
 
     sys.exit(app.exec())
+
