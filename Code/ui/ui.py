@@ -81,60 +81,60 @@ class MainWindow(QMainWindow):
         self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.middle_glayout.setContentsMargins(10, 10, 10, 10)
 
-        self.overlay_1 = QWidget()
-        self.overlay_1.setFixedSize(150, 75)
+        self.list_turns = QWidget()
+        self.list_turns.setFixedSize(150, 75)
 
-        self.overlay_1_opacity = QGraphicsOpacityEffect(self.overlay_1)
-        self.overlay_1_opacity.setOpacity(0.7)
-        self.overlay_1.setGraphicsEffect(self.overlay_1_opacity)
+        self.list_turns_opacity = QGraphicsOpacityEffect(self.list_turns)
+        self.list_turns_opacity.setOpacity(0.7)
+        self.list_turns.setGraphicsEffect(self.list_turns_opacity)
 
         self.middle_glayout.addWidget(
-            self.overlay_1,
+            self.list_turns,
             0,
             0,
             Qt.AlignTop | Qt.AlignLeft
         )
 
-        self.overlay_2 = QWidget()
-        self.overlay_2.setFixedSize(150, 75)
+        self.zoom_out = QWidget()
+        self.zoom_out.setFixedSize(150, 75)
 
-        self.overlay_2_opacity = QGraphicsOpacityEffect(self.overlay_2)
-        self.overlay_2_opacity.setOpacity(0.7)
-        self.overlay_2.setGraphicsEffect(self.overlay_2_opacity)
+        self.zoom_out_opacity = QGraphicsOpacityEffect(self.zoom_out)
+        self.zoom_out_opacity.setOpacity(0.7)
+        self.zoom_out.setGraphicsEffect(self.zoom_out_opacity)
 
         self.middle_glayout.addWidget(
-            self.overlay_2,
-            0,
+            self.zoom_out,
             1,
-            Qt.AlignTop | Qt.AlignLeft
+            1,
+            Qt.AlignBottom | Qt.AlignLeft
         )
 
-        self.overlay_3 = QWidget()
-        self.overlay_3.setFixedSize(150, 75)
+        self.zoom_in = QWidget()
+        self.zoom_in.setFixedSize(150, 75)
 
-        self.overlay_3_opacity = QGraphicsOpacityEffect(self.overlay_3)
-        self.overlay_3_opacity.setOpacity(0.7)
-        self.overlay_3.setGraphicsEffect(self.overlay_3_opacity)
+        self.zoom_in_opacity = QGraphicsOpacityEffect(self.zoom_in)
+        self.zoom_in_opacity.setOpacity(0.7)
+        self.zoom_in.setGraphicsEffect(self.zoom_in_opacity)
 
         self.middle_glayout.addWidget(
-            self.overlay_3,
+            self.zoom_in,
             1,
             1,
-            Qt.AlignTop | Qt.AlignLeft
+            Qt.AlignBottom | Qt.AlignRight
         )
 
-        self.overlay_4 = QWidget()
-        self.overlay_4.setFixedSize(150, 75)
+        self.recentre = QWidget()
+        self.recentre.setFixedSize(150, 75)
 
-        self.overlay_4_opacity = QGraphicsOpacityEffect(self.overlay_4)
-        self.overlay_4_opacity.setOpacity(0.7)
-        self.overlay_4.setGraphicsEffect(self.overlay_4_opacity)
+        self.recentre_opacity = QGraphicsOpacityEffect(self.recentre)
+        self.recentre_opacity.setOpacity(0.7)
+        self.recentre.setGraphicsEffect(self.recentre_opacity)
 
         self.middle_glayout.addWidget(
-            self.overlay_4,
-            1,
+            self.recentre,
             0,
-            Qt.AlignTop | Qt.AlignLeft
+            1,
+            Qt.AlignTop | Qt.AlignRight
         )
 
         self.middle_slayout.addWidget(self.map_widget)
@@ -169,10 +169,10 @@ class MainWindow(QMainWindow):
             self.animation_widget: ("Travel Animation", "#4dd0e1"),
             self.eta_widget: ("ETA", "#f06292"),
             self.dest_select_widget: ("Destination Select", "#a1887f"),
-            self.overlay_1: ("Overlay", "#ffb74d"),
-            self.overlay_2: ("Overlay 2", "#ffb74d"),
-            self.overlay_3: ("Overlay 3", "#ffb74d"),
-            self.overlay_4: ("Overlay 4", "#ffb74d"),
+            self.list_turns: ("List Turns", "#ffb74d"),
+            self.zoom_out: ("-", "#ffb74d"),
+            self.zoom_in: ("+", "#ffb74d"),
+            self.recentre: ("recentre", "#ffb74d"),
         }
 
         if debug:
