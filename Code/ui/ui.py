@@ -82,7 +82,7 @@ class MainWindow(QMainWindow):
         self.middle_glayout.setContentsMargins(10, 10, 10, 10)
 
         self.list_turns = QWidget()
-        self.list_turns.setFixedSize(150, 75)
+        self.list_turns.setFixedSize(50, 50)
 
         self.middle_glayout.addWidget(
             self.list_turns,
@@ -91,28 +91,29 @@ class MainWindow(QMainWindow):
             Qt.AlignTop | Qt.AlignLeft
         )
 
-        self.zoom_out = QWidget()
-        self.zoom_out.setFixedSize(150, 75)
+        self.zoom = QWidget()
+        self.zoom.setFixedSize(100, 50)
+
+        self.zoom_hlayout = QHBoxLayout(self.zoom)
 
         self.middle_glayout.addWidget(
-            self.zoom_out,
-            1,
-            1,
-            Qt.AlignBottom | Qt.AlignLeft
-        )
-
-        self.zoom_in = QWidget()
-        self.zoom_in.setFixedSize(150, 75)
-
-        self.middle_glayout.addWidget(
-            self.zoom_in,
+            self.zoom,
             1,
             1,
             Qt.AlignBottom | Qt.AlignRight
         )
 
+        self.zoom_out = QWidget()
+        self.zoom_in = QWidget()
+
+        self.zoom_out.setFixedSize(40,40)
+        self.zoom_in.setFixedSize(40,40)
+
+        self.zoom_hlayout.addWidget(self.zoom_out)
+        self.zoom_hlayout.addWidget(self.zoom_in)
+
         self.recentre = QWidget()
-        self.recentre.setFixedSize(150, 75)
+        self.recentre.setFixedSize(50,50)
 
         self.middle_glayout.addWidget(
             self.recentre,
@@ -143,9 +144,9 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout.addWidget(self.dest_select_widget, 1)
 
         if debug:
-            apply_debug_styling()
+            self.apply_debug_styling()
         else:
-            apply_styling()
+            self.apply_styling()
 
         self.show()
 
