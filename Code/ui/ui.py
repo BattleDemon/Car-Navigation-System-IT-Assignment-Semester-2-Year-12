@@ -1,5 +1,5 @@
-
-from PyQt5.QtWidgets import (
+from PyQt5.QtWidgets import *
+'''(
     QMainWindow,
     QWidget,
     QVBoxLayout,
@@ -9,13 +9,24 @@ from PyQt5.QtWidgets import (
     QGridLayout,
     QStackedLayout,
     QGraphicsOpacityEffect,
-)
+    QPushButton
+)'''
 
 from PyQt5.QtCore import Qt
 
 import sys
+import os
 
 debug = True
+
+# Color Palette
+color_pallet = {
+'jet-black': "#30343fff",
+'ghost-white': "#fafaffff", 
+'dusty-olive': "#709176ff",
+'twilight-indigo': "#273469ff", 
+'space-indigo': "#1e2749ff",
+}
 
 
 class MainWindow(QMainWindow):
@@ -24,7 +35,7 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("CarNav")
         self.resize(720, 480)
-        self.setFixedSize(720,480)
+        self.setFixedSize(720, 480) # Needed due to my computers using Hyprland (auto tiling window manager), which overwrote the handling of size
 
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
@@ -85,46 +96,36 @@ class MainWindow(QMainWindow):
         self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.middle_glayout.setContentsMargins(10, 10, 10, 10)
 
-        self.list_turns = QWidget()
+        self.list_turns = QPushButton()
         self.list_turns.setFixedSize(50, 50)
+        self.list_turns.clicked.connect(self.on_list_turns_presses)
 
-        self.middle_glayout.addWidget(
-            self.list_turns,
-            0,
-            0,
-            Qt.AlignTop | Qt.AlignLeft
-        )
+        self.middle_glayout.addWidget(self.list_turns, 0, 0, Qt.AlignTop | Qt.AlignLeft)
 
         self.zoom = QWidget()
         self.zoom.setFixedSize(100, 50)
 
         self.zoom_hlayout = QHBoxLayout(self.zoom)
 
-        self.middle_glayout.addWidget(
-            self.zoom,
-            1,
-            1,
-            Qt.AlignBottom | Qt.AlignRight
-        )
+        self.middle_glayout.addWidget(self.zoom, 1, 1, Qt.AlignBottom | Qt.AlignRight)
 
-        self.zoom_out = QWidget()
-        self.zoom_in = QWidget()
+        self.zoom_out = QPushButton()
+        self.zoom_in = QPushButton()
 
-        self.zoom_out.setFixedSize(40,40)
-        self.zoom_in.setFixedSize(40,40)
+        self.zoom_out.clicked.connect(self.on_zoom_out_pressed)
+        self.zoom_in.clicked.connect(self.on_zoom_in_pressed)
+
+        self.zoom_out.setFixedSize(40, 40)
+        self.zoom_in.setFixedSize(40, 40)
 
         self.zoom_hlayout.addWidget(self.zoom_out)
         self.zoom_hlayout.addWidget(self.zoom_in)
 
-        self.recentre = QWidget()
-        self.recentre.setFixedSize(50,50)
+        self.recentre = QPushButton()
+        self.recentre.clicked.connect(self.on_recentre_presses)
+        self.recentre.setFixedSize(50, 50)
 
-        self.middle_glayout.addWidget(
-            self.recentre,
-            0,
-            1,
-            Qt.AlignTop | Qt.AlignRight
-        )
+        self.middle_glayout.addWidget(self.recentre, 0, 1, Qt.AlignTop | Qt.AlignRight)
 
         self.middle_slayout.addWidget(self.map_widget)
         self.middle_slayout.addWidget(self.middle_glayout_widget)
@@ -132,14 +133,16 @@ class MainWindow(QMainWindow):
         self.middle_slayout.setCurrentWidget(self.middle_glayout_widget)
 
         # Bottom layout widgets
-        self.stop_route_widget = QWidget()
+        self.stop_route_widget = QPushButton()
         self.animation_widget = QWidget()
         self.eta_widget = QWidget()
         self.dest_select_widget = QWidget()
 
-        self.stop_route_widget.setFixedSize(65,65)
+        self.stop_route_widget.clicked.connect(self.on_stop_route_pressed)
+
+        self.stop_route_widget.setFixedSize(65, 65)
         self.animation_widget.setFixedHeight(65)
-        self.eta_widget.setFixedSize(100,65)
+        self.eta_widget.setFixedSize(100, 65)
         self.dest_select_widget.setFixedHeight(65)
 
         self.bottom_hlayout.addWidget(self.stop_route_widget, 1)
@@ -181,9 +184,7 @@ class MainWindow(QMainWindow):
 
             label = QLabel(name)
             label.setAlignment(Qt.AlignCenter)
-            label.setStyleSheet(
-                "background: transparent; border: none;"
-            )
+            label.setStyleSheet("background: transparent; border: none;")
 
             layout = QVBoxLayout(widget)
             layout.setContentsMargins(2, 2, 2, 2)
@@ -191,6 +192,21 @@ class MainWindow(QMainWindow):
 
     def apply_styling(self):
         pass
+
+    def on_zoom_out_pressed(self):
+        print("Zoom out Pressed")
+
+    def on_zoom_in_pressed(self):
+        print("Zoom in pressed")
+    
+    def on_recentre_presses(self):
+        print("Recentred")
+
+    def on_list_turns_presses(self):
+        print("list turns")
+
+    def on_stop_route_pressed(self):
+        print("Route Stopped")
 
 
 if __name__ == "__main__":

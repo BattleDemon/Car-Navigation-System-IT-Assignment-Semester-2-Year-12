@@ -300,6 +300,12 @@ Pathfinding and Astar library
 https://pypi.org/project/pathfinding/
 Pathfinding GitHub
 https://github.com/brean/python-pathfinding/tree/main
+color pallet
+https://coolors.co/30343f-fafaff-709176-273469-1e2749
+Qt Forum
+https://forum.qt.io/
+PyQt5 Documentation
+https://doc.qt.io/archives/qtforpython-5/
 
 
 Australian Government 2026, _Actgov division_, Arcgis.com, viewed 11 September 2026, <https://actmapi-actgov.opendata.arcgis.com/datasets/ACTGOV::actgov-division/explore?location=-35.520000,149.085000,9>.
@@ -353,4 +359,3 @@ TomTom 2026, _Pricing_, TomTom Documentation, viewed 11 September 2026, <https:/
 Topf, J 2021, _Osmium tool manual - osmcode_, Osmcode.org, viewed 11 September 2026, <https://osmcode.org/osmium-tool/manual.html>.
 
 Waze 2026, _Driving directions, live traffic & road conditions updates_, Waze, viewed 11 September 2026, <https://www.waze.com/live-map>.
-
