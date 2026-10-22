@@ -13,10 +13,9 @@ from PyQt5.QtWidgets import *
 )'''
 
 from PyQt5.QtCore import Qt
+import PyQt5.QtWebEngine
 
 import folium
-
-import PyQtWebEngine
 
 import sys
 import os
