@@ -142,6 +142,14 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout.addWidget(self.eta_widget, 1)
         self.bottom_hlayout.addWidget(self.dest_select_widget, 1)
 
+        if debug:
+            apply_debug_styling()
+        else:
+            apply_styling()
+
+        self.show()
+
+    def apply_debug_styling(self):
         # Debug styling
         debug_widgets = {
             self.speed_widget: ("Speed", "#e57373"),
@@ -159,25 +167,25 @@ class MainWindow(QMainWindow):
             self.recentre: ("recentre", "#ffb74d"),
         }
 
-        if debug:
-            for widget, (name, colour) in debug_widgets.items():
-                widget.setStyleSheet(
-                    f"background-color: {colour};"
-                    "border: 2px solid #333333;"
-                    "border-radius: 4px;"
-                )
+        for widget, (name, colour) in debug_widgets.items():
+            widget.setStyleSheet(
+                f"background-color: {colour};"
+                "border: 2px solid #333333;"
+                "border-radius: 4px;"
+            )
 
-                label = QLabel(name)
-                label.setAlignment(Qt.AlignCenter)
-                label.setStyleSheet(
-                    "background: transparent; border: none;"
-                )
+            label = QLabel(name)
+            label.setAlignment(Qt.AlignCenter)
+            label.setStyleSheet(
+                "background: transparent; border: none;"
+            )
 
-                layout = QVBoxLayout(widget)
-                layout.setContentsMargins(2, 2, 2, 2)
-                layout.addWidget(label)
+            layout = QVBoxLayout(widget)
+            layout.setContentsMargins(2, 2, 2, 2)
+            layout.addWidget(label)
 
-        self.show()
+    def apply_styling(self):
+        pass
 
 
 if __name__ == "__main__":
