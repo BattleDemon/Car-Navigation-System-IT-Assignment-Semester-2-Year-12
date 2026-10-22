@@ -24,6 +24,7 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("CarNav")
         self.resize(720, 480)
+        self.setFixedSize(720,480)
 
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
@@ -54,6 +55,9 @@ class MainWindow(QMainWindow):
         self.name_widget = QWidget()
         self.time_widget = QWidget()
         self.location_widget = QWidget()
+
+        self.name_widget.setFixedWidth(200)
+        self.time_widget.setFixedWidth(200)
 
         self.speed_widget.setFixedSize(100, 65)
         self.location_widget.setFixedHeight(65)
@@ -133,9 +137,9 @@ class MainWindow(QMainWindow):
         self.eta_widget = QWidget()
         self.dest_select_widget = QWidget()
 
-        self.stop_route_widget.setFixedHeight(65)
+        self.stop_route_widget.setFixedSize(65,65)
         self.animation_widget.setFixedHeight(65)
-        self.eta_widget.setFixedHeight(65)
+        self.eta_widget.setFixedSize(100,65)
         self.dest_select_widget.setFixedHeight(65)
 
         self.bottom_hlayout.addWidget(self.stop_route_widget, 1)
@@ -191,6 +195,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setApplicationName("CarNav")
 
     w = MainWindow()
 
