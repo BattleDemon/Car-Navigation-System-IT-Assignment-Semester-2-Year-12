@@ -84,10 +84,6 @@ class MainWindow(QMainWindow):
         self.list_turns = QWidget()
         self.list_turns.setFixedSize(150, 75)
 
-        self.list_turns_opacity = QGraphicsOpacityEffect(self.list_turns)
-        self.list_turns_opacity.setOpacity(0.7)
-        self.list_turns.setGraphicsEffect(self.list_turns_opacity)
-
         self.middle_glayout.addWidget(
             self.list_turns,
             0,
@@ -97,10 +93,6 @@ class MainWindow(QMainWindow):
 
         self.zoom_out = QWidget()
         self.zoom_out.setFixedSize(150, 75)
-
-        self.zoom_out_opacity = QGraphicsOpacityEffect(self.zoom_out)
-        self.zoom_out_opacity.setOpacity(0.7)
-        self.zoom_out.setGraphicsEffect(self.zoom_out_opacity)
 
         self.middle_glayout.addWidget(
             self.zoom_out,
@@ -112,10 +104,6 @@ class MainWindow(QMainWindow):
         self.zoom_in = QWidget()
         self.zoom_in.setFixedSize(150, 75)
 
-        self.zoom_in_opacity = QGraphicsOpacityEffect(self.zoom_in)
-        self.zoom_in_opacity.setOpacity(0.7)
-        self.zoom_in.setGraphicsEffect(self.zoom_in_opacity)
-
         self.middle_glayout.addWidget(
             self.zoom_in,
             1,
@@ -125,10 +113,6 @@ class MainWindow(QMainWindow):
 
         self.recentre = QWidget()
         self.recentre.setFixedSize(150, 75)
-
-        self.recentre_opacity = QGraphicsOpacityEffect(self.recentre)
-        self.recentre_opacity.setOpacity(0.7)
-        self.recentre.setGraphicsEffect(self.recentre_opacity)
 
         self.middle_glayout.addWidget(
             self.recentre,
