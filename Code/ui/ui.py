@@ -95,6 +95,48 @@ class MainWindow(QMainWindow):
             Qt.AlignTop | Qt.AlignLeft
         )
 
+        self.overlay_2 = QWidget()
+        self.overlay_2.setFixedSize(150, 75)
+
+        self.overlay_2_opacity = QGraphicsOpacityEffect(self.overlay_2)
+        self.overlay_2_opacity.setOpacity(0.7)
+        self.overlay_2.setGraphicsEffect(self.overlay_2_opacity)
+
+        self.middle_glayout.addWidget(
+            self.overlay_2,
+            0,
+            1,
+            Qt.AlignTop | Qt.AlignLeft
+        )
+
+        self.overlay_3 = QWidget()
+        self.overlay_3.setFixedSize(150, 75)
+
+        self.overlay_3_opacity = QGraphicsOpacityEffect(self.overlay_3)
+        self.overlay_3_opacity.setOpacity(0.7)
+        self.overlay_3.setGraphicsEffect(self.overlay_3_opacity)
+
+        self.middle_glayout.addWidget(
+            self.overlay_3,
+            1,
+            1,
+            Qt.AlignTop | Qt.AlignLeft
+        )
+
+        self.overlay_4 = QWidget()
+        self.overlay_4.setFixedSize(150, 75)
+
+        self.overlay_4_opacity = QGraphicsOpacityEffect(self.overlay_4)
+        self.overlay_4_opacity.setOpacity(0.7)
+        self.overlay_4.setGraphicsEffect(self.overlay_4_opacity)
+
+        self.middle_glayout.addWidget(
+            self.overlay_4,
+            1,
+            0,
+            Qt.AlignTop | Qt.AlignLeft
+        )
+
         self.middle_slayout.addWidget(self.map_widget)
         self.middle_slayout.addWidget(self.middle_glayout_widget)
 
@@ -128,6 +170,9 @@ class MainWindow(QMainWindow):
             self.eta_widget: ("ETA", "#f06292"),
             self.dest_select_widget: ("Destination Select", "#a1887f"),
             self.overlay_1: ("Overlay", "#ffb74d"),
+            self.overlay_2: ("Overlay 2", "#ffb74d"),
+            self.overlay_3: ("Overlay 3", "#ffb74d"),
+            self.overlay_4: ("Overlay 4", "#ffb74d"),
         }
 
         if debug:
