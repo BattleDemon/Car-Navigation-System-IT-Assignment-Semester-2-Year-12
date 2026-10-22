@@ -14,6 +14,10 @@ from PyQt5.QtWidgets import *
 
 from PyQt5.QtCore import Qt
 
+import folium
+
+import PyQtWebEngine
+
 import sys
 import os
 
@@ -136,7 +140,7 @@ class MainWindow(QMainWindow):
         self.stop_route_widget = QPushButton()
         self.animation_widget = QWidget()
         self.eta_widget = QWidget()
-        self.dest_select_widget = QWidget()
+        self.dest_select_widget = QLineEdit()
 
         self.stop_route_widget.clicked.connect(self.on_stop_route_pressed)
 
