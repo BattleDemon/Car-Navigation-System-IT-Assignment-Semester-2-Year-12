@@ -81,15 +81,15 @@ class MainWindow(QMainWindow):
         self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.middle_glayout.setContentsMargins(10, 10, 10, 10)
 
-        self.test_widget = QWidget()
-        self.test_widget.setFixedSize(150, 75)
+        self.overlay_1 = QWidget()
+        self.overlay_1.setFixedSize(150, 75)
 
-        self.test_widget_opacity = QGraphicsOpacityEffect(self.test_widget)
-        self.test_widget_opacity.setOpacity(0.7)
-        self.test_widget.setGraphicsEffect(self.test_widget_opacity)
+        self.overlay_1_opacity = QGraphicsOpacityEffect(self.overlay_1)
+        self.overlay_1_opacity.setOpacity(0.7)
+        self.overlay_1.setGraphicsEffect(self.overlay_1_opacity)
 
         self.middle_glayout.addWidget(
-            self.test_widget,
+            self.overlay_1,
             0,
             0,
             Qt.AlignTop | Qt.AlignLeft
@@ -127,7 +127,7 @@ class MainWindow(QMainWindow):
             self.animation_widget: ("Travel Animation", "#4dd0e1"),
             self.eta_widget: ("ETA", "#f06292"),
             self.dest_select_widget: ("Destination Select", "#a1887f"),
-            self.test_widget: ("Overlay", "#ffb74d"),
+            self.overlay_1: ("Overlay", "#ffb74d"),
         }
 
         if debug:
