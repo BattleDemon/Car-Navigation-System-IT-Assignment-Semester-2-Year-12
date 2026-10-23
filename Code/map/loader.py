@@ -1,11 +1,11 @@
-import Path
+from pathlib import Path
 import _thread
 import json
 import time
 from shapely.geometry import Point, shape
 
 local_path = Path(__file__).parent.parent
-local_path.append("/Areas")
+local_path= local_path / "Areas"
 
 
 class AreaLoader:

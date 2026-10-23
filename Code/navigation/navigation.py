@@ -72,3 +72,5 @@ class NavigationController:
             time_hours = distance_km / float(speed)
 
             total_minutes += time_hours * 60
+
+        return total_minutes

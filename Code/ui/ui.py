@@ -19,6 +19,12 @@ import folium
 
 import sys
 import os
+from pathlib import Path
+
+parent_dir = Path(__file__).resolve().parent.parent
+sys.path.append(str(parent_dir))
+
+#from main import CarNavApp
 
 debug = True
 
@@ -33,12 +39,14 @@ color_pallet = {
 
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, carnavapp):
         super().__init__()
 
         self.setWindowTitle("CarNav")
         self.resize(720, 480)
         self.setFixedSize(720, 480) # Needed due to my computers using Hyprland (auto tiling window manager), which overwrote the handling of size
+
+        self.car_nav_controller = carnavapp
 
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
@@ -160,6 +168,9 @@ class MainWindow(QMainWindow):
 
         self.show()
 
+    def __update(self):
+        pass
+
     def apply_debug_styling(self):
         # Debug styling
         debug_widgets = {
@@ -216,6 +227,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setApplicationName("CarNav")
 
-    w = MainWindow()
+    w = MainWindow("temp")
 
     sys.exit(app.exec_())

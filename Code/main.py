@@ -1,13 +1,12 @@
 # External import
 
-import Path
+from pathlib import Path
 import _thread
-import pyosm
+import pyrosm
 import pynmea2
 import pandas
 import numpy
 import pandarm
-import PyQt5i
 import time
 
 # Interal imports
@@ -17,6 +16,7 @@ from map.osm_import import OSMImporter
 from map.loader import AreaLoader
 from map.road_graph import RoadGraph
 from navigation.navigation import NavigationController
+from ui.ui import MainWindow
 
 
 class CarNavApp:
@@ -24,6 +24,7 @@ class CarNavApp:
         self.GPSManager = GPSManager()
         self.OSMImporter = OSMImporter()
         self.AreaLoader = AreaLoader(self)
+        self.ui = MainWindow(self)
         self.lat_lng_speed = [0, 0, 0]
 
         self.update_thread = _thread.start_new_thread(self._update)
@@ -48,6 +49,9 @@ class CarNavApp:
 
     def get_location(self):
         return [self.lat_lng_speed[0], self.lat_lng_speed[1]]
+
+    def get_time(self):
+        pass
 
     def stop(self):
         self.running = False
