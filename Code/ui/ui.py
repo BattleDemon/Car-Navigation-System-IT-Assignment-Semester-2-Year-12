@@ -14,9 +14,9 @@ from PyQt5.QtWidgets import *
 )"""
 
 from PyQt5.QtCore import Qt
-import PyQt5.QtWebEngine
+import PyQt5.QtWebEngineWidgets
 
-from offine_folium import offline
+from offline_folium import offline
 import folium
 
 import sys
