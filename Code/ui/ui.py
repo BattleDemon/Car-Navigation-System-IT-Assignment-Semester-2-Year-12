@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
-'''(
+
+"""(
     QMainWindow,
     QWidget,
     QVBoxLayout,
@@ -10,11 +11,12 @@ from PyQt5.QtWidgets import *
     QStackedLayout,
     QGraphicsOpacityEffect,
     QPushButton
-)'''
+)"""
 
 from PyQt5.QtCore import Qt
 import PyQt5.QtWebEngine
 
+from offine_folium import offline
 import folium
 
 import sys
@@ -24,17 +26,17 @@ from pathlib import Path
 parent_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_dir))
 
-#from main import CarNavApp
+# from main import CarNavApp
 
 debug = True
 
 # Color Palette
 color_pallet = {
-'jet-black': "#30343fff",
-'ghost-white': "#fafaffff", 
-'dusty-olive': "#709176ff",
-'twilight-indigo': "#273469ff", 
-'space-indigo': "#1e2749ff",
+    "jet-black": "#30343fff",
+    "ghost-white": "#fafaffff",
+    "dusty-olive": "#709176ff",
+    "twilight-indigo": "#273469ff",
+    "space-indigo": "#1e2749ff",
 }
 
 
@@ -44,7 +46,9 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("CarNav")
         self.resize(720, 480)
-        self.setFixedSize(720, 480) # Needed due to my computers using Hyprland (auto tiling window manager), which overwrote the handling of size
+        self.setFixedSize(
+            720, 480
+        )  # Needed due to my computers using Hyprland (auto tiling window manager), which overwrote the handling of size
 
         self.car_nav_controller = carnavapp
 
@@ -212,7 +216,7 @@ class MainWindow(QMainWindow):
 
     def on_zoom_in_pressed(self):
         print("Zoom in pressed")
-    
+
     def on_recentre_presses(self):
         print("Recentred")
 
