@@ -1,7 +1,7 @@
 import folium
 from folium import plugins
 
-def create_map(latitude, longitude, zoom_start=12):
+def create_map(latitude, longitude, zoom_start=18):
     """
     Create an interactive map with a custom marker at specified coordinates.
     
@@ -20,18 +20,9 @@ def create_map(latitude, longitude, zoom_start=12):
     
     # Add a marker with a popup
     folium.Marker(
-        [latitude, longitude],
-        popup='Selected Location',
-        icon=folium.Icon(color='red', icon='info-sign')
-    ).add_to(m)
-    
-    # Add a circle around the marker
-    folium.Circle(
-        radius=1000,  # 1000 meters radius
-        location=[latitude, longitude],
-        color='crimson',
-        fill=True,
-    ).add_to(m)
+            [latitude, longitude],
+            icon=folium.Icon(color='red', icon='ion.car-sport-outline')
+        ).add_to(m)
     
     # Add fullscreen button
     plugins.Fullscreen().add_to(m)
@@ -73,7 +64,7 @@ class MapWindow(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     
-    # Example coordinates (New York City)
+    # Example coordinates 
     latitude = -35.3265
     longitude = 149.053
 

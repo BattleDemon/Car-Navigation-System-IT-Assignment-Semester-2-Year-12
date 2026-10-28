@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_919efee817fbe046b74737e17f644ce8 {
+                #map_14ffb7eada3393cb3ce63470bda5b291 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -50,27 +50,25 @@
             </script>
 
         
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.css"/>
 </head>
 <body>
     
     
-            <div class="folium-map" id="map_919efee817fbe046b74737e17f644ce8" ></div>
+            <div class="folium-map" id="map_14ffb7eada3393cb3ce63470bda5b291" ></div>
         
 </body>
 <script>
     
     
-            var map_919efee817fbe046b74737e17f644ce8 = L.map(
-                "map_919efee817fbe046b74737e17f644ce8",
+            var map_14ffb7eada3393cb3ce63470bda5b291 = L.map(
+                "map_14ffb7eada3393cb3ce63470bda5b291",
                 {
                     center: [-35.3265, 149.053],
                     crs: L.CRS.EPSG3857,
                     ...{
-  "zoom": 12,
+  "zoom": 18,
   "zoomControl": true,
   "preferCanvas": false,
 }
@@ -82,7 +80,7 @@
 
         
     
-            var tile_layer_77e6f9815ffc3b255a63d1dcf861695d = L.tileLayer(
+            var tile_layer_bdaf21d43163dab6baebb504f39a2588 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -99,66 +97,33 @@
             );
         
     
-            tile_layer_77e6f9815ffc3b255a63d1dcf861695d.addTo(map_919efee817fbe046b74737e17f644ce8);
+            tile_layer_bdaf21d43163dab6baebb504f39a2588.addTo(map_14ffb7eada3393cb3ce63470bda5b291);
         
     
-            var marker_67a2c69be658ba909a31bc7ce548bcda = L.marker(
+            var marker_37aa16d698191250d1e5e6ff81d16bc6 = L.marker(
                 [-35.3265, 149.053],
                 {
 }
-            ).addTo(map_919efee817fbe046b74737e17f644ce8);
+            ).addTo(map_14ffb7eada3393cb3ce63470bda5b291);
         
     
-            var icon_5661d894d7e91d48c383905ac57e9bb4 = L.AwesomeMarkers.icon(
+            var icon_dc52520a5923c1b857d37ed0baa4fb39 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "red",
   "iconColor": "white",
-  "icon": "info-sign",
+  "icon": "ion.car-sport-outline",
   "prefix": "glyphicon",
   "extraClasses": "fa-rotate-0",
 }
             );
         
     
-        var popup_e02bbdf129c2b96e6fd875f69d444394 = L.popup({
-  "maxWidth": "100%",
-});
-
-        
-            
-                var html_f23f94061eca43b8319288f1ea2c4e2c = $(`<div id="html_f23f94061eca43b8319288f1ea2c4e2c" style="width: 100.0%; height: 100.0%;">Selected Location</div>`)[0];
-                popup_e02bbdf129c2b96e6fd875f69d444394.setContent(html_f23f94061eca43b8319288f1ea2c4e2c);
-            
-        
-
-        marker_67a2c69be658ba909a31bc7ce548bcda.bindPopup(popup_e02bbdf129c2b96e6fd875f69d444394)
-        ;
-
-        
-    
-    
-                marker_67a2c69be658ba909a31bc7ce548bcda.setIcon(icon_5661d894d7e91d48c383905ac57e9bb4);
+                marker_37aa16d698191250d1e5e6ff81d16bc6.setIcon(icon_dc52520a5923c1b857d37ed0baa4fb39);
             
     
-            var circle_50bbc7f4c4b2947693eb46a49c71d3f0 = L.circle(
-                [-35.3265, 149.053],
-                {"bubblingMouseEvents": true, "color": "crimson", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "crimson", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 1000, "stroke": true, "weight": 3}
-            ).addTo(map_919efee817fbe046b74737e17f644ce8);
-        
-    
-            L.control.fullscreen(
-                {
-  "position": "topleft",
-  "title": "Full Screen",
-  "titleCancel": "Exit Full Screen",
-  "forceSeparateButton": false,
-}
-            ).addTo(map_919efee817fbe046b74737e17f644ce8);
-        
-    
-            var locate_control_b0e6a7beae8675b3559914dfc2251370 = L.control.locate(
+            var locate_control_4278ca21e7c686cbcc028a2127a1e86d = L.control.locate(
                 {}
-            ).addTo(map_919efee817fbe046b74737e17f644ce8);
+            ).addTo(map_14ffb7eada3393cb3ce63470bda5b291);
             
         
 </script>

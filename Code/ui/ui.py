@@ -14,10 +14,11 @@ from PyQt5.QtWidgets import *
 )"""
 
 from PyQt5.QtCore import Qt
-import PyQt5.QtWebEngineWidgets
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
-from offline_folium import offline
+#from offline_folium import offline
 import folium
+from folium import plugins
 
 import sys
 import os
@@ -36,9 +37,8 @@ color_pallet = {
     "ghost-white": "#fafaffff",
     "dusty-olive": "#709176ff",
     "twilight-indigo": "#273469ff",
-    "space-indigo": "#1e2749ff",
+    "space-ind        plugins.Fullscreen().add_to(map)igo": "#1e2749ff",
 }
-
 
 class MainWindow(QMainWindow):
     def __init__(self, carnavapp):
@@ -100,7 +100,10 @@ class MainWindow(QMainWindow):
         self.top_hlayout.addWidget(self.location_widget, 1)
 
         # Middle layout widgets
-        self.map_widget = QWidget()
+        self.map_widget = QWebEngineView()
+        self.map = self.create_map(-35.3265,149.053,18)
+        self.map.save('map.html')
+        self.map_widget.setHtml(self.map.get_root().render())
 
         # Transparent overlay positioned over the map
         self.middle_glayout_widget = QWidget()
@@ -115,32 +118,7 @@ class MainWindow(QMainWindow):
         self.list_turns.setFixedSize(50, 50)
         self.list_turns.clicked.connect(self.on_list_turns_presses)
 
-        self.middle_glayout.addWidget(self.list_turns, 0, 0, Qt.AlignTop | Qt.AlignLeft)
-
-        self.zoom = QWidget()
-        self.zoom.setFixedSize(100, 50)
-
-        self.zoom_hlayout = QHBoxLayout(self.zoom)
-
-        self.middle_glayout.addWidget(self.zoom, 1, 1, Qt.AlignBottom | Qt.AlignRight)
-
-        self.zoom_out = QPushButton()
-        self.zoom_in = QPushButton()
-
-        self.zoom_out.clicked.connect(self.on_zoom_out_pressed)
-        self.zoom_in.clicked.connect(self.on_zoom_in_pressed)
-
-        self.zoom_out.setFixedSize(40, 40)
-        self.zoom_in.setFixedSize(40, 40)
-
-        self.zoom_hlayout.addWidget(self.zoom_out)
-        self.zoom_hlayout.addWidget(self.zoom_in)
-
-        self.recentre = QPushButton()
-        self.recentre.clicked.connect(self.on_recentre_presses)
-        self.recentre.setFixedSize(50, 50)
-
-        self.middle_glayout.addWidget(self.recentre, 0, 1, Qt.AlignTop | Qt.AlignRight)
+        self.middle_glayout.addWidget(self.list_turns, 1, 1, Qt.AlignBottom | Qt.AlignRight)
 
         self.middle_slayout.addWidget(self.map_widget)
         self.middle_slayout.addWidget(self.middle_glayout_widget)
@@ -188,9 +166,6 @@ class MainWindow(QMainWindow):
             self.eta_widget: ("ETA", "#f06292"),
             self.dest_select_widget: ("Destination Select", "#a1887f"),
             self.list_turns: ("List Turns", "#ffb74d"),
-            self.zoom_out: ("-", "#ffb74d"),
-            self.zoom_in: ("+", "#ffb74d"),
-            self.recentre: ("recentre", "#ffb74d"),
         }
 
         for widget, (name, colour) in debug_widgets.items():
@@ -225,6 +200,21 @@ class MainWindow(QMainWindow):
 
     def on_stop_route_pressed(self):
         print("Route Stopped")
+
+    def create_map(self, latitude, longitude, zoom_start = 12):
+        map = folium.Map(
+            location=[latitude, longitude],
+            zoom_start=zoom_start,
+            tiles='OpenStreetMap')
+        
+        folium.Marker(
+            [latitude, longitude],
+            icon=folium.Icon(color='red', icon='ion.car-sport-outline')
+        ).add_to(map)
+
+        plugins.LocateControl().add_to(map)
+
+        return map
 
 
 if __name__ == "__main__":
