@@ -29,7 +29,7 @@ sys.path.append(str(parent_dir))
 
 # from main import CarNavApp
 
-debug = True
+debug = False
 
 # Color Palette
 color_pallet = {
@@ -37,7 +37,7 @@ color_pallet = {
     "ghost-white": "#fafaffff",
     "dusty-olive": "#709176ff",
     "twilight-indigo": "#273469ff",
-    "space-ind        plugins.Fullscreen().add_to(map)igo": "#1e2749ff",
+    "space-indigo": "#1e2749ff",
 }
 
 class MainWindow(QMainWindow):
@@ -183,8 +183,34 @@ class MainWindow(QMainWindow):
             layout.setContentsMargins(2, 2, 2, 2)
             layout.addWidget(label)
 
-    def apply_styling(self):
-        pass
+    def apply_styling(self):    
+
+        '''
+        "jet-black": "#30343fff",
+        "ghost-white": "#fafaffff",
+        "dusty-olive": "#709176ff",
+        "twilight-indigo": "#273469ff",
+        "space-indigo": "#1e2749ff",
+        '''
+
+        widget_styles = {
+            self.speed_widget: color_pallet["jet-black"],
+            self.name_widget: color_pallet["dusty-olive"],
+            self.time_widget: color_pallet["ghost-white"],
+            self.location_widget: color_pallet["space-indigo"],
+            self.stop_route_widget: color_pallet["twilight-indigo"]
+        }
+
+        for widget, colour in widget_styles.items():
+            widget.setStyleSheet(
+                f"background-color: {colour};"
+                "border: 2px solid #333333;"
+                "border-radius: 4px;"
+            )
+
+            layout = QVBoxLayout(widget)
+            layout.setContentsMargins(2, 2, 2, 2)
+
 
     def on_list_turns_presses(self):
         print("list turns")
