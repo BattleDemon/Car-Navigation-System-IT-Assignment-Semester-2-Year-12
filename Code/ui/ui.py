@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
 
         # Middle layout widgets
         self.map_widget = QWebEngineView()
-        self.map = self.create_map(-35.3265,149.053,18)
+        self.map = self.create_map(-35.3265,149.053,17)
         self.map.save('map.html')
         self.map_widget.setHtml(self.map.get_root().render())
 
@@ -245,7 +245,11 @@ class MainWindow(QMainWindow):
     def get_estimated_time(self):
         pass
 
+    def update_map(self):
+        pass
+
 if __name__ == "__main__":
+
     app = QApplication(sys.argv)
     app.setApplicationName("CarNav")
 
