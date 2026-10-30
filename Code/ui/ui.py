@@ -208,7 +208,6 @@ class MainWindow(QMainWindow):
     def apply_styling(self):
         pass
 
-
     def on_list_turns_presses(self):
         print("list turns")
 
