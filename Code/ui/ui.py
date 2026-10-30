@@ -32,13 +32,35 @@ sys.path.append(str(parent_dir))
 debug = False
 
 # Color Palette
-color_pallet = {
-    "jet-black": "#30343fff",
-    "ghost-white": "#fafaffff",
-    "dusty-olive": "#709176ff",
-    "twilight-indigo": "#273469ff",
-    "space-indigo": "#1e2749ff",
+mono_dark_mode = {
+    "background": "#121212",
+    "primary text": "#E0E0E0",
+    "Secondary Text": "#B0B0B0",
+    "border/dividers": "#444444",
+    "accent": "#888888",
 }
+'''
+Background: #121212 (charcoal black)
+Primary Text: #E0E0E0 (light gray)
+Secondary Text: #B0B0B0 (medium gray)
+Borders/Dividers: #444444 (dark gray)
+Accent: #888888 (soft gray)
+'''
+
+deep_dark_mode = {
+    "background": "#1A1A1A",
+    "primary text": "#F0F0F0",
+    "Secondary Text": "#004D61",
+    "border/dividers": "#822659",
+    "accent": "#3E5641",
+}
+'''
+    Background: #1A1A1A (rich black)
+    Primary Text: #F0F0F0 (off-white)
+    Accent 1: #004D61 (dark teal)
+    Accent 2: #822659 (deep ruby)
+    Button/CTA: #3E5641 (forest green)
+'''
 
 class MainWindow(QMainWindow):
     def __init__(self, carnavapp):
@@ -171,8 +193,8 @@ class MainWindow(QMainWindow):
         for widget, (name, colour) in debug_widgets.items():
             widget.setStyleSheet(
                 f"background-color: {colour};"
-                "border: 2px solid #333333;"
-                "border-radius: 4px;"
+                "border:3px solid #333333;"
+                "border-radius: 5px;"
             )
 
             label = QLabel(name)
@@ -204,8 +226,8 @@ class MainWindow(QMainWindow):
         for widget, colour in widget_styles.items():
             widget.setStyleSheet(
                 f"background-color: {colour};"
-                "border: 2px solid #333333;"
-                "border-radius: 4px;"
+                "border:3px solid #333333;"
+                "border-radius: 5px;"
             )
 
             layout = QVBoxLayout(widget)
@@ -246,7 +268,7 @@ class MainWindow(QMainWindow):
         pass
 
     def update_map(self):
-        pass
+        self.map = self.create_map()
 
 if __name__ == "__main__":
 
