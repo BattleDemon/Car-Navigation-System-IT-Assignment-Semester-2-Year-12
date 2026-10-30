@@ -186,15 +186,6 @@ class MainWindow(QMainWindow):
     def apply_styling(self):
         pass
 
-    def on_zoom_out_pressed(self):
-        print("Zoom out Pressed")
-
-    def on_zoom_in_pressed(self):
-        print("Zoom in pressed")
-
-    def on_recentre_presses(self):
-        print("Recentred")
-
     def on_list_turns_presses(self):
         print("list turns")
 
@@ -216,6 +207,17 @@ class MainWindow(QMainWindow):
 
         return map
 
+    def update_speed(self):
+        pass
+
+    def update_time(self):
+        pass
+
+    def find_destination(self):
+        pass
+
+    def get_estimated_time(self):
+        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
