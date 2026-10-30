@@ -74,3 +74,6 @@ class NavigationController:
             total_minutes += time_hours * 60
 
         return total_minutes
+
+    def calculate_estimated_distance(self):
+        pass

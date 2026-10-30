@@ -51,7 +51,7 @@ class CarNavApp:
         return [self.lat_lng_speed[0], self.lat_lng_speed[1]]
 
     def get_time(self):
-        pass
+        return time.localtime()
 
     def stop(self):
         self.running = False
