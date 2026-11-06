@@ -65,15 +65,22 @@ class NavigationController:
         total_minutes = 0
 
         for length, speed in length_speed:
-            if speed is None:
-                speed = 50 # Assume default speed
+            if length is None:
+                continue
+
+            try:
+                speed = float(speed)
+
+                if speed <= 0:
+                    speed = 50
+
+            except (ValueError, TypeError):
+                speed = 50
 
             distance_km = length / 1000
-            time_hours = distance_km / float(speed)
+            time_hours = distance_km / speed
 
             total_minutes += time_hours * 60
-
-        return total_minutes
 
     def calculate_estimated_distance(self):
         pass

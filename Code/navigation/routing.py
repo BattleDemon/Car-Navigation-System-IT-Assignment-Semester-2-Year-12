@@ -115,12 +115,14 @@ class Router:
                 last_node = node_id
                 continue
 
-            edge = list(edges.values())[0]
+            if self.graph.is_multigraph():
+                edge = list(edges.values())[0]
+            else:
+                edge = edges
 
             length_speed.append([
                 edge.get("length"),
                 edge.get("maxspeed")
             ])
-            last_node = node_id
 
         return length_speed

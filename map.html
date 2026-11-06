@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_242877bf382f5437038497f9e8e5adbf {
+                #map_22cfc9beb78381d26a4c1e1c9c2af75c {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -50,20 +50,18 @@
             </script>
 
         
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.css"/>
 </head>
 <body>
     
     
-            <div class="folium-map" id="map_242877bf382f5437038497f9e8e5adbf" ></div>
+            <div class="folium-map" id="map_22cfc9beb78381d26a4c1e1c9c2af75c" ></div>
         
 </body>
 <script>
     
     
-            var map_242877bf382f5437038497f9e8e5adbf = L.map(
-                "map_242877bf382f5437038497f9e8e5adbf",
+            var map_22cfc9beb78381d26a4c1e1c9c2af75c = L.map(
+                "map_22cfc9beb78381d26a4c1e1c9c2af75c",
                 {
                     center: [-35.3265, 149.053],
                     crs: L.CRS.EPSG3857,
@@ -80,7 +78,7 @@
 
         
     
-            var tile_layer_97ad614e0c79294469f9d704797fa706 = L.tileLayer(
+            var tile_layer_2d91f498af914bd6f0996d1cf4772680 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -97,34 +95,38 @@
             );
         
     
-            tile_layer_97ad614e0c79294469f9d704797fa706.addTo(map_242877bf382f5437038497f9e8e5adbf);
+            tile_layer_2d91f498af914bd6f0996d1cf4772680.addTo(map_22cfc9beb78381d26a4c1e1c9c2af75c);
         
     
-            var marker_fd035ceca77a163d7b86b31590169000 = L.marker(
+            var marker_a0c99c56ca94110109994a100fd62925 = L.marker(
                 [-35.3265, 149.053],
                 {
 }
-            ).addTo(map_242877bf382f5437038497f9e8e5adbf);
+            ).addTo(map_22cfc9beb78381d26a4c1e1c9c2af75c);
         
     
-            var icon_8a9148a927f7c83e582bcf2bf5f3ae60 = L.AwesomeMarkers.icon(
+            var icon_6c50328784aff83d0950f655c1af888f = L.AwesomeMarkers.icon(
                 {
   "markerColor": "red",
   "iconColor": "white",
-  "icon": "ion.car-sport-outline",
+  "icon": "info-sign",
   "prefix": "glyphicon",
   "extraClasses": "fa-rotate-0",
 }
             );
         
     
-                marker_fd035ceca77a163d7b86b31590169000.setIcon(icon_8a9148a927f7c83e582bcf2bf5f3ae60);
-            
-    
-            var locate_control_9c2f2759bd3e645588255c213d2e5506 = L.control.locate(
-                {}
-            ).addTo(map_242877bf382f5437038497f9e8e5adbf);
-            
+            marker_a0c99c56ca94110109994a100fd62925.bindTooltip(
+                `<div>
+                     Current Location
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
         
+    
+                marker_a0c99c56ca94110109994a100fd62925.setIcon(icon_6c50328784aff83d0950f655c1af888f);
+            
 </script>
 </html>

@@ -14,14 +14,20 @@ from PyQt5.QtWidgets import *
 )"""
 
 from PyQt5.QtCore import Qt
+import os
+
+os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = (
+    "--disable-gpu --disable-gpu-compositing"
+)
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 #from offline_folium import offline
 import folium
 from folium import plugins
 
+from PyQt5.QtCore import Qt, QTimer
+
 import sys
-import os
 from pathlib import Path
 
 parent_dir = Path(__file__).resolve().parent.parent
@@ -99,10 +105,15 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout.setSpacing(5)
 
         # Top layout widgets
-        self.speed_widget = QWidget()
-        self.name_widget = QWidget()
-        self.time_widget = QWidget()
-        self.location_widget = QWidget()
+        self.speed_widget = QLabel("0 km/h")
+        self.name_widget = QLabel("CarNav")
+        self.time_widget = QLabel("00:00")
+        self.location_widget = QLabel("GPS: No Location")
+
+        self.speed_widget.setAlignment(Qt.AlignCenter)
+        self.name_widget.setAlignment(Qt.AlignCenter)
+        self.time_widget.setAlignment(Qt.AlignCenter)
+        self.location_widget.setAlignment(Qt.AlignCenter)
 
         self.name_widget.setFixedWidth(200)
         self.time_widget.setFixedWidth(200)
@@ -132,6 +143,11 @@ class MainWindow(QMainWindow):
         self.middle_glayout_widget.setStyleSheet(
             "background: transparent; border: none;"
         )
+        self.middle_glayout_widget.setAttribute(
+            Qt.WA_TransparentForMouseEvents,
+            True
+        )
+        self.middle_glayout_widget.hide()
 
         self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.middle_glayout.setContentsMargins(10, 10, 10, 10)
@@ -148,10 +164,17 @@ class MainWindow(QMainWindow):
         self.middle_slayout.setCurrentWidget(self.middle_glayout_widget)
 
         # Bottom layout widgets
-        self.stop_route_widget = QPushButton()
-        self.animation_widget = QWidget()
-        self.eta_widget = QWidget()
+        self.stop_route_widget = QPushButton("Stop")
+        self.animation_widget = QProgressBar()
+        self.eta_widget = QLabel("ETA: -- min")
         self.dest_select_widget = QLineEdit()
+
+        self.animation_widget.setRange(0, 100)
+        self.animation_widget.setValue(0)
+
+        self.eta_widget.setAlignment(Qt.AlignCenter)
+
+        self.dest_select_widget.setPlaceholderText("Lat, Lng")
 
         self.stop_route_widget.clicked.connect(self.on_stop_route_pressed)
 
@@ -165,15 +188,38 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout.addWidget(self.eta_widget, 1)
         self.bottom_hlayout.addWidget(self.dest_select_widget, 1)
 
+        self.clock_timer = QTimer(self)
+        self.clock_timer.timeout.connect(self.update_time)
+        self.clock_timer.start(1000)
+
+        self.gps_timer = QTimer(self)
+        self.gps_timer.timeout.connect(self.update_from_app)
+        self.gps_timer.start(200)
+
+        self.update_time()
+
+        self.dest_select_widget.returnPressed.connect(
+            self.find_destination
+        )
+
         if debug:
             self.apply_debug_styling()
         else:
             self.apply_styling()
 
+        self.destination = None
+
         self.show()
 
-    def __update(self):
-        pass
+    def update_from_app(self):
+        lat, lng, speed = (
+            self.car_nav_controller.get_location_speed()
+        )
+
+        if speed is not None:
+            self.update_speed(speed)
+
+        self.update_location(lat, lng)
 
     def apply_debug_styling(self):
         # Debug styling
@@ -206,43 +252,201 @@ class MainWindow(QMainWindow):
             layout.addWidget(label)
 
     def apply_styling(self):
-        pass
+        self.central_widget.setStyleSheet("""
+            QWidget {
+                background-color: #121212;
+                color: #E0E0E0;
+                font-family: Arial;
+            }
+
+            QLabel {
+                border: none;
+                background: transparent;
+            }
+
+            QPushButton {
+                background-color: #303030;
+                border: 1px solid #444444;
+                border-radius: 8px;
+                padding: 8px;
+                color: #E0E0E0;
+            }
+
+            QPushButton:pressed {
+                background-color: #505050;
+            }
+
+            QLineEdit {
+                background-color: #303030;
+                border: 1px solid #444444;
+                border-radius: 8px;
+                padding: 8px;
+                color: #E0E0E0;
+            }
+
+            QProgressBar {
+                background-color: #303030;
+                border: 1px solid #444444;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            QProgressBar::chunk {
+                background-color: #888888;
+                border-radius: 7px;
+            }
+        """)
+
+        self.speed_widget.setStyleSheet(
+            "font-size: 22px; font-weight: bold;"
+        )
+
+        self.name_widget.setStyleSheet(
+            "font-size: 20px; font-weight: bold;"
+        )
+
+        self.time_widget.setStyleSheet(
+            "font-size: 16px;"
+        )
+
+        self.location_widget.setStyleSheet(
+            "font-size: 13px;"
+        )
+
+        self.eta_widget.setStyleSheet(
+            "font-size: 15px; font-weight: bold;"
+        )
 
     def on_list_turns_presses(self):
         print("list turns")
 
     def on_stop_route_pressed(self):
-        print("Route Stopped")
+        self.car_nav_controller.NavigationController.clear_route()
 
-    def create_map(self, latitude, longitude, zoom_start = 12):
+        self.car_nav_controller.GPSManager.stop()
+
+        self.destination = None
+
+        self.update_eta()
+        self.update_progress(0)
+
+        lat, lng = self.car_nav_controller.get_location()
+        self.update_map(lat, lng)
+
+    def create_map(self, latitude, longitude, zoom_start, route=None):
         map = folium.Map(
             location=[latitude, longitude],
             zoom_start=zoom_start,
-            tiles='OpenStreetMap')
-        
+            tiles="OpenStreetMap"
+        )
+
         folium.Marker(
             [latitude, longitude],
-            icon=folium.Icon(color='red', icon='ion.car-sport-outline')
+            tooltip="Current Location",
+            icon=folium.Icon(color="red")
         ).add_to(map)
 
-        plugins.LocateControl().add_to(map)
+        if route:
+            folium.PolyLine(
+                route,
+                color="blue",
+                weight=5
+            ).add_to(map)
 
         return map
 
-    def update_speed(self):
-        pass
+    def update_speed(self, speed=0):
+        self.speed_widget.setText(f"{speed:.0f} km/h")
+
 
     def update_time(self):
-        pass
+        from datetime import datetime
+
+        current_time = datetime.now().strftime("%H:%M")
+        self.time_widget.setText(current_time)
+
+
+    def update_location(self, latitude=None, longitude=None):
+        if latitude is None or longitude is None:
+            self.location_widget.setText("GPS: No Location")
+        else:
+            self.location_widget.setText(
+                f"{latitude:.5f}, {longitude:.5f}"
+            )
+
+
+    def update_eta(self, minutes=None):
+        if minutes is None:
+            self.eta_widget.setText("ETA: -- min")
+        else:
+            self.eta_widget.setText(
+                f"ETA: {minutes:.0f} min"
+            )
+
+
+    def update_progress(self, progress=0):
+        self.animation_widget.setValue(
+            max(0, min(100, int(progress)))
+        )
+
+    def update_map(self, latitude, longitude,zoom_start, route=None):
+        self.map = self.create_map(
+            latitude,
+            longitude,
+            zoom_start=zoom_start,
+            route=route
+        )
+
+        self.map_widget.setHtml(
+            self.map.get_root().render()
+        )
 
     def find_destination(self):
-        pass
+        try:
+            # Read the coordinates entered by the user
+            text = self.dest_select_widget.text()
 
-    def get_estimated_time(self):
-        pass
+            latitude, longitude = map(
+                float, text.split(",")
+            )
 
-    def update_map(self):
-        self.map = self.create_map()
+            # Check that coordinates are valid
+            if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
+                raise ValueError("Coordinates out of range")
+
+        except ValueError:
+            print("Invalid destination coordinates")
+            return
+
+        # Ask the main application to calculate a route
+        route = self.car_nav_controller.set_destination(
+            latitude, longitude
+        )
+
+        if route is None:
+            print("Unable to calculate route")
+            return
+
+        # Get current GPS location
+        current_lat, current_lng = (
+            self.car_nav_controller.get_location()
+        )
+
+        # Display the calculated route
+        self.update_map(
+            current_lat,
+            current_lng,
+            route=route
+        )
+
+        # Display estimated travel time
+        minutes = (
+            self.car_nav_controller
+            .NavigationController
+            .calculate_estimated_time()
+        )
+
+        self.update_eta(minutes)
 
 if __name__ == "__main__":
 
@@ -250,5 +454,9 @@ if __name__ == "__main__":
     app.setApplicationName("CarNav")
 
     w = MainWindow("temp")
+    w.update_speed(60)
+    w.update_location(-35.325833, 149.057750)
+    w.update_eta(8)
+    w.update_progress(35)
 
     sys.exit(app.exec_())

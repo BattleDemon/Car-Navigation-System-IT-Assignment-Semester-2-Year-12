@@ -6,29 +6,33 @@ import pyrosm
 import pynmea2
 import pandas
 import numpy
-import pandarm
 import time
 
 # Interal imports
 
 from gps.gps import GPSManager
+from gps.simulate_gps import SimulatedGPS
 from map.osm_import import OSMImporter
 from map.loader import AreaLoader
 from map.road_graph import RoadGraph
 from navigation.navigation import NavigationController
 from ui.ui import MainWindow
 
+import sys
+from PyQt5.QtWidgets import QApplication
+
 
 class CarNavApp:
-    def __init__(self):
-        self.GPSManager = GPSManager()
-        self.OSMImporter = OSMImporter()
-        self.AreaLoader = AreaLoader(self)
-        self.ui = MainWindow(self)
-        self.lat_lng_speed = [0, 0, 0]
-
-        self.update_thread = _thread.start_new_thread(self._update)
+    def __init__(self, simulate=True):
+        self.lat_lng_speed = [None, None, None]
         self.running = True
+
+        if simulate:
+            self.GPSManager = SimulatedGPS()
+        else:
+            self.GPSManager = GPSManager()
+
+        self.lat_lng_speed = self.GPSManager.get_location_speed()
 
         self.RoadGraph = RoadGraph("Code/map/WEST.osm.pbf")
         self.RoadGraph.load()
@@ -36,6 +40,13 @@ class CarNavApp:
         self.NavigationController = NavigationController(
             self,
             self.RoadGraph
+        )
+
+        self.ui = MainWindow(self)
+
+        self.update_thread = _thread.start_new_thread(
+            self._update,
+            ()
         )
 
     def _update(self):
@@ -57,3 +68,25 @@ class CarNavApp:
         self.running = False
 
         self.GPSManager.stop()
+
+    def set_destination(self, latitude, longitude):
+        # Calculate route through the existing navigation controller
+        route = self.NavigationController.set_destination(
+            latitude, longitude
+        )
+
+        if route is None:
+            return None
+
+        # Start simulated movement if using the GPS simulator
+        if isinstance(self.GPSManager, SimulatedGPS):
+            self.GPSManager.set_route(route)
+
+        return route
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+
+    car_nav = CarNavApp(simulate=True)
+
+    sys.exit(app.exec_())

@@ -1,4 +1,4 @@
-import Path
+from pathlib import Path
 
 local_path = Path(__file__).parent
 

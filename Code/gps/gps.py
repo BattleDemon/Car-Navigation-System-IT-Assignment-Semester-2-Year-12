@@ -20,29 +20,43 @@ class GPSManager:
         self.ser = serial.Serial(self.port, baudrate=9600, timeout=0.5)
 
         # Create thread for gps location update
-        self.update_thread = _thread.start_new_thread(self._update)
         self.running = True
+        self.update_thread = _thread.start_new_thread(self._update)
+        
 
-    def _update(self):  # _ for internal function, loop to update gps location
+    def _update(self):
         while self.running:
-            rawdata = self.ser.readline()
+            try:
+                rawdata = self.ser.readline().decode(
+                    "ascii", errors="ignore"
+                ).strip()
 
-            # Check if the raw data is the correct type
-            # $GNRMC gives longitude, latitude, speed (in Knots), UTC time, and date
-            if rawdata[0:5] == "$GNRMC":
-                # Parse rawdate into usable data
+                # Only process valid RMC messages
+                if not rawdata.startswith(("$GNRMC", "$GPRMC")):
+                    continue
+
                 data = pynmea2.parse(rawdata)
 
-                # Set local refrence to needed data
+                # Ignore messages without a valid GPS fix
+                if data.status != "A":
+                    continue
+
                 lat = data.latitude
                 lng = data.longitude
 
-                # Get raw speed (in knots), then change to km/h
-                speed_knots = data.spd_over_grnd
+                # Convert speed from knots to km/h
+                speed_knots = float(data.spd_over_grnd or 0)
                 speed = speed_knots * 1.852
 
-                # Set class data
                 self._set_location_speed(lat, lng, speed)
+
+            except (pynmea2.ParseError, ValueError):
+                continue
+
+            except (serial.SerialException, OSError):
+                if self.running:
+                    print("GPS connection lost")
+                break
 
     def get_location_speed(self):  # Called by other files when needed to get location
         return [self.lat, self.lng, self.speed]
