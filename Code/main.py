@@ -70,15 +70,18 @@ class CarNavApp:
         self.GPSManager.stop()
 
     def set_destination(self, latitude, longitude):
-        # Calculate route through the existing navigation controller
+        # Calculate the route using the navigation controller
         route = self.NavigationController.set_destination(
             latitude, longitude
         )
 
         if route is None:
+            print("Route calculation failed")
             return None
 
-        # Start simulated movement if using the GPS simulator
+        print(f"Route calculated: {len(route)} coordinates")
+
+        # Start simulated movement along the calculated route
         if isinstance(self.GPSManager, SimulatedGPS):
             self.GPSManager.set_route(route)
 

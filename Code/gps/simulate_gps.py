@@ -19,7 +19,7 @@ class SimulatedGPS:
 
         if coordinates:
             self.lat, self.lng = coordinates[0]
-            self.speed = 40
+            self.speed = 50
 
     def get_location_speed(self):
         if self.route and time.monotonic() - self.last_update >= 1:

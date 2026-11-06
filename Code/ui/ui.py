@@ -134,7 +134,7 @@ class MainWindow(QMainWindow):
 
         # Middle layout widgets
         self.map_widget = QWebEngineView()
-        self.map = self.create_map(-35.3265,149.053,17)
+        self.map = self.create_map(-35.325833, 149.057750,17)
         self.map.save('map.html')
         self.map_widget.setHtml(self.map.get_root().render())
 
@@ -196,6 +196,10 @@ class MainWindow(QMainWindow):
         self.gps_timer.timeout.connect(self.update_from_app)
         self.gps_timer.start(200)
 
+        self.map_timer = QTimer(self)
+        self.map_timer.timeout.connect(self.refresh_map)
+        self.map_timer.start(1000)
+
         self.update_time()
 
         self.dest_select_widget.returnPressed.connect(
@@ -220,6 +224,15 @@ class MainWindow(QMainWindow):
             self.update_speed(speed)
 
         self.update_location(lat, lng)
+
+        gps = self.car_nav_controller.GPSManager
+
+        if hasattr(gps, "route") and gps.route:
+            progress = (
+                gps.index / max(1, len(gps.route) - 1)
+            ) * 100
+
+            self.update_progress(progress)
 
     def apply_debug_styling(self):
         # Debug styling
@@ -250,6 +263,32 @@ class MainWindow(QMainWindow):
             layout = QVBoxLayout(widget)
             layout.setContentsMargins(2, 2, 2, 2)
             layout.addWidget(label)
+
+    def refresh_map(self):
+        lat, lng = self.car_nav_controller.get_location()
+
+        if lat is None or lng is None:
+            return
+
+        gps = self.car_nav_controller.GPSManager
+        route = self.car_nav_controller.NavigationController.get_route()
+
+        # Only display the remaining route
+        if hasattr(gps, "index") and route:
+            route = route[gps.index:]
+
+        # Move the existing vehicle marker
+        javascript = f"""
+            {self.vehicle_marker.get_name()}.setLatLng([{lat}, {lng}]);
+        """
+
+        # Update the existing route line
+        if self.route_line is not None:
+            javascript += f"""
+                {self.route_line.get_name()}.setLatLngs({route});
+            """
+
+        self.map_widget.page().runJavaScript(javascript)
 
     def apply_styling(self):
         self.central_widget.setStyleSheet("""
@@ -323,15 +362,21 @@ class MainWindow(QMainWindow):
     def on_stop_route_pressed(self):
         self.car_nav_controller.NavigationController.clear_route()
 
-        self.car_nav_controller.GPSManager.stop()
+        gps = self.car_nav_controller.GPSManager
+
+        if isinstance(gps, SimulatedGPS):
+            gps.stop()
 
         self.destination = None
-
         self.update_eta()
         self.update_progress(0)
 
         lat, lng = self.car_nav_controller.get_location()
-        self.update_map(lat, lng)
+
+        if lat is not None and lng is not None:
+            self.update_map(lat, lng)
+
+        print("Route stopped")
 
     def create_map(self, latitude, longitude, zoom_start, route=None):
         map = folium.Map(
@@ -340,18 +385,23 @@ class MainWindow(QMainWindow):
             tiles="OpenStreetMap"
         )
 
-        folium.Marker(
+        self.vehicle_marker = folium.Marker(
             [latitude, longitude],
             tooltip="Current Location",
             icon=folium.Icon(color="red")
-        ).add_to(map)
+        )
+
+        self.vehicle_marker.add_to(map)
+
+        self.route_line = None
 
         if route:
-            folium.PolyLine(
+            self.route_line = folium.PolyLine(
                 route,
                 color="blue",
                 weight=5
-            ).add_to(map)
+            )
+            self.route_line.add_to(map)
 
         return map
 
@@ -389,7 +439,7 @@ class MainWindow(QMainWindow):
             max(0, min(100, int(progress)))
         )
 
-    def update_map(self, latitude, longitude,zoom_start, route=None):
+    def update_map(self, latitude, longitude, zoom_start=17, route=None):
         self.map = self.create_map(
             latitude,
             longitude,
@@ -454,9 +504,6 @@ if __name__ == "__main__":
     app.setApplicationName("CarNav")
 
     w = MainWindow("temp")
-    w.update_speed(60)
     w.update_location(-35.325833, 149.057750)
-    w.update_eta(8)
-    w.update_progress(35)
 
     sys.exit(app.exec_())
