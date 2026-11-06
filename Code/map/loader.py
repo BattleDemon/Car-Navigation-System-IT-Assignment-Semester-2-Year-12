@@ -257,11 +257,15 @@ class AreaLoader:
     def load_areas(self):
         pass
 
+    # Updating loop
     def _update(self):
+        # only while running
         while self.running:
+            # get lat lng
             lat_lng = self.owner.get_location()
             self.coordinates = Point(lat_lng[1], lat_lng[0])
 
+            # open the geojson
             with open(self.location[1], "r") as f:
                 geojson_data = json.load(f)
 

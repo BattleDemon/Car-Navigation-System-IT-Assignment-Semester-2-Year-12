@@ -57,31 +57,42 @@ class NavigationController:
         self.route_coordinates = []
 
     def calculate_estimated_time(self):
+        # If the route exist
         if self.route is None:
             return None
 
+        # get the speed on the route
         length_speed = self.router.get_route_legth_speed(self.route)
 
+        # Tally of minutes
         total_minutes = 0
 
+        # Get the running tally by going through the list
         for length, speed in length_speed:
             if length is None:
                 continue
 
             try:
+                # The speed as a float
                 speed = float(speed)
 
+                # If speed does not exist set speed
                 if speed <= 0:
                     speed = 50
 
+            # if bad value get default speed
             except (ValueError, TypeError):
                 speed = 50
 
+            # get the distance in km
             distance_km = length / 1000
+            # Time hours
             time_hours = distance_km / speed
 
+            # add to the total minutes
             total_minutes += time_hours * 60
 
+            # Return final total minutes
             return total_minutes
 
     def calculate_estimated_distance(self):
