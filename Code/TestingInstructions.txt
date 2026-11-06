@@ -1,0 +1,7 @@
+Hi Tim,
+
+Please use the 'main.py' file, it is the centural file and connects everything.
+
+Feel free to change the '.osm.pbf' file that changes the area which can be navigated. 
+
+Here is the latitude and longitude for Coolomen court which I have been using to test '-35.341411, 149.052293'.
