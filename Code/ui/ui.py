@@ -30,6 +30,8 @@ from PyQt5.QtCore import Qt, QTimer
 import sys
 from pathlib import Path
 
+from gps.simulate_gps import SimulatedGPS
+
 parent_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_dir))
 

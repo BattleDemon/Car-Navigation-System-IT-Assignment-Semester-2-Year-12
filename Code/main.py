@@ -93,3 +93,7 @@ if __name__ == "__main__":
     car_nav = CarNavApp(simulate=True)
 
     sys.exit(app.exec_())
+
+
+
+# -35.341411, 149.052293

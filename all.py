@@ -20,29 +20,43 @@ class GPSManager:
         self.ser = serial.Serial(self.port, baudrate=9600, timeout=0.5)
 
         # Create thread for gps location update
-        self.update_thread = _thread.start_new_thread(self._update)
         self.running = True
+        self.update_thread = _thread.start_new_thread(self._update)
+        
 
-    def _update(self):  # _ for internal function, loop to update gps location
+    def _update(self):
         while self.running:
-            rawdata = self.ser.readline()
+            try:
+                rawdata = self.ser.readline().decode(
+                    "ascii", errors="ignore"
+                ).strip()
 
-            # Check if the raw data is the correct type
-            # $GNRMC gives longitude, latitude, speed (in Knots), UTC time, and date
-            if rawdata[0:5] == "$GNRMC":
-                # Parse rawdate into usable data
+                # Only process valid RMC messages
+                if not rawdata.startswith(("$GNRMC", "$GPRMC")):
+                    continue
+
                 data = pynmea2.parse(rawdata)
 
-                # Set local refrence to needed data
+                # Ignore messages without a valid GPS fix
+                if data.status != "A":
+                    continue
+
                 lat = data.latitude
                 lng = data.longitude
 
-                # Get raw speed (in knots), then change to km/h
-                speed_knots = data.spd_over_grnd
+                # Convert speed from knots to km/h
+                speed_knots = float(data.spd_over_grnd or 0)
                 speed = speed_knots * 1.852
 
-                # Set class data
                 self._set_location_speed(lat, lng, speed)
+
+            except (pynmea2.ParseError, ValueError):
+                continue
+
+            except (serial.SerialException, OSError):
+                if self.running:
+                    print("GPS connection lost")
+                break
 
     def get_location_speed(self):  # Called by other files when needed to get location
         return [self.lat, self.lng, self.speed]
@@ -57,333 +71,44 @@ class GPSManager:
         self.running = False
         self.ser.close()
 
-import json
-
-# Load your multi-subsection GeoJSON
-with open("Data/ACTGOV_DISTRICTS_-2248938068983619392.geojson", "r") as f:
-    geojson_data = json.load(f)
-
-extracts = []
-
-# Loop through each feature to create an extract definition
-for index, feature in enumerate(geojson_data["features"]):
-    # Use a property name (like 'name' or 'id') for the filename, fallback to index
-    properties = feature.get("properties", {})
-    name = (
-        properties.get("DISTRICT_NAME", f"subsection_{index}").replace(" ", "_").lower()
-    )
-
-    polygons = feature["geometry"]["coordinates"]
-
-    extracts.append(
-        {
-            "output": f"{name}.osm.pbf",
-            "description": f"Extract for {name}",
-            "polygon": feature["geometry"]["coordinates"],
-        }
-    )
-
-# Save to Osmium configuration format
-osmium_config = {"extracts": extracts}
-
-with open("extract_config.json", "w") as f:
-    json.dump(osmium_config, f, indent=4)
-
-print("Osmium extract configuration created successfully!")
-
-from pathlib import Path
-import _thread
-import json
 import time
-from shapely.geometry import Point, shape
-
-local_path = Path(__file__).parent.parent
-local_path= local_path / "Areas"
 
 
-class AreaLoader:
-    def __init__(self, owner):
-        # Reference to the owner
-        self.owner = owner
-        # Dictionary containing the files associated with the districts and their adjacentcies
-        self.locations = {
-            "Belconnen": [
-                local_path / "BELC.osm.pbf",
-                local_path / "BELC.geojson",
-                [
-                    "Coree",
-                    "Hall",
-                    "Gungahlin",
-                    "Canberra Central",
-                    "Molongolo Valley",
-                    "Stromlo",
-                ],
-            ],
-            "Booth": [
-                local_path / "BOOT.osm.pbf",
-                local_path / "BOOT.geojson",
-                [
-                    "Mount Clear",
-                    "Rendezvous Creek",
-                    "Tennent",
-                ],
-            ],
-            "Canberra Cental": [
-                local_path / "CANB.osm.pbf",
-                local_path / "CANB.geojson",
-                [
-                    "Belconnen",
-                    "Gungahlin",
-                    "Majura",
-                    "Jerrabomberra",
-                    "Woden Valley",
-                    "Weston Creek",
-                    "Molongolo Valley",
-                ],
-            ],
-            "Coree": [
-                local_path / "CORE.osm.pbf",
-                local_path / "CORE.geojson",
-                [
-                    "Belconnen",
-                    "Stromlo",
-                    "Paddys Creek",
-                    "Cotter River",
-                ],
-            ],
-            "Cotter River": [
-                local_path / "COTT.osm.pbf",
-                local_path / "COTT.geojson",
-                [
-                    "Coree",
-                    "Paddys Creek",
-                    "Tennent",
-                    "Rendezvous Creek",
-                ],
-            ],
-            "Gungahlin": [
-                local_path / "GUNG.osm.pbf",
-                local_path / "GUNG.geojson",
-                [
-                    "Hall",
-                    "Belconnen",
-                    "Canberra Central",
-                    "Majura",
-                ],
-            ],
-            "Hall": [
-                local_path / "HALL.osm.pbf",
-                local_path / "HALL.geojson",
-                [
-                    "Belconnen",
-                    "Gungahlin",
-                ],
-            ],
-            "Jerrabomberra": [
-                local_path / "JERR.osm.pbf",
-                local_path / "JERR.geojson",
-                [
-                    "Majura",
-                    "Canberra Central",
-                    "Woden Valley",
-                    "Tuggeranong",
-                ],
-            ],
-            "Kowen": [
-                local_path / "KOWE.osm.pbf",
-                local_path / "KOWE.geojson",
-                ["Majura"],
-            ],
-            "Majura": [
-                local_path / "MAJU.osm.pbf",
-                local_path / "MAJU.geojson",
-                [
-                    "Kowen",
-                    "Gungahlin",
-                    "Canberra Central",
-                    "Jerrabomberra",
-                ],
-            ],
-            "Molonglo Valley": [
-                local_path / "MOLO.osm.pbf",
-                local_path / "MOLO.geojson",
-                [
-                    "Stromlo",
-                    "Belconnen",
-                    "Canberra Central",
-                    "Weston Creek",
-                ],
-            ],
-            "Mount Clear": [
-                local_path / "MOUN.osm.pbf",
-                local_path / "MOUN.geojson",
-                [
-                    "Rendezvous Creek",
-                    "Booth",
-                ],
-            ],
-            "Paddys River": [
-                local_path / "PADD.osm.pbf",
-                local_path / "PADD.geojson",
-                [
-                    "Cotter River",
-                    "Coree",
-                    "Stromlo",
-                    "Tuggeranong",
-                    "Tennent",
-                ],
-            ],
-            "Rendezvous Creek": [
-                local_path / "REND.osm.pbf",
-                local_path / "REND.geojson",
-                [
-                    "Cotter River",
-                    "Tennent",
-                    "Booth",
-                    "Mount Clear",
-                ],
-            ],
-            "Stromlo": [
-                local_path / "STRO.osm.pbf",
-                local_path / "STRO.geojson",
-                [
-                    "Coree",
-                    "Belconnen",
-                    "Molongolo Valley",
-                    "Weston Creek",
-                    "Tuggeranong",
-                    "Paddys Creek",
-                ],
-            ],
-            "Tennent": [
-                local_path / "TENN.osm.pbf",
-                local_path / "TENN.geojson",
-                [
-                    "Cotter River",
-                    "Paddys River",
-                    "Tuggeranong",
-                    "Booth",
-                    "Rendezvous Creek",
-                ],
-            ],
-            "Tuggeranong": [
-                local_path / "TUGG.osm.pbf",
-                local_path / "TUGG.geojson",
-                [
-                    "Stromlo",
-                    "Weston Creek",
-                    "Woden Valley",
-                    "Jerrabomberra",
-                    "Tennent",
-                    "Paddys River",
-                ],
-            ],
-            "Weston Creek": [
-                local_path / "WEST.osm.pbf",
-                local_path / "WEST.geojson",
-                [
-                    "Stromlo",
-                    "Molongolo Valley",
-                    "Canberra Central",
-                    "Woden Valley",
-                    "Tuggeranong",
-                ],
-            ],
-            "Woden Valley": [
-                local_path / "WODE.osm.pbf",
-                local_path / "WODE.geojson",
-                [
-                    "Weston Creek",
-                    "Canberra Central",
-                    "Jerrabomberra",
-                    "Tuggeranong",
-                ],
-            ],
-        }
+class SimulatedGPS:
 
-        # If the location has been found and what it is
-        self.located = False
-        self.location = None
-        # Exact latitude and longitude
-        self.coordinates = None
+    def __init__(self, lat=-35.325833, lng=149.057750):
+        self.lat = lat
+        self.lng = lng
+        self.speed = 0
 
-        self.load_area = 1  # Number of adjacent areas to load: 1 Just the immediete adjacent, 2 their adjacentcies.
+        self.route = []
+        self.index = 0
+        self.last_update = time.monotonic()
 
-        # Running and its thread
-        self.running = True
-        self.update_thread = _thread.start_new_thread(self._update)
+    def set_route(self, coordinates):
+        self.route = coordinates
+        self.index = 0
+        self.last_update = time.monotonic()
 
-    def find_location(self):
-        lat_lng = self.owner.get_location()  # in form [Lat, Lng]
-        self.cordinates = Point(lat_lng[1], lat_lng[0])
+        if coordinates:
+            self.lat, self.lng = coordinates[0]
+            self.speed = 50
 
-        if self.located:
-            # Check adjacent
+    def get_location_speed(self):
+        if self.route and time.monotonic() - self.last_update >= 1:
+            self.last_update = time.monotonic()
 
-            for area1 in self.located[2]:
-                area = list(self.locations.keys()).index(area1)
+            if self.index < len(self.route) - 1:
+                self.index += 1
+                self.lat, self.lng = self.route[self.index]
+            else:
+                self.speed = 0
 
-                with open(area[1], "r") as f:
-                    geojson_date = json.load(f)
+        return [self.lat, self.lng, self.speed]
 
-                for feature in geojson_date["features"]:
-                    polygon = shape(feature["geometry"])
-                    if polygon.contains(self.coordinates):
-                        self.location = area1
-                        self.located = True
-                        break
-
-        else:
-            # Check all
-            for area in self.locations:
-                # Check if the areas.geojson has the current lat_lng in it
-                with open(area[1], "r") as f:
-                    geojson_date = json.load(f)
-
-                for feature in geojson_date["features"]:
-                    polygon = shape(feature["geometry"])
-                    if polygon.contains(self.coordinates):
-                        self.location = area
-                        self.located = True
-                        break
-
-    def load_areas(self):
-        pass
-
-    def _update(self):
-        while self.running:
-            lat_lng = self.owner.get_location()
-            self.coordinates = Point(lat_lng[1], lat_lng[0])
-
-            with open(self.location[1], "r") as f:
-                geojson_data = json.load(f)
-
-            for feature in geojson_data["features"]:
-                polygon = shape(feature["geometry"])
-                if polygon.contains(self.coordinates):
-                    break
-                else:
-                    self.find_location()
-
-    time.sleep(15)  # Checks every 15 seconds
-
-
-# When load an area after the first time (Check all and find where we are using cord), then check adjacent first before doing the others
-
-from pyrosm import OSM
-from pathlib import Path
-
-
-class OSMImporter:
-    def __init__(self, file_path: Path):
-        self.osm_file = file_path
-        self.osm = OSM(self.osm_file)
-
-        self.nodes, self.edges = self.osm.get_network(
-            nodes=True, network_type="driving"
-        )
-
-        self.graph = self.osm.to_graph(self.nodes, self.edges, simplify=True)
+    def stop(self):
+        self.route = []
+        self.speed = 0
 
 from pyrosm import OSM
 
@@ -409,86 +134,6 @@ class RoadGraph:
         self.graph = self.osm.to_graph(self.nodes, self.edges, graph_type="networkx")
 
         return self.graph
-
-from navigation.routing import Router
-
-
-class NavigationController:
-    def __init__(self, owner, road_graph):
-        # CarNavApp gives us access to the current GPS location.
-        self.owner = owner
-
-        self.road_graph = road_graph
-        # Router handles the actual pathfinding through the road network.
-        self.router = Router(road_graph)
-
-        # Current navigation information.
-        self.destination = None
-        self.route = None
-        self.route_coordinates = []
-
-    def set_destination(self, lat, lng):
-        # Store the destination and immediately calculate a route to it.
-        self.destination = [lat, lng]
-
-        return self.calculate_route()
-
-    def calculate_route(self):
-        # A destination needs to be selected before routing can begin.
-        if self.destination is None:
-            return None
-
-        start = self.owner.get_location()
-
-        # GPS may not have produced a position yet.
-        if start[0] is None or start[1] is None:
-            return None
-
-        self.route = self.router.calculate_route(
-            start[0], start[1], self.destination[0], self.destination[1]
-        )
-
-        if self.route is None:
-            self.route_coordinates = []
-            return None
-
-        self.route_coordinates = self.router.get_route_coordinates(self.route)
-        self.route_length_speed = {}  # Key = node_id, element = [length, maxspeed]
-
-        return self.route_coordinates
-
-    def get_route(self):
-        return self.route_coordinates
-
-    def get_destination(self):
-        return self.destination
-
-    def clear_route(self):
-        self.destination = None
-        self.route = None
-        self.route_coordinates = []
-
-    def calculate_estimated_time(self):
-        if self.route is None:
-            return None
-
-        length_speed = self.router.get_route_legth_speed(self.route)
-
-        total_minutes = 0
-
-        for length, speed in length_speed:
-            if speed is None:
-                speed = 50 # Assume default speed
-
-            distance_km = length / 1000
-            time_hours = distance_km / float(speed)
-
-            total_minutes += time_hours * 60
-
-        return total_minutes
-
-    def calculate_estimated_distance(self):
-        pass
 
 import math
 import networkx as nx
@@ -607,15 +252,104 @@ class Router:
                 last_node = node_id
                 continue
 
-            edge = list(edges.values())[0]
+            if self.graph.is_multigraph():
+                edge = list(edges.values())[0]
+            else:
+                edge = edges
 
             length_speed.append([
                 edge.get("length"),
                 edge.get("maxspeed")
             ])
-            last_node = node_id
 
         return length_speed
+
+from navigation.routing import Router
+
+
+class NavigationController:
+    def __init__(self, owner, road_graph):
+        # CarNavApp gives us access to the current GPS location.
+        self.owner = owner
+
+        self.road_graph = road_graph
+        # Router handles the actual pathfinding through the road network.
+        self.router = Router(road_graph)
+
+        # Current navigation information.
+        self.destination = None
+        self.route = None
+        self.route_coordinates = []
+
+    def set_destination(self, lat, lng):
+        # Store the destination and immediately calculate a route to it.
+        self.destination = [lat, lng]
+
+        return self.calculate_route()
+
+    def calculate_route(self):
+        # A destination needs to be selected before routing can begin.
+        if self.destination is None:
+            return None
+
+        start = self.owner.get_location()
+
+        # GPS may not have produced a position yet.
+        if start[0] is None or start[1] is None:
+            return None
+
+        self.route = self.router.calculate_route(
+            start[0], start[1], self.destination[0], self.destination[1]
+        )
+
+        if self.route is None:
+            self.route_coordinates = []
+            return None
+
+        self.route_coordinates = self.router.get_route_coordinates(self.route)
+        self.route_length_speed = {}  # Key = node_id, element = [length, maxspeed]
+
+        return self.route_coordinates
+
+    def get_route(self):
+        return self.route_coordinates
+
+    def get_destination(self):
+        return self.destination
+
+    def clear_route(self):
+        self.destination = None
+        self.route = None
+        self.route_coordinates = []
+
+    def calculate_estimated_time(self):
+        if self.route is None:
+            return None
+
+        length_speed = self.router.get_route_legth_speed(self.route)
+
+        total_minutes = 0
+
+        for length, speed in length_speed:
+            if length is None:
+                continue
+
+            try:
+                speed = float(speed)
+
+                if speed <= 0:
+                    speed = 50
+
+            except (ValueError, TypeError):
+                speed = 50
+
+            distance_km = length / 1000
+            time_hours = distance_km / speed
+
+            total_minutes += time_hours * 60
+
+    def calculate_estimated_distance(self):
+        pass
 
 from PyQt5.QtWidgets import *
 
@@ -633,14 +367,20 @@ from PyQt5.QtWidgets import *
 )"""
 
 from PyQt5.QtCore import Qt
+import os
+
+os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = (
+    "--disable-gpu --disable-gpu-compositing"
+)
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 #from offline_folium import offline
 import folium
 from folium import plugins
 
+from PyQt5.QtCore import Qt, QTimer
+
 import sys
-import os
 from pathlib import Path
 
 parent_dir = Path(__file__).resolve().parent.parent
@@ -718,10 +458,15 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout.setSpacing(5)
 
         # Top layout widgets
-        self.speed_widget = QWidget()
-        self.name_widget = QWidget()
-        self.time_widget = QWidget()
-        self.location_widget = QWidget()
+        self.speed_widget = QLabel("0 km/h")
+        self.name_widget = QLabel("CarNav")
+        self.time_widget = QLabel("00:00")
+        self.location_widget = QLabel("GPS: No Location")
+
+        self.speed_widget.setAlignment(Qt.AlignCenter)
+        self.name_widget.setAlignment(Qt.AlignCenter)
+        self.time_widget.setAlignment(Qt.AlignCenter)
+        self.location_widget.setAlignment(Qt.AlignCenter)
 
         self.name_widget.setFixedWidth(200)
         self.time_widget.setFixedWidth(200)
@@ -742,7 +487,7 @@ class MainWindow(QMainWindow):
 
         # Middle layout widgets
         self.map_widget = QWebEngineView()
-        self.map = self.create_map(-35.3265,149.053,17)
+        self.map = self.create_map(-35.325833, 149.057750,17)
         self.map.save('map.html')
         self.map_widget.setHtml(self.map.get_root().render())
 
@@ -751,6 +496,11 @@ class MainWindow(QMainWindow):
         self.middle_glayout_widget.setStyleSheet(
             "background: transparent; border: none;"
         )
+        self.middle_glayout_widget.setAttribute(
+            Qt.WA_TransparentForMouseEvents,
+            True
+        )
+        self.middle_glayout_widget.hide()
 
         self.middle_glayout = QGridLayout(self.middle_glayout_widget)
         self.middle_glayout.setContentsMargins(10, 10, 10, 10)
@@ -767,10 +517,17 @@ class MainWindow(QMainWindow):
         self.middle_slayout.setCurrentWidget(self.middle_glayout_widget)
 
         # Bottom layout widgets
-        self.stop_route_widget = QPushButton()
-        self.animation_widget = QWidget()
-        self.eta_widget = QWidget()
+        self.stop_route_widget = QPushButton("Stop")
+        self.animation_widget = QProgressBar()
+        self.eta_widget = QLabel("ETA: -- min")
         self.dest_select_widget = QLineEdit()
+
+        self.animation_widget.setRange(0, 100)
+        self.animation_widget.setValue(0)
+
+        self.eta_widget.setAlignment(Qt.AlignCenter)
+
+        self.dest_select_widget.setPlaceholderText("Lat, Lng")
 
         self.stop_route_widget.clicked.connect(self.on_stop_route_pressed)
 
@@ -784,15 +541,51 @@ class MainWindow(QMainWindow):
         self.bottom_hlayout.addWidget(self.eta_widget, 1)
         self.bottom_hlayout.addWidget(self.dest_select_widget, 1)
 
+        self.clock_timer = QTimer(self)
+        self.clock_timer.timeout.connect(self.update_time)
+        self.clock_timer.start(1000)
+
+        self.gps_timer = QTimer(self)
+        self.gps_timer.timeout.connect(self.update_from_app)
+        self.gps_timer.start(200)
+
+        self.map_timer = QTimer(self)
+        self.map_timer.timeout.connect(self.refresh_map)
+        self.map_timer.start(1000)
+
+        self.update_time()
+
+        self.dest_select_widget.returnPressed.connect(
+            self.find_destination
+        )
+
         if debug:
             self.apply_debug_styling()
         else:
             self.apply_styling()
 
+        self.destination = None
+
         self.show()
 
-    def __update(self):
-        pass
+    def update_from_app(self):
+        lat, lng, speed = (
+            self.car_nav_controller.get_location_speed()
+        )
+
+        if speed is not None:
+            self.update_speed(speed)
+
+        self.update_location(lat, lng)
+
+        gps = self.car_nav_controller.GPSManager
+
+        if hasattr(gps, "route") and gps.route:
+            progress = (
+                gps.index / max(1, len(gps.route) - 1)
+            ) * 100
+
+            self.update_progress(progress)
 
     def apply_debug_styling(self):
         # Debug styling
@@ -824,44 +617,239 @@ class MainWindow(QMainWindow):
             layout.setContentsMargins(2, 2, 2, 2)
             layout.addWidget(label)
 
+    def refresh_map(self):
+        lat, lng = self.car_nav_controller.get_location()
+
+        if lat is None or lng is None:
+            return
+
+        gps = self.car_nav_controller.GPSManager
+        route = self.car_nav_controller.NavigationController.get_route()
+
+        # Only display the remaining route
+        if hasattr(gps, "index") and route:
+            route = route[gps.index:]
+
+        # Move the existing vehicle marker
+        javascript = f"""
+            {self.vehicle_marker.get_name()}.setLatLng([{lat}, {lng}]);
+        """
+
+        # Update the existing route line
+        if self.route_line is not None:
+            javascript += f"""
+                {self.route_line.get_name()}.setLatLngs({route});
+            """
+
+        self.map_widget.page().runJavaScript(javascript)
+
     def apply_styling(self):
-        pass
+        self.central_widget.setStyleSheet("""
+            QWidget {
+                background-color: #121212;
+                color: #E0E0E0;
+                font-family: Arial;
+            }
+
+            QLabel {
+                border: none;
+                background: transparent;
+            }
+
+            QPushButton {
+                background-color: #303030;
+                border: 1px solid #444444;
+                border-radius: 8px;
+                padding: 8px;
+                color: #E0E0E0;
+            }
+
+            QPushButton:pressed {
+                background-color: #505050;
+            }
+
+            QLineEdit {
+                background-color: #303030;
+                border: 1px solid #444444;
+                border-radius: 8px;
+                padding: 8px;
+                color: #E0E0E0;
+            }
+
+            QProgressBar {
+                background-color: #303030;
+                border: 1px solid #444444;
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            QProgressBar::chunk {
+                background-color: #888888;
+                border-radius: 7px;
+            }
+        """)
+
+        self.speed_widget.setStyleSheet(
+            "font-size: 22px; font-weight: bold;"
+        )
+
+        self.name_widget.setStyleSheet(
+            "font-size: 20px; font-weight: bold;"
+        )
+
+        self.time_widget.setStyleSheet(
+            "font-size: 16px;"
+        )
+
+        self.location_widget.setStyleSheet(
+            "font-size: 13px;"
+        )
+
+        self.eta_widget.setStyleSheet(
+            "font-size: 15px; font-weight: bold;"
+        )
 
     def on_list_turns_presses(self):
         print("list turns")
 
     def on_stop_route_pressed(self):
-        print("Route Stopped")
+        self.car_nav_controller.NavigationController.clear_route()
 
-    def create_map(self, latitude, longitude, zoom_start = 12):
+        gps = self.car_nav_controller.GPSManager
+
+        if isinstance(gps, SimulatedGPS):
+            gps.stop()
+
+        self.destination = None
+        self.update_eta()
+        self.update_progress(0)
+
+        lat, lng = self.car_nav_controller.get_location()
+
+        if lat is not None and lng is not None:
+            self.update_map(lat, lng)
+
+        print("Route stopped")
+
+    def create_map(self, latitude, longitude, zoom_start, route=None):
         map = folium.Map(
             location=[latitude, longitude],
             zoom_start=zoom_start,
-            tiles='OpenStreetMap')
-        
-        folium.Marker(
-            [latitude, longitude],
-            icon=folium.Icon(color='red', icon='ion.car-sport-outline')
-        ).add_to(map)
+            tiles="OpenStreetMap"
+        )
 
-        plugins.LocateControl().add_to(map)
+        self.vehicle_marker = folium.Marker(
+            [latitude, longitude],
+            tooltip="Current Location",
+            icon=folium.Icon(color="red")
+        )
+
+        self.vehicle_marker.add_to(map)
+
+        self.route_line = None
+
+        if route:
+            self.route_line = folium.PolyLine(
+                route,
+                color="blue",
+                weight=5
+            )
+            self.route_line.add_to(map)
 
         return map
 
-    def update_speed(self):
-        pass
+    def update_speed(self, speed=0):
+        self.speed_widget.setText(f"{speed:.0f} km/h")
+
 
     def update_time(self):
-        pass
+        from datetime import datetime
+
+        current_time = datetime.now().strftime("%H:%M")
+        self.time_widget.setText(current_time)
+
+
+    def update_location(self, latitude=None, longitude=None):
+        if latitude is None or longitude is None:
+            self.location_widget.setText("GPS: No Location")
+        else:
+            self.location_widget.setText(
+                f"{latitude:.5f}, {longitude:.5f}"
+            )
+
+
+    def update_eta(self, minutes=None):
+        if minutes is None:
+            self.eta_widget.setText("ETA: -- min")
+        else:
+            self.eta_widget.setText(
+                f"ETA: {minutes:.0f} min"
+            )
+
+
+    def update_progress(self, progress=0):
+        self.animation_widget.setValue(
+            max(0, min(100, int(progress)))
+        )
+
+    def update_map(self, latitude, longitude, zoom_start=17, route=None):
+        self.map = self.create_map(
+            latitude,
+            longitude,
+            zoom_start=zoom_start,
+            route=route
+        )
+
+        self.map_widget.setHtml(
+            self.map.get_root().render()
+        )
 
     def find_destination(self):
-        pass
+        try:
+            # Read the coordinates entered by the user
+            text = self.dest_select_widget.text()
 
-    def get_estimated_time(self):
-        pass
+            latitude, longitude = map(
+                float, text.split(",")
+            )
 
-    def update_map(self):
-        self.map = self.create_map()
+            # Check that coordinates are valid
+            if not (-90 <= latitude <= 90 and -180 <= longitude <= 180):
+                raise ValueError("Coordinates out of range")
+
+        except ValueError:
+            print("Invalid destination coordinates")
+            return
+
+        # Ask the main application to calculate a route
+        route = self.car_nav_controller.set_destination(
+            latitude, longitude
+        )
+
+        if route is None:
+            print("Unable to calculate route")
+            return
+
+        # Get current GPS location
+        current_lat, current_lng = (
+            self.car_nav_controller.get_location()
+        )
+
+        # Display the calculated route
+        self.update_map(
+            current_lat,
+            current_lng,
+            route=route
+        )
+
+        # Display estimated travel time
+        minutes = (
+            self.car_nav_controller
+            .NavigationController
+            .calculate_estimated_time()
+        )
+
+        self.update_eta(minutes)
 
 if __name__ == "__main__":
 
@@ -869,86 +857,8 @@ if __name__ == "__main__":
     app.setApplicationName("CarNav")
 
     w = MainWindow("temp")
+    w.update_location(-35.325833, 149.057750)
 
-    sys.exit(app.exec_())
-import folium
-from folium import plugins
-
-def create_map(latitude, longitude, zoom_start=18):
-    """
-    Create an interactive map with a custom marker at specified coordinates.
-    
-    Parameters:
-    latitude (float): Latitude of the location
-    longitude (float): Longitude of the location
-    zoom_start (int): Initial zoom level of the map (default: 12)
-    
-    Returns:
-    folium.Map: Interactive map object
-    """
-    # Create a map centered at the specified location
-    m = folium.Map(location=[latitude, longitude], 
-                   zoom_start=zoom_start,
-                   tiles='OpenStreetMap')
-    
-    # Add a marker with a popup
-    folium.Marker(
-            [latitude, longitude],
-            icon=folium.Icon(color='red', icon='ion.car-sport-outline')
-        ).add_to(m)
-    
-    # Add fullscreen button
-    plugins.Fullscreen().add_to(m)
-    
-    # Add location finder
-    plugins.LocateControl().add_to(m)
-    
-    return m
-
-import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtWebEngineWidgets import QWebEngineView
-
-class MapWindow(QMainWindow):
-    def __init__(self, latitude, longitude, zoom_start=12):
-        super().__init__()
-        
-        # Create the map
-        self.map = create_map(latitude, longitude, zoom_start)
-        
-        # Save the map to an HTML file
-        self.map.save('map.html')
-        
-        # Create a QWebEngineView widget
-        self.browser = QWebEngineView()
-        
-        # Load the HTML content into the QWebEngineView
-        self.browser.setHtml(self.map.get_root().render())
-        
-        # Set the central widget of the MainWindow to the QWebEngineView
-        self.setCentralWidget(self.browser)
-        
-        # Set the window title
-        self.setWindowTitle('Folium Map with PyQt5')
-        
-        # Set the window size
-        self.resize(800, 600)
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    
-    # Example coordinates 
-    latitude = -35.3265
-    longitude = 149.053
-
-
-    #35°19'35.0"S 149°03'32.3"E
-    
-    # Create the main window
-    window = MapWindow(latitude, longitude)
-    window.show()
-    
-    # Run the application
     sys.exit(app.exec_())
 
 # External import
@@ -959,29 +869,33 @@ import pyrosm
 import pynmea2
 import pandas
 import numpy
-import pandarm
 import time
 
 # Interal imports
 
 from gps.gps import GPSManager
+from gps.simulate_gps import SimulatedGPS
 from map.osm_import import OSMImporter
 from map.loader import AreaLoader
 from map.road_graph import RoadGraph
 from navigation.navigation import NavigationController
 from ui.ui import MainWindow
 
+import sys
+from PyQt5.QtWidgets import QApplication
+
 
 class CarNavApp:
-    def __init__(self):
-        self.GPSManager = GPSManager()
-        self.OSMImporter = OSMImporter()
-        self.AreaLoader = AreaLoader(self)
-        self.ui = MainWindow(self)
-        self.lat_lng_speed = [0, 0, 0]
-
-        self.update_thread = _thread.start_new_thread(self._update)
+    def __init__(self, simulate=True):
+        self.lat_lng_speed = [None, None, None]
         self.running = True
+
+        if simulate:
+            self.GPSManager = SimulatedGPS()
+        else:
+            self.GPSManager = GPSManager()
+
+        self.lat_lng_speed = self.GPSManager.get_location_speed()
 
         self.RoadGraph = RoadGraph("Code/map/WEST.osm.pbf")
         self.RoadGraph.load()
@@ -989,6 +903,13 @@ class CarNavApp:
         self.NavigationController = NavigationController(
             self,
             self.RoadGraph
+        )
+
+        self.ui = MainWindow(self)
+
+        self.update_thread = _thread.start_new_thread(
+            self._update,
+            ()
         )
 
     def _update(self):
@@ -1011,28 +932,27 @@ class CarNavApp:
 
         self.GPSManager.stop()
 
-import Path
+    def set_destination(self, latitude, longitude):
+        # Calculate the route using the navigation controller
+        route = self.NavigationController.set_destination(
+            latitude, longitude
+        )
 
-local_path = Path(__file__).parent
+        if route is None:
+            print("Route calculation failed")
+            return None
 
-AREAS = {
-    "Belconnen": local_path / "BELC.osm.pbf",
-    "Booth": local_path / "BOOT.osm.pbf",
-    " Canberra Cental": local_path / "CANB.osm.pbf",
-    "Coree": local_path / "CORE.osm.pbf",
-    "Cotter River": local_path / "COTT.osm.pbf",
-    "Gungahlin": local_path / "GUNG.osm.pbf",
-    "Hall": local_path / "HALL.osm.pbf",
-    "Jerrabomberra": local_path / "JERR.osm.pbf",
-    "Kowen": local_path / "KOWE.osm.pbf",
-    "Majura": local_path / "MAJU.osm.pbf",
-    "Molonglo Valley": local_path / "MOLO.osm.pbf",
-    "Mount Clear": local_path / "MOUN.osm.pbf",
-    "Paddys River": local_path / "PADD.osm.pbf",
-    "Rendezvous Creek": local_path / "REND.osm.pbf",
-    "Stromlo": local_path / "STRO.osm.pbf",
-    "Tennent": local_path / "TENN.osm.pbf",
-    "Tuggeranong": local_path / "TUGG.osm.pbf",
-    "Weston Creek": local_path / "WEST.osm.pbf",
-    "Woden Valley": local_path / "WODE.osm.pbf",
-}
+        print(f"Route calculated: {len(route)} coordinates")
+
+        # Start simulated movement along the calculated route
+        if isinstance(self.GPSManager, SimulatedGPS):
+            self.GPSManager.set_route(route)
+
+        return route
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+
+    car_nav = CarNavApp(simulate=True)
+
+    sys.exit(app.exec_())

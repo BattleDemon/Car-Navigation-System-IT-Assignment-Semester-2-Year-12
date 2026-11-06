@@ -20,8 +20,10 @@ class Router:
             node_lat = node["y"]
             node_lng = node["x"]
 
+            # Compare squared coordinate differences to find the closest node without needing to calculate square roots (Time consuming in already time consuming loading)
             distance = (lat - node_lat) ** 2 + (lng - node_lng) ** 2
 
+            # Keep track of the closest road node found while searching through the graph
             if distance < closest_distance:
                 closest_distance = distance
                 closest_node = node_id

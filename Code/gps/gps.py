@@ -25,6 +25,7 @@ class GPSManager:
         
 
     def _update(self):
+        # Continuously read GPS messages in a separate thread so the main application can run independently
         while self.running:
             try:
                 rawdata = self.ser.readline().decode(
@@ -50,9 +51,11 @@ class GPSManager:
 
                 self._set_location_speed(lat, lng, speed)
 
+            # Ignore invalid or incorrectly formatted messages rather than stopping GPS updates
             except (pynmea2.ParseError, ValueError):
                 continue
 
+            # Stop reading if the physical GPS connection is lost
             except (serial.SerialException, OSError):
                 if self.running:
                     print("GPS connection lost")
