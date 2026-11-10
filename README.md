@@ -198,74 +198,15 @@ The user interface was another area that changed significantly, although this wa
 
 ### 2. Development
 
-#### What technical challenges did you encounter?
+One of the first technical challenges I encountered was connecting the GPS receiver to the Raspberry Pi, particularly as this required me to learn how to solder. It took several attempts to get a working connection, and even then, the solder occasionally broke during testing, requiring me to redo it. Although I gained some experience with soldering, I don't think I learnt it particularly well, as the connections were still quite poor. The GPS receiver itself was relatively straightforward to program, with no major problems interpreting the NMEA messages.
 
-Hardware and GPS
+Another major challenge was processing the OpenStreetMap data, particularly due to the large amount of memory required. Initially, I attempted to load the entirety of Australia's map data, which used approximately 34 GB of RAM and took around ten minutes to load on my computer. In comparison, loading just Canberra required approximately 0.14 GB and took around a minute. Due to the Raspberry Pi's limited RAM, I decided to divide the ACT's map data into smaller geographic regions, which could be loaded individually when required. However, this introduced additional complications, particularly when trying to divide the OSM files using GeoJSON boundaries, which required me to learn several unfamiliar commands and tools. Which was all for nothing in the end as I was unable to integrate that system into the whole before the assignment was due.
 
-- Were there any difficulties connecting the GPS receiver to the Raspberry Pi?
-		Yeah since i had to learn soldering. I took a good few tries, and the final solder broke while i was testing the device, so it needed frequent re sodlers it. And my solders were quite bad, so i don't think i learnt it well.
-    
-- Did you encounter problems interpreting NMEA messages or obtaining accurate location data?
-		Not with interpreting. But the signal was only good outside or through very thin walls, or near windows.
-    
-- Did GPS accuracy vary between indoor, window and outdoor testing?
-	    Already said
+Developing the user interface presented a different set of challenges, particularly as I don't consider myself good at designing graphical interfaces from scratch. To help with this, I asked my classmates to draw their preferred designs for a car navigation interface, which I then used as a basis for my own. Displaying the map was also more complicated than expected, as I initially experimented with QGIS before deciding to use Folium. However, Folium introduced some limitations, particularly when I attempted to add my own interactive overlays, such as a recentering button, and it required the program to be online. I was unable to find a way to place these over the map while still allowing interaction with the elements beneath them.
 
-Map data
+When connecting the map display to the navigation backend, I was able to successfully display a calculated route to the user's desired coordinates. However, I was unable to implement address searching, meaning destinations had to be entered using latitude and longitude rather than a street address. Another problem occurred when updating the user's location, as my original approach recreated the entire map with each update, causing the zoom level to reset. I resolved this by changing the system to update the existing map rather than recreating it each time. I had also planned to include an animation within the interface, although I was unable to complete this before submission.
 
-- What happened when you attempted to load the larger OpenStreetMap datasets?
-	I initally tried to load all of australia but that used 34gb of ram on my pc so the raspberry pi's small ram size, compared to loading just canberra of .14gb. All australia also took 10 minutes to load on a pc, while canberra took 1 min
-    
-- How did memory usage affect your approach?
-	I decided to split the 'large' area of canberra into its sub divisions.
-    
-- What difficulties did you encounter when dividing OSM data using GeoJSON boundaries?
-		it took some weird commands with some osm handling programs, which took me a while to figure out.
-
-Navigation
-
-- What difficulties did you encounter converting road data into a usable graph?
-		None acually just needed to find the right library, with me testing two.
-    
-- Were there any problems identifying the nearest road node to a GPS location?
-		not really it was just math, you have a rough position, and you find the nearest position in the data
-    
-- Did A* initially produce incorrect routes, errors or unexpected results?
-		not that i could see
-    
-- What problems occurred when calculating route distances or estimated travel times?
-		i dont think any
-    
-
-User interface
-
-- What difficulties did you encounter developing the PyQt5 interface?
-		I am not a graphic designer so starting to figure out a ui design was hard, so i asked my peers to draw their ui and then i used that as a basis for my own. It alos took a while to figure out how i could do the map, i tried to do some stuff with qgis, but then just decided to use a package folium.
-    
-- Did you have to redesign any parts of the layout?
-		i wanted to have an animation but couldn't do it in time, i also wanted to do my own oberlays on the map, since folium only had zoom in and out, but i wanted centre, but i couldn't figure out how to have a overlay and be able to interact with the buttons below it.
-    
-- What happened when you connected the map display to the navigation backend?
-		It worked, it showed the path to the users desired cordinates (not able to entre adress just the lat and lng, since i couldn't find a way to search though all adresses by the time i got to this point)
-    
-- Why did the map zoom reset during updates?
-		i initally reset the enbtire map each time it updated causing any zoomig in or out to reset so instead i updated the old map, 
-
-#### How did you overcome them?
-
-- How did you identify the causes of these problems?
-		
-    
-- Did you use separate testing programs to isolate individual systems?
-    
-- Which problems required research into documentation or external resources?
-
-- Did you experiment with multiple possible solutions before finding one that worked?
-    
-- Were there any problems you couldn't completely resolve?
-    
-- Which technical solution had the greatest effect on the project?
-    
+Most of the problems I encountered were identified through testing the individual systems as I developed them. When something didn't work as intended, I would examine the output or errors to determine what was causing the problem, before either modifying my approach or researching possible solutions. I also created several separate testing programs, particularly for the navigation backend and map processing, which allowed me to test the functionality of individual components before connecting them to the main application. However, while this was useful for identifying problems within individual systems, it also meant that some issues were not discovered until the final integration, luckily those were minor problems.
 
 ### 3. Project Management
 
