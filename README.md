@@ -233,44 +233,58 @@ Although I learnt some new Python features, such as `isinstance()`, along with t
 #### How well does the final product meet user needs?
 
 - What were your original needs as a provisional driver without an existing in-car navigation system?
-    
+		I started this project to make a car navigation system in to have in my car, It needed to be offline, and usable within my car. It only needed to include mapping and navigation for canberra.
+
 - Which of the original MVP features were successfully implemented?
+		I generally completed the MVP features, athough did need to change or compromise on somethings, such as offline ect.
     
 - Can the system determine and display the user's current location?
+		It can when connection is good, but requires the antenna to be positioned under the glass of  the windshield
     
 - Can it calculate and display a route to a destination?
+		yes it can calculate and display a route to a destination, although it cannot look up the destination as if it were an address, instead needing latitude and longitude
     
 - Does the system function without an internet connection?
+		Technically the navigation does, but you won't see anything on the map.
     
 - How successfully does the UI communicate navigation information to the user?
+		I believe it does well, showing the user the map and the route needed, it shows the estimated time, and how far through the route they are.
     
 - Is the interface practical to operate using a seven-inch touchscreen?
+		Qt naturally supports a touch screen interface, and i have designed it to fit within the resolution of the screen.
     
 - Was the final system tested on the Raspberry Pi hardware, or primarily on your desktop?
+		Although i have only tested on my computer and not the raspberry pi system.
     
 - How reliable is the navigation system compared with existing commercial alternatives?
+		It is reliable but only for the region inputed so ACT or Weston, but can sometimes have unreliable map streaming preventing some of the map from loading
     
 - What limitations would prevent you from using the current version for everyday driving?
+		I was unable to 3d print a chasiss, and mout it in my car so it can't be used. Also it would need an internet connection which i don't want to bother with, but if i spent some more time working on it i could setup a local server and keep the map tiles on there for canberra.
     
 - Overall, would you consider the project successful when compared with your original objectives? Why?
-    
+	    It was generally successful but did need to compromise in aspects, and didn't go as far as i originally planed, barely making the MVP.
 
 #### What would you improve if given another month?
 
 - Would you prioritise fixing existing problems or adding new functionality?
-    
-- What additional testing would be necessary before using CarNav regularly in a car?
-    
+		I would refine and fix existing systems, and actually connect my area loading system, and fix anyproblems with it, before making a map tile server (locally on the raspberry pi).
+
 - Would you improve the interface, particularly navigation controls and information display?
-    
+		My current interface although including the parts from my design, is not as aesthetically good for the ui i was envisioning.
+
 - Would you implement automatic rerouting when the driver leaves the calculated route?
-    
+		
+
 - Would you improve the efficiency or accuracy of the route calculation?
-    
+
+
 - Would you revisit any of your original stretch goals, such as voice navigation or a 3D-printed chassis?
-    
+
+
 - Which improvement would provide the greatest benefit to the user?
-    
+
+
 - How would you test whether those improvements were successful?
 
 ## Bibliography
