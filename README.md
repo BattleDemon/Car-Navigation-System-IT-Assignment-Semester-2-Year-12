@@ -274,18 +274,16 @@ Although I learnt some new Python features, such as `isinstance()`, along with t
 		My current interface although including the parts from my design, is not as aesthetically good for the ui i was envisioning.
 
 - Would you implement automatic rerouting when the driver leaves the calculated route?
-		
+		It would be good to implement, but might not be an instant thing, it might be a periodic check to reduce load on the raspbery pi. 
 
 - Would you improve the efficiency or accuracy of the route calculation?
-
+		No since i have used a library it is already quite efficient and accurate, if i were to change it i would need to build it from scratch.
 
 - Would you revisit any of your original stretch goals, such as voice navigation or a 3D-printed chassis?
-
+		It would be good to revisit all the stretch goals and implement them especially yhe ones which allow it to be mouted in my car.
 
 - Which improvement would provide the greatest benefit to the user?
-
-
-- How would you test whether those improvements were successful?
+		Mostlikely UI improvements, as it improves every users experience instantly.
 
 ## Bibliography
 
