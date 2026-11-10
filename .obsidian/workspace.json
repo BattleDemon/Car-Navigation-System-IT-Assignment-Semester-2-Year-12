@@ -206,6 +206,9 @@
   },
   "active": "8b725b1c5ffc1958",
   "lastOpenFiles": [
+    "Documentation/260822_23h31m26s_screenshot.png",
+    "README.md",
+    "development_history.txt",
     "Code/ui/ui.py~",
     "Code/navigation/navigation.py~",
     "Code/map/loader.py~",
@@ -215,10 +218,7 @@
     "temp.py",
     "Code/main.py~",
     "venv/lib/python3.14/site-packages/pathfinding/finder/__pycache__/msp.cpython-314.pyc",
-    "venv/lib/python3.14/site-packages/pathfinding/finder/__pycache__/ida_star.cpython-314.pyc",
-    "venv/lib/python3.14/site-packages/pathfinding/finder/__pycache__/finder.cpython-314.pyc",
     "Need to do currently.md",
-    "README.md",
     "venv/lib/python3.14/site-packages/pip-26.2.1.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
     "venv/lib/python3.14/site-packages/~ip/_vendor/idna/LICENSE.md",
     "venv/lib/python3.14/site-packages/~ip-26.1.2.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md",
@@ -232,7 +232,6 @@
     "Documentation/Australia_ramusage_osmloading_screenshot.png",
     "Documentation/Australia_osmloading_screenshot.png",
     "Documentation/260822_23h43m04s_screenshot.png",
-    "Documentation/260822_23h31m26s_screenshot.png",
     "Preplanning/Proposal.md",
     "Documentation/documentation.md"
   ]

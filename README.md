@@ -1,4 +1,4 @@
-# Integrated Car Navigation and GPS
+# CarNav 
 <div style="text-align: right;"> Dexter Hart </div>
 
 ## Proposal 
@@ -156,85 +156,7 @@ TomTom 2026, _Pricing_, TomTom Documentation, viewed 6 August 2026, <https://doc
 
 Waze 2026, _Driving directions, live traffic & road conditions updates_, _Waze_, viewed 6 August 2026, <https://www.waze.com/live-map>.
 
-## Preplanning
 
-### GPS
-
-**Research**
-
-
-
-**Psuedocode**
-``` Psuedocode 
-Import serial
-Import Pynmea2
-
-Port = serialport
-
-Class GPS
-	port = Port
-	lat 
-	lng 
-	
-	speed
-	
-	seriallistener(port)
-	
-	update_thread
-	running
-	
-	Function Update
-		While running
-			rawdata = seriallistener.read
-			
-			if rawdata = GNRMC
-				data = pynmea2.parse(rawdata)
-				
-				lat = data.lat
-				lng = data.lng
-				
-				speed = data.speed
-				
-				set_location_speed(lat lng speed)
-				
-	Function set_location_speed(lat lng speed)
-		self.(lat,lng,speed) = lat, lng, speed
-		
-	Function get_location_speed
-		return lat, lng, speed
-	
-	Function stop
-		running = False					
-```
-
-### Map Loading and Interpreting
-
-**Research**
-
-
-
-**Psuedocode**
-
-### Navigation System
-
-**Research**
-
-
-
-**Psuedocode**
-
-### UI 
-
-**Research**
-
-
-
-**Psuedocode**
-
-
-psuedocode 
-Flow chrarts
-Designs (diagrams)
 
 ## Development and Design Thinking
 
@@ -260,53 +182,239 @@ This is the step where i fell behind and other assignments took the primary focu
 
 ## Evaluation and Review
 
-Planning
- What aspects of your original plan were successful?
- What changes did you make and why?
-Development
- What technical challenges did you encounter?
- How did you overcome them?
-Project Management
- How effectively did you manage your time?
- What would you do differently?
-Skills
- What new skills did you learn?
- Which skills improved most?
-Evaluation
- How well does the final product meet user needs?
- What would you improve if given another month?
+### 1. Planning
+#### What aspects of your original plan were successful?
 
-## Resources and Early Bibliography
+- Was the original concept of an offline navigation system achievable using the hardware and software you selected?
+		The original concept was technically achievable although i was unable to, due to the map processing requiring an internet connection to stream the map tiles. But if that wasn't a factor the system could be run offline in the car, but with possible concerns around power supply from a car engine, to a raspberry pi possibly causing problems when the engine is turned off.
+    
+- Which parts of your initial research proved useful during development?
+		Most of the initial research was useful for development, although not all directly, with it giving me the rough info on how to implement systems, but not the specifics.
+    
+- Was choosing Python, PyQt5 and OpenStreetMap appropriate for this project?
+		PyQt5 was suficient for the ui of my app, and was useful due to it already been a library we had worked with in the past, so i didn't have to learn a whole new library, compared to if i had used tkinter or someother python ui.
+    
+- Was dividing the project into five main milestones helpful for organising development?
+	    It was helpful, but I struggled to follow them, as other assignments got in the way, and its distance from due date, made it feel more like a task i could set aside for later. But it was the rough structure of what i developed in order, although not at the planned upon times.
+    
+- Which parts of the original plan did you follow most closely?
+	    Milestone 1 and 2, whith it startin to fall apart around milestone 3, when other assingments drew my attention, and it required me to research how to handle the datasets, and i kept falling into pitfalls of other steps, such as spliting geojsons, and osms so they could be loaded when needed, and making an early loading system, which i was unable to integrate in the end. 
 
-Initial .osm.pbf data for canberra (ACT)
-https://download.geofabrik.de/australia-oceania/australia/act.html
-PyrOSM repo with examples
-https://github.com/pyrosm/pyrosm/tree/master/tests
-PyrOSM documentation
-https://pyrosm.readthedocs.io/en/stable/quickstart.html
-Osmium tool documentation
-https://osmcode.org/osmium-tool/manual.html
-Divisions within ACT GEOJson data source
-https://actmapi-actgov.opendata.arcgis.com/maps/ACTGOV::actgov-division
-Districts within ACT GEOJson data source
-https://actmapi-actgov.opendata.arcgis.com/datasets/actgov-district/about
-another pyrosm doc
-https://pyrosm.readthedocs.io/en/latest/api/pyrosm.OSM.to_graph.html#pyrosm.OSM.to_graph
-Shapely documentation (for handling geojsons)
-https://shapely.readthedocs.io/en/stable/
-Json also for geojsons
-https://python.readthedocs.io/fr/latest/library/json.html 
-Pathfinding and Astar library
-https://pypi.org/project/pathfinding/
-Pathfinding GitHub
-https://github.com/brean/python-pathfinding/tree/main
-color pallet
-https://coolors.co/30343f-fafaff-709176-273469-1e2749
-Qt Forum
-https://forum.qt.io/
-PyQt5 Documentation
-https://doc.qt.io/archives/qtforpython-5/
+#### What aspects were unsuccessful?
 
+- Which parts of the project were more complicated than you originally expected?
+    
+- Did you underestimate how long processing OpenStreetMap data would take?
+		Yes this took almost two weeks of trying to spit the files, geojsons, then making a loading sytem, then also the navigation backend which i used a few libraries for before landing on the final one, after i founf the others didn't have what i needed.
+    
+- Was the original timeline realistic, particularly the plan to complete the MVP by 17 September?
+		It probably wasn't entirely realistic but if i had done more work then i had out of class, i most likely could of finished around when i originally intended.
+    
+- Were there any dependencies between different systems that you failed to account for?
+		As said before, also i intended to have my own map presenting system instead of using an already made library.
+    
+- Did your original planning include enough time for debugging and integration?
+	    I did provide enough for debugging, but failed to see that this type of project requires interconnected systems to be made one by one unable to test in its truth until the end, and unable to integrate.
+
+#### What changes did you make and why?
+
+- Why did you decide to divide the ACT's map data into smaller geographic regions?
+		So it wouldn't all be loaded into the raspberry pi's ram, so i though it would be better to load a small region,  which i spent quite a while preparing without any actual turnout, as i didn't have time to connect the system.
+    
+- How did your approach to route calculation change during development?
+	Initially i wanted to make my own route calculation then i wanted to do my own implementation of a known route algorithm, before i ended up using a library.
+    
+- Did you change your intended UI design? What motivated those changes?
+		The ui wasn't defined well from the begining, so i ran a suvey like thing amoung my IT peers having each of the other three draw their favoured ui for a car navigator, which i used as basis to design my own before implementing it.
+    
+- Were these changes improvements to the original design, or compromises made because of time constraints?
+	    compromised for library things, but improvements for the ui.
+
+### 2. Development
+
+#### What technical challenges did you encounter?
+
+Hardware and GPS
+
+- Were there any difficulties connecting the GPS receiver to the Raspberry Pi?
+    
+- Did you encounter problems interpreting NMEA messages or obtaining accurate location data?
+    
+- Why did you change the GPS program into an object-oriented class?
+    
+- Did GPS accuracy vary between indoor, window and outdoor testing?
+    
+
+Map data
+
+- What happened when you attempted to load the larger OpenStreetMap datasets?
+    
+- How did memory usage affect your approach?
+    
+- What difficulties did you encounter when dividing OSM data using GeoJSON boundaries?
+    
+- Were there problems identifying which geographic region contained the user's location?
+    
+
+Navigation
+
+- What difficulties did you encounter converting road data into a usable graph?
+    
+- Were there any problems identifying the nearest road node to a GPS location?
+    
+- Did A* initially produce incorrect routes, errors or unexpected results?
+    
+- What problems occurred when calculating route distances or estimated travel times?
+    
+
+User interface
+
+- What difficulties did you encounter developing the PyQt5 interface?
+    
+- Did you have to redesign any parts of the layout?
+    
+- What happened when you connected the map display to the navigation backend?
+    
+- Why did the map zoom reset during updates?
+    
+- Why did the calculated route sometimes remain behind the user's position?
+    
+
+#### How did you overcome them?
+
+- How did you identify the causes of these problems?
+    
+- Did you use separate testing programs to isolate individual systems?
+    
+- Which problems required research into documentation or external resources?
+    
+- Did you experiment with multiple possible solutions before finding one that worked?
+    
+- Were there any problems you couldn't completely resolve?
+    
+- Which technical solution had the greatest effect on the project?
+    
+
+### 3. Project Management
+
+#### How effectively did you manage your time?
+
+- How closely did your actual development follow the original milestone dates?
+    
+- Which milestones took significantly longer than expected?
+    
+- How much time did you spend on map data processing compared with navigation and UI development?
+    
+- How did other assignments affect your available development time?
+    
+- What happened during the period between 23 September and 13 October when there were no recorded commits?
+    
+- Did you work consistently throughout the semester, or did most progress occur closer to the deadline?
+    
+- How did falling behind affect the quality or completeness of the final product?
+    
+- Did you leave enough time for testing and documentation?
+    
+
+#### What would you do differently?
+
+- Would you allocate more time to any particular milestone?
+    
+- Would you develop a basic working version using a small map before attempting the entire ACT?
+    
+- Would you begin integrating the GPS, navigation and UI systems earlier?
+    
+- Would you establish more frequent testing checkpoints?
+    
+- How could you improve your Git commit messages and development documentation?
+    
+- Would you change how you prioritised this project against your other assignments?
+    
+- How would you organise the project differently to avoid leaving so much work until the final weeks?
+    
+
+### 4. Skills
+
+#### What new skills did you learn?
+
+- What did you learn about configuring and programming a Raspberry Pi?
+    
+- How did working with a GPS receiver improve your understanding of serial communication and NMEA data?
+    
+- What did you learn about OpenStreetMap, OSM PBF files and GeoJSON?
+    
+- How did your understanding of geographic coordinates and spatial data develop?
+    
+- What did implementing A* teach you about graphs and pathfinding algorithms?
+    
+- What did you learn about building graphical interfaces using PyQt5?
+    
+- What did you learn about connecting multiple independent software components into one application?
+    
+
+#### Which skills improved most?
+
+- How did your Python programming abilities change between the beginning and end of the project?
+    
+- Did your understanding of classes and object-oriented programming improve?
+    
+- Did you become better at debugging errors and identifying their causes?
+    
+- Did you improve at researching unfamiliar libraries and understanding their documentation?
+    
+- How did your approach to testing change during development?
+    
+- Did you become better at breaking large technical problems into smaller tasks?
+    
+- Which skill do you think improved the most, and what specific part of CarNav demonstrates that improvement?
+    
+
+### 5. Evaluation
+
+#### How well does the final product meet user needs?
+
+- What were your original needs as a provisional driver without an existing in-car navigation system?
+    
+- Which of the original MVP features were successfully implemented?
+    
+- Can the system determine and display the user's current location?
+    
+- Can it calculate and display a route to a destination?
+    
+- Does the system function without an internet connection?
+    
+- How successfully does the UI communicate navigation information to the user?
+    
+- Is the interface practical to operate using a seven-inch touchscreen?
+    
+- Was the final system tested on the Raspberry Pi hardware, or primarily on your desktop?
+    
+- How reliable is the navigation system compared with existing commercial alternatives?
+    
+- What limitations would prevent you from using the current version for everyday driving?
+    
+- Overall, would you consider the project successful when compared with your original objectives? Why?
+    
+
+#### What would you improve if given another month?
+
+- Would you prioritise fixing existing problems or adding new functionality?
+    
+- What additional testing would be necessary before using CarNav regularly in a car?
+    
+- Would you improve the interface, particularly navigation controls and information display?
+    
+- Would you implement automatic rerouting when the driver leaves the calculated route?
+    
+- Would you improve the efficiency or accuracy of the route calculation?
+    
+- Would you revisit any of your original stretch goals, such as voice navigation or a 3D-printed chassis?
+    
+- Which improvement would provide the greatest benefit to the user?
+    
+- How would you test whether those improvements were successful?
+
+## Bibliography
 
 Australian Government 2026, _Actgov division_, Arcgis.com, viewed 11 September 2026, <https://actmapi-actgov.opendata.arcgis.com/datasets/ACTGOV::actgov-division/explore?location=-35.520000,149.085000,9>.
 

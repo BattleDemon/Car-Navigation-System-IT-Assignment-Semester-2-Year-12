@@ -1,0 +1,985 @@
+COMMIT 9ee1267 | 2026-06-24 | added first few files and directories
+
+A	Code/temp.txt
+A	Preplanning/temp.txt
+A	README.md
+COMMIT d44296e | 2026-06-24 | Added Obsidian
+
+A	.obsidian/app.json
+A	.obsidian/appearance.json
+A	.obsidian/core-plugins.json
+A	.obsidian/workspace.json
+COMMIT ef81693 | 2026-06-24 | ffe
+
+M	.obsidian/appearance.json
+A	.obsidian/themes/Obsidianite/manifest.json
+A	.obsidian/themes/Obsidianite/theme.css
+M	.obsidian/workspace.json
+M	README.md
+COMMIT 6c57ac2 | 2026-07-03 | Update README.md
+
+M	README.md
+COMMIT a5c7fa6 | 2026-07-03 | Add GPS module link to README
+
+M	README.md
+COMMIT 06effea | 2026-07-19 | work over holidays
+
+M	.obsidian/appearance.json
+A	.obsidian/community-plugins.json
+A	.obsidian/plugins/advanced-canvas/main.js
+A	.obsidian/plugins/advanced-canvas/manifest.json
+A	.obsidian/plugins/advanced-canvas/styles.css
+A	.obsidian/plugins/obsidian-kanban/main.js
+A	.obsidian/plugins/obsidian-kanban/manifest.json
+A	.obsidian/plugins/obsidian-kanban/styles.css
+A	.obsidian/themes/Catppuccin/manifest.json
+A	.obsidian/themes/Catppuccin/theme.css
+COMMIT c28e10d | 2026-07-22 | adeed some images and made more file structure
+
+M	.obsidian/workspace.json
+A	Code/gps/temp.txt
+A	Code/main.py
+A	Code/ui/temp.txt
+M	README.md
+A	Raspberry-Pi-5-Pinout--1210x642.jpg
+A	Raspberry-Pi-5-Pinout_Highlighted.jpg
+COMMIT 273e93c | 2026-07-22 | made more directories
+
+M	.obsidian/workspace.json
+A	Code/resources/temp.txt
+A	Preplanning/preplanning.md
+A	documentation/documentation.md
+A	documentation/temp.txt
+COMMIT 5005ecf | 2026-07-22 | made files
+
+M	.obsidian/workspace.json
+A	Code/gps/gps.py
+A	Code/ui/ui.py
+COMMIT c12c846 | 2026-07-22 | renamed file
+
+M	.obsidian/workspace.json
+R100	documentation/documentation.md	Documentation/documentation.md
+R100	documentation/temp.txt	Documentation/temp.txt
+A	Preplanning/Preplanning.md
+D	Preplanning/preplanning.md
+COMMIT 63b3922 | 2026-07-23 | making preplanning document
+
+M	Preplanning/Preplanning.md
+COMMIT d4b349f | 2026-07-23 | Update gps.py
+
+M	Code/gps/gps.py
+COMMIT 9ea43ea | 2026-07-23 | added first attempt at gps
+
+M	Code/gps/gps.py
+COMMIT 5cb77f1 | 2026-07-24 | moved some things and working on preplanning
+
+M	.obsidian/workspace.json
+A	NEO-6_DataSheet_(GPS.G6-HW-09005).pdf
+M	Preplanning/Preplanning.md
+R100	Raspberry-Pi-5-Pinout--1210x642.jpg	Preplanning/Raspberry-Pi-5-Pinout--1210x642.jpg
+R100	Raspberry-Pi-5-Pinout_Highlighted.jpg	Preplanning/Raspberry-Pi-5-Pinout_Highlighted.jpg
+COMMIT 708451b | 2026-07-24 | Update Preplanning.md
+
+M	Preplanning/Preplanning.md
+COMMIT 47b3c1a | 2026-07-24 | ewwe
+
+M	.obsidian/community-plugins.json
+A	.obsidian/plugins/pdf-plus/data.json
+A	.obsidian/plugins/pdf-plus/main.js
+A	.obsidian/plugins/pdf-plus/manifest.json
+A	.obsidian/plugins/pdf-plus/styles.css
+M	.obsidian/workspace.json
+A	gpiozero-readthedocs-io-en-stable.pdf
+COMMIT ab4f097 | 2026-07-24 | working on section
+
+M	.obsidian/workspace.json
+M	Preplanning/Preplanning.md
+COMMIT 50576c0 | 2026-07-24 | eewf
+
+M	.obsidian/workspace.json
+A	AU-addresses.tsv.gz
+A	AU-houses.tsv.gz
+A	AU-streets.tsv.gz
+COMMIT 8d3fbff | 2026-07-24 | changed some sections
+
+M	Preplanning/Preplanning.md
+COMMIT 2b87f9e | 2026-07-24 | cvcv
+
+M	.obsidian/workspace.json
+M	Preplanning/Preplanning.md
+COMMIT e0bafb4 | 2026-07-24 | Update Preplanning.md
+
+M	Preplanning/Preplanning.md
+COMMIT 38bb16b | 2026-07-31 | fwfwe
+
+A	.obsidian/plugins/better-word-count/main.js
+A	.obsidian/plugins/better-word-count/manifest.json
+A	.obsidian/plugins/better-word-count/styles.css
+M	Preplanning/Preplanning.md
+COMMIT 00e5a28 | 2026-07-31 | Made GPS into a class OOP for the win
+
+M	.obsidian/workspace.json
+M	Code/gps/gps.py
+M	Preplanning/Preplanning.md
+COMMIT b4d837d | 2026-07-31 | made groud work for main file
+
+M	.obsidian/workspace.json
+M	Code/main.py
+M	Preplanning/Preplanning.md
+COMMIT ba3b687 | 2026-07-31 | added debug file
+
+M	.obsidian/workspace.json
+A	Code/debug.py
+COMMIT 5a521a2 | 2026-08-06 | feew
+
+M	.obsidian/appearance.json
+M	.obsidian/workspace.json
+R097	Preplanning/Preplanning.md	Preplanning/Proposal and Preplanning.md
+COMMIT 0d6e319 | 2026-08-06 | wecwec
+
+M	.obsidian/workspace.json
+M	Preplanning/Proposal and Preplanning.md
+COMMIT 62cae8d | 2026-08-06 | efgew
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT ebc8bae | 2026-08-06 | fwfew
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT 4fcc8f0 | 2026-08-06 | fwfwe
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT f3a4780 | 2026-08-06 | ewefew
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT 346692f | 2026-08-06 | ewfew
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT 85a31f0 | 2026-08-06 | ffew
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT 26f5847 | 2026-08-06 | efse
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT fa44ba2 | 2026-08-06 | added bibliograpohy
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT 6b49b1a | 2026-08-06 | Update Proposal and Preplanning.md
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT c3ea51d | 2026-08-06 | ewfewfwe
+
+M	Preplanning/Proposal and Preplanning.md
+COMMIT 1298a23 | 2026-08-07 | fwefwe
+
+M	.obsidian/workspace.json
+R100	Preplanning/Proposal and Preplanning.md	Preplanning/Proposal.md
+M	README.md
+COMMIT 6502d86 | 2026-08-07 | Moved proposal into full document
+
+M	.obsidian/app.json
+M	.obsidian/appearance.json
+M	README.md
+COMMIT ad50317 | 2026-08-07 | fge
+
+M	.obsidian/appearance.json
+M	.obsidian/workspace.json
+M	README.md
+COMMIT bd2b828 | 2026-08-07 | efw
+
+M	README.md
+COMMIT 39359fc | 2026-08-07 | fwefwe
+
+M	.obsidian/workspace.json
+M	Code/gps/gps.py
+M	Code/main.py
+M	Preplanning/Proposal.md
+COMMIT 265cf65 | 2026-08-07 | Update Proposal.md
+
+M	Preplanning/Proposal.md
+COMMIT cf08716 | 2026-08-07 | fewfew
+
+M	Preplanning/Proposal.md
+COMMIT 71cc579 | 2026-08-07 | fefwe
+
+M	Preplanning/Proposal.md
+COMMIT 3049eb6 | 2026-08-07 | efsfe
+
+M	Preplanning/Proposal.md
+COMMIT 45bfa3e | 2026-08-07 | changed readme proposal to matech true proposal
+
+M	.obsidian/workspace.json
+M	README.md
+COMMIT 9635336 | 2026-08-07 | fwf
+
+M	README.md
+COMMIT 1857f44 | 2026-08-07 | efwefwe
+
+M	README.md
+COMMIT 8c57121 | 2026-08-10 | made raspberry pi config
+
+A	config.txt
+COMMIT 44ee0ba | 2026-08-10 | fwfew
+
+M	.obsidian/workspace.json
+A	cmdline.txt
+M	config.txt
+COMMIT e184b25 | 2026-08-11 | Update gps.py
+
+M	Code/gps/gps.py
+COMMIT 800c5e9 | 2026-08-11 | Update gps.py
+
+M	Code/gps/gps.py
+COMMIT ecc8d26 | 2026-08-11 | fwefwe
+
+D	Code/gps/temp.txt
+COMMIT 55c3bc4 | 2026-08-11 | added large file data
+
+A	.gitattributes
+A	australia-260722.osm.pbf
+COMMIT efc32cc | 2026-08-11 | Update gps.py
+
+M	Code/gps/gps.py
+COMMIT 5c465d5 | 2026-08-11 | commented code gps.py
+
+M	.obsidian/workspace.json
+M	Code/gps/gps.py
+M	README.md
+COMMIT e28e641 | 2026-08-11 | changed knots to km/h and commented a bit more
+
+M	Code/gps/gps.py
+COMMIT 936764e | 2026-08-11 | small edits
+
+M	.obsidian/workspace.json
+M	Code/gps/gps.py
+M	Code/main.py
+COMMIT d0eb91c | 2026-08-12 | added fan and fan speed to rpi
+
+M	config.txt
+COMMIT 39e15cb | 2026-08-12 | created gpsdata.txt from real data
+
+A	gpsdata.txt
+COMMIT 4c5f346 | 2026-08-12 | commit
+
+M	.obsidian/workspace.json
+A	Code/TESTING/gps_test1.py
+A	data.txt
+A	gpsdata_window.txt
+COMMIT e02cb4a | 2026-08-14 | working test file
+
+M	Code/TESTING/gps_test1.py
+A	d.txt
+COMMIT ff96b15 | 2026-08-14 | wfwef
+
+R100	d.txt	Code/TESTING/gps_data_good.txt
+COMMIT 3dec7ae | 2026-08-21 | working on osm
+
+M	Code/TESTING/gps_test1.py
+A	Code/TESTING/osmtest.py
+M	Code/main.py
+A	Data/temp
+COMMIT 62f534f | 2026-08-21 | Update osmtest.py
+
+M	Code/TESTING/osmtest.py
+COMMIT b6a12fb | 2026-08-21 | bla
+
+M	Code/TESTING/osmtest.py
+COMMIT 1e55b78 | 2026-08-22 | wfwe
+
+M	Code/main.py
+A	Code/map/osm_import.py
+A	Code/map/road_graph.py
+A	Code/navigation/navigation.py
+A	Code/navigation/routing.py
+COMMIT aaf6c71 | 2026-08-22 | Create requirements.txt
+
+A	requirements.txt
+COMMIT 22c4e12 | 2026-08-22 | fewfew
+
+M	Code/gps/gps.py
+M	Code/main.py
+A	Code/map/act.osm.pbf
+M	Code/map/osm_import.py
+COMMIT 969088a | 2026-08-22 | Merge branch 'main' of https://github.com/BattleDemon/CarNavITSem2
+COMMIT 4b12812 | 2026-08-22 | working on osm
+
+M	Code/map/osm_import.py
+A	Documentation/260822_23h31m26s_screenshot.png
+COMMIT 2314c06 | 2026-08-23 | working on osm intepreter
+
+M	.gitattributes
+M	Code/map/act.osm.pbf
+R100	australia-260722.osm.pbf	Code/map/australia.osm.pbf
+M	Code/map/osm_import.py
+M	Code/map/road_graph.py
+A	Documentation/260822_23h43m04s_screenshot.png
+A	Documentation/260822_23h44m03s_screenshot.png
+A	Documentation/260822_23h54m56s_screenshot.png
+A	Documentation/260822_23h57m21s_screenshot.png
+COMMIT 0fa4075 | 2026-08-28 | small changes and new data
+
+M	.obsidian/workspace.json
+M	Code/map/osm_import.py
+A	Data/ACTGOV_DIVISIONS_2639814853747302406.geojson
+M	README.md
+COMMIT 6596a8c | 2026-08-28 | rgrgre
+
+M	.obsidian/workspace.json
+A	Data/ACTGOV_DISTRICTS_-2248938068983619392.geojson
+M	README.md
+COMMIT ee47469 | 2026-08-28 | bla
+
+M	.obsidian/workspace.json
+M	Code/map/osm_import.py
+COMMIT c4ee5d7 | 2026-08-28 | added geojson_split
+
+M	.obsidian/workspace.json
+A	Code/map/geojson_split.py
+COMMIT 10a75fd | 2026-08-28 | moving around data and removing temp files
+
+M	.obsidian/workspace.json
+D	Code/temp.txt
+D	Code/ui/temp.txt
+R100	AU-addresses.tsv.gz	Data/AU-addresses.tsv.gz
+R100	AU-houses.tsv.gz	Data/AU-houses.tsv.gz
+R100	AU-streets.tsv.gz	Data/AU-streets.tsv.gz
+D	Data/temp
+D	Documentation/temp.txt
+D	Preplanning/temp.txt
+COMMIT 4a92110 | 2026-08-28 | documenting rename screen shots
+
+M	.obsidian/workspace.json
+M	Code/map/osm_import.py
+R100	Documentation/260822_23h57m21s_screenshot.png	Documentation/Australia_osmloading_screenshot.png
+R100	Documentation/260822_23h54m56s_screenshot.png	Documentation/Australia_ramusage_osmloading_screenshot.png
+A	Documentation/canberra_osmloading_screenshot.png
+A	Documentation/canberra_ramusage_osmloading_screenshot.png
+R100	Documentation/260822_23h44m03s_screenshot.png	Documentation/osmloader_test_code_screenshot.png
+A	Documentation/ramusage osm laoding.md
+COMMIT d312512 | 2026-08-28 |  ffwe
+
+M	.obsidian/workspace.json
+D	Documentation/documentation.md
+COMMIT e4f18b0 | 2026-08-28 | added an extract config json
+
+M	.obsidian/workspace.json
+M	Code/map/geojson_split.py
+A	extract_config.json
+COMMIT 098245d | 2026-08-28 | changed to save name's when making extract config
+
+M	Code/map/geojson_split.py
+M	extract_config.json
+COMMIT 99af404 | 2026-08-28 | fwefwe
+
+M	Code/map/geojson_split.py
+M	extract_config.json
+COMMIT 576a74f | 2026-08-28 | added all osm for eacdh distric in canberra
+
+M	Code/map/geojson_split.py
+A	Data/districts/belconnen.osm.pbf
+A	Data/districts/booth.osm.pbf
+A	Data/districts/canberra_central.osm.pbf
+A	Data/districts/cotter_river.osm.pbf
+A	Data/districts/gungahlin.osm.pbf
+A	Data/districts/hall.osm.pbf
+A	Data/districts/jerrabomberra.osm.pbf
+A	Data/districts/kowen.osm.pbf
+A	Data/districts/majura.osm.pbf
+A	Data/districts/molonglo_valley.osm.pbf
+A	Data/districts/mount_clear.osm.pbf
+A	Data/districts/paddys_river.osm.pbf
+A	Data/districts/rendezvous_creek.osm.pbf
+A	Data/districts/stromlo.osm.pbf
+A	Data/districts/tennent.osm.pbf
+A	Data/districts/tuggeranong.osm.pbf
+A	Data/districts/weston_creek.osm.pbf
+A	Data/districts/woden_valley.osm.pbf
+A	coree.osm.pbf
+M	extract_config.json
+COMMIT ee8ba3f | 2026-08-28 | moved some things around and rename
+
+R100	coree.osm.pbf	Data/districts/coree.osm.pbf
+A	Documentation/gps_data_outside_good.txt
+R100	gpsdata.txt	Documentation/gpsdata_inside.txt
+R100	gpsdata_window.txt	Documentation/gpsdata_window.txt
+COMMIT 3d33844 | 2026-08-28 | wefwe
+
+A	.obsidian/themes/Programming Mono/manifest.json
+A	.obsidian/themes/Programming Mono/theme.css
+M	.obsidian/workspace.json
+COMMIT 79456fe | 2026-08-31 | working on assignment
+
+M	Code/main.py
+M	Code/map/geojson_split.py
+M	Code/map/osm_import.py
+A	Code/map/weston_creek.osm.pbf
+COMMIT 2416771 | 2026-09-01 | fqfwq
+
+M	.obsidian/workspace.json
+A	Documentation/OSM_export_0B_screenshot.png
+A	Documentation/osm_act_with_data_screenshot.png
+M	README.md
+COMMIT 5208ba0 | 2026-09-02 | working on documentation
+
+M	.obsidian/appearance.json
+M	.obsidian/workspace.json
+M	README.md
+COMMIT e135d47 | 2026-09-02 | seperated geojsons
+
+M	.obsidian/workspace.json
+A	Data/BOOT.geojson
+A	Data/KOWE.geojson
+A	Data/MOLO.geojson
+A	Data/PADD.geojson
+A	Data/REND.geojson
+A	Data/TENN.geojson
+A	Data/districts/geojson/BELC.geojson
+A	Data/districts/geojson/CANB.geojson
+A	Data/districts/geojson/CORE.geojson
+A	Data/districts/geojson/COTT.geojson
+A	Data/districts/geojson/GUNG.geojson
+A	Data/districts/geojson/HALL.geojson
+A	Data/districts/geojson/JERR.geojson
+A	Data/districts/geojson/MAJU.geojson
+A	Data/districts/geojson/MOUN.geojson
+A	Data/districts/geojson/STRO.geojson
+A	Data/districts/geojson/TUGG.geojson
+A	Data/districts/geojson/WEST.geojson
+A	Data/districts/geojson/WODE.geojson
+R100	Data/districts/belconnen.osm.pbf	Data/districts/osm/belconnen.osm.pbf
+R100	Data/districts/booth.osm.pbf	Data/districts/osm/booth.osm.pbf
+R100	Data/districts/canberra_central.osm.pbf	Data/districts/osm/canberra_central.osm.pbf
+R100	Data/districts/coree.osm.pbf	Data/districts/osm/coree.osm.pbf
+R100	Data/districts/cotter_river.osm.pbf	Data/districts/osm/cotter_river.osm.pbf
+R100	Data/districts/gungahlin.osm.pbf	Data/districts/osm/gungahlin.osm.pbf
+R100	Data/districts/hall.osm.pbf	Data/districts/osm/hall.osm.pbf
+R100	Data/districts/jerrabomberra.osm.pbf	Data/districts/osm/jerrabomberra.osm.pbf
+R100	Data/districts/kowen.osm.pbf	Data/districts/osm/kowen.osm.pbf
+R100	Data/districts/majura.osm.pbf	Data/districts/osm/majura.osm.pbf
+R100	Data/districts/molonglo_valley.osm.pbf	Data/districts/osm/molonglo_valley.osm.pbf
+R100	Data/districts/mount_clear.osm.pbf	Data/districts/osm/mount_clear.osm.pbf
+R100	Data/districts/paddys_river.osm.pbf	Data/districts/osm/paddys_river.osm.pbf
+R100	Data/districts/rendezvous_creek.osm.pbf	Data/districts/osm/rendezvous_creek.osm.pbf
+R100	Data/districts/stromlo.osm.pbf	Data/districts/osm/stromlo.osm.pbf
+R100	Data/districts/tennent.osm.pbf	Data/districts/osm/tennent.osm.pbf
+R100	Data/districts/tuggeranong.osm.pbf	Data/districts/osm/tuggeranong.osm.pbf
+R100	Data/districts/weston_creek.osm.pbf	Data/districts/osm/weston_creek.osm.pbf
+R100	Data/districts/woden_valley.osm.pbf	Data/districts/osm/woden_valley.osm.pbf
+M	README.md
+M	extract_config.json
+A	geojson_split_to_geojson.py
+COMMIT ffbc7c9 | 2026-09-02 | moved some files
+
+M	.obsidian/workspace.json
+R100	Data/BOOT.geojson	Data/districts/geojson/BOOT.geojson
+R100	Data/KOWE.geojson	Data/districts/geojson/KOWE.geojson
+R100	Data/MOLO.geojson	Data/districts/geojson/MOLO.geojson
+R100	Data/PADD.geojson	Data/districts/geojson/PADD.geojson
+R100	Data/REND.geojson	Data/districts/geojson/REND.geojson
+R100	Data/TENN.geojson	Data/districts/geojson/TENN.geojson
+COMMIT 3e5bad1 | 2026-09-02 | adding brackets
+
+M	Data/districts/geojson/BELC.geojson
+M	Data/districts/geojson/BOOT.geojson
+M	Data/districts/geojson/CANB.geojson
+M	Data/districts/geojson/CORE.geojson
+M	Data/districts/geojson/COTT.geojson
+M	Data/districts/geojson/GUNG.geojson
+M	Data/districts/geojson/HALL.geojson
+M	Data/districts/geojson/JERR.geojson
+M	Data/districts/geojson/KOWE.geojson
+COMMIT 4f70532 | 2026-09-07 | 3feff
+
+M	.obsidian/workspace.json
+M	Data/districts/geojson/MAJU.geojson
+M	Data/districts/geojson/MOLO.geojson
+M	Data/districts/geojson/MOUN.geojson
+M	Data/districts/geojson/PADD.geojson
+M	Data/districts/geojson/REND.geojson
+M	Data/districts/geojson/STRO.geojson
+M	Data/districts/geojson/TENN.geojson
+M	Data/districts/geojson/TUGG.geojson
+M	Data/districts/geojson/WEST.geojson
+M	Data/districts/geojson/WODE.geojson
+A	Data/districts/osm/BELC.osm.pbf
+A	Data/districts/osm/BOOT.osm.pbf
+A	Data/districts/osm/CANB.osm.pbf
+A	Data/districts/osm/COTT.osm.pbf
+A	Data/districts/osm/GUNG.osm.pbf
+A	Data/districts/osm/HALL.osm.pbf
+A	Data/districts/osm/JERR.osm.pbf
+A	Data/districts/osm/KOWE.osm.pbf
+A	Data/districts/osm/MAJU.osm.pbf
+A	Data/districts/osm/MOLO.osm.pbf
+A	Data/districts/osm/STRO.osm.pbf
+A	Data/districts/osm/TENN.osm.pbf
+A	Data/districts/osm/TUGG.osm.pbf
+A	Data/districts/osm/WEST.osm.pbf
+A	Data/districts/osm/WODE.osm.pbf
+D	Data/districts/osm/belconnen.osm.pbf
+D	Data/districts/osm/booth.osm.pbf
+D	Data/districts/osm/canberra_central.osm.pbf
+D	Data/districts/osm/coree.osm.pbf
+D	Data/districts/osm/cotter_river.osm.pbf
+D	Data/districts/osm/gungahlin.osm.pbf
+D	Data/districts/osm/hall.osm.pbf
+D	Data/districts/osm/jerrabomberra.osm.pbf
+D	Data/districts/osm/kowen.osm.pbf
+D	Data/districts/osm/majura.osm.pbf
+D	Data/districts/osm/molonglo_valley.osm.pbf
+D	Data/districts/osm/mount_clear.osm.pbf
+D	Data/districts/osm/paddys_river.osm.pbf
+D	Data/districts/osm/rendezvous_creek.osm.pbf
+D	Data/districts/osm/stromlo.osm.pbf
+D	Data/districts/osm/tennent.osm.pbf
+D	Data/districts/osm/tuggeranong.osm.pbf
+D	Data/districts/osm/weston_creek.osm.pbf
+D	Data/districts/osm/woden_valley.osm.pbf
+A	cmdforosmium.txt
+M	extract_config.json
+COMMIT 5c2af3c | 2026-09-07 | small changes
+
+M	.obsidian/workspace.json
+A	Documentation/OSM_export_with_filesize_screenshot.png
+COMMIT 0dc9ce1 | 2026-09-07 | working on the project
+
+M	.obsidian/workspace.json
+A	Code/map/WEST.osm.pbf
+M	Code/map/osm_import.py
+D	Code/map/weston_creek.osm.pbf
+COMMIT 739b524 | 2026-09-09 | wefwefw
+
+M	.obsidian/workspace.json
+M	Code/map/osm_import.py
+COMMIT ae4fe34 | 2026-09-09 | small changes
+
+M	Code/map/osm_import.py
+M	README.md
+COMMIT 9d69bd5 | 2026-09-11 | changing things ramping up
+
+M	.obsidian/workspace.json
+A	Code/Areas/BELC.osm.pbf
+A	Code/Areas/BOOT.osm.pbf
+A	Code/Areas/CANB.osm.pbf
+A	Code/Areas/COTT.osm.pbf
+A	Code/Areas/GUNG.osm.pbf
+A	Code/Areas/HALL.osm.pbf
+A	Code/Areas/JERR.osm.pbf
+A	Code/Areas/KOWE.osm.pbf
+A	Code/Areas/MAJU.osm.pbf
+A	Code/Areas/MOLO.osm.pbf
+A	Code/Areas/STRO.osm.pbf
+A	Code/Areas/TENN.osm.pbf
+A	Code/Areas/TUGG.osm.pbf
+A	Code/Areas/WEST.osm.pbf
+A	Code/Areas/WODE.osm.pbf
+A	Code/Areas/areas.py
+A	Code/map/loader.py
+A	Code/map/map.py
+M	Code/map/osm_import.py
+A	Data/districts/osm/CORE.osm.pbf
+A	Data/districts/osm/MOUN.osm.pbf
+A	Data/districts/osm/PADD.osm.pbf
+A	Data/districts/osm/REND.osm.pbf
+A	Need to do currently.md
+COMMIT 6daabde | 2026-09-11 | wokin g on it
+
+M	.obsidian/workspace.json
+M	Code/map/loader.py
+COMMIT 98f830c | 2026-09-11 | bla bla bla
+
+M	.obsidian/workspace.json
+M	README.md
+COMMIT 9df1776 | 2026-09-11 | small chnage
+
+M	.obsidian/workspace.json
+M	Need to do currently.md
+COMMIT 0f8488b | 2026-09-16 | Added the adjacentcies
+
+M	.obsidian/workspace.json
+M	Code/map/loader.py
+COMMIT f65a6bf | 2026-09-16 | Changed location of the geojsons and then edited the Loader for these changes
+
+A	Code/Areas/BELC.geojson
+A	Code/Areas/BOOT.geojson
+A	Code/Areas/CANB.geojson
+A	Code/Areas/CORE.geojson
+A	Code/Areas/COTT.geojson
+A	Code/Areas/GUNG.geojson
+A	Code/Areas/HALL.geojson
+A	Code/Areas/JERR.geojson
+A	Code/Areas/KOWE.geojson
+A	Code/Areas/MAJU.geojson
+A	Code/Areas/MOLO.geojson
+A	Code/Areas/MOUN.geojson
+A	Code/Areas/PADD.geojson
+A	Code/Areas/REND.geojson
+A	Code/Areas/STRO.geojson
+A	Code/Areas/TENN.geojson
+A	Code/Areas/TUGG.geojson
+A	Code/Areas/WEST.geojson
+A	Code/Areas/WODE.geojson
+M	Code/map/loader.py
+COMMIT 638c19c | 2026-09-16 | working on the loader
+
+M	Code/main.py
+M	Code/map/loader.py
+COMMIT d4bc2fe | 2026-09-16 | working on the locating
+
+M	Code/map/loader.py
+COMMIT 99cf51b | 2026-09-18 | working on the loader, moved adjacenties to the main dictionary
+
+M	.obsidian/workspace.json
+M	Code/map/loader.py
+M	README.md
+COMMIT b06c005 | 2026-09-18 | locate for adjacent
+
+M	Code/map/loader.py
+COMMIT 567d6f8 | 2026-09-18 | renamed load_area to find_location
+
+M	Code/map/loader.py
+COMMIT dd92809 | 2026-09-18 | ejbgejgej
+
+M	.obsidian/workspace.json
+M	Code/map/loader.py
+M	README.md
+COMMIT 6349de1 | 2026-09-18 | added more bibliography entries
+
+M	README.md
+COMMIT 0f3af68 | 2026-09-18 | Update README.md
+
+M	README.md
+COMMIT 7b14083 | 2026-09-21 | small progress
+
+M	Code/main.py
+M	Code/navigation/navigation.py
+COMMIT 2d96293 | 2026-09-23 | small changes
+
+M	.obsidian/workspace.json
+M	Code/map/loader.py
+A	pathtest.py
+A	temp.py
+COMMIT e38d30c | 2026-09-23 | small edits
+
+M	.obsidian/workspace.json
+M	Code/map/loader.py
+COMMIT 1ac7c9f | 2026-09-23 | fwefw
+
+M	Code/map/loader.py
+COMMIT 3e2f54d | 2026-09-23 | small chages to bibliographs
+
+M	README.md
+COMMIT dd8d99e | 2026-09-23 | added the imports for the pathfindi9ng library to the navigation controller file
+
+M	.obsidian/workspace.json
+M	Code/navigation/navigation.py
+COMMIT 164bdbc | 2026-10-13 | fwfwf
+
+M	Code/map/road_graph.py
+A	all.py
+COMMIT ee24b4b | 2026-10-13 | fwfwew
+
+A	Code/map/__pycache__/road_graph.cpython-314.pyc
+A	Code/navigation/__pycache__/routing.cpython-314.pyc
+M	Code/navigation/routing.py
+A	Code/test.py
+A	Code/test2.py
+COMMIT d5327d2 | 2026-10-14 | gergre
+
+M	Code/main.py
+M	Code/navigation/navigation.py
+COMMIT 2d15c67 | 2026-10-14 | efewfwefw
+
+A	Code/navigation/__pycache__/navigation.cpython-314.pyc
+M	Code/navigation/__pycache__/routing.cpython-314.pyc
+M	Code/navigation/routing.py
+A	Code/test3.py
+COMMIT 1203d96 | 2026-10-14 | fweffw
+
+M	Code/map/__pycache__/road_graph.cpython-314.pyc
+M	Code/map/road_graph.py
+M	Code/navigation/__pycache__/navigation.cpython-314.pyc
+M	Code/navigation/navigation.py
+COMMIT e0ffac9 | 2026-10-14 | efwe
+
+M	Code/map/__pycache__/road_graph.cpython-314.pyc
+M	Code/map/road_graph.py
+M	Code/navigation/__pycache__/navigation.cpython-314.pyc
+M	Code/navigation/__pycache__/routing.cpython-314.pyc
+M	Code/navigation/navigation.py
+M	Code/navigation/routing.py
+COMMIT 54099ca | 2026-10-14 | wefwefw
+
+M	Code/navigation/routing.py
+COMMIT 31492a1 | 2026-10-14 | Update routing.py
+
+M	Code/navigation/routing.py
+COMMIT b87062d | 2026-10-15 | fefew
+
+M	Code/navigation/navigation.py
+M	Code/navigation/routing.py
+COMMIT 7184450 | 2026-10-15 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT b1f0df7 | 2026-10-16 | small edits to the UI
+
+A	Code/ui/CarNav.ui
+M	Code/ui/ui.py
+COMMIT 99cecdc | 2026-10-16 | named the widgets
+
+M	Code/ui/CarNav.ui
+COMMIT cdba9ff | 2026-10-16 | changing some things arround with the ui
+
+M	Code/ui/CarNav.ui
+COMMIT b199daf | 2026-10-19 | fwfqqw
+
+M	Code/ui/CarNav.ui
+M	Code/ui/ui.py
+COMMIT 019b1a4 | 2026-10-21 | small ui edits
+
+M	Code/ui/ui.py
+COMMIT 2b6bc01 | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT 9062917 | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT d05ff61 | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT 7dac81c | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT c326d93 | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT 3ce3a52 | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT 804445e | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT c4d2d81 | 2026-10-21 | efwefwe
+
+M	Code/ui/ui.py
+COMMIT 6b8072e | 2026-10-21 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT 2ef8d7c | 2026-10-22 | Create tempui.py
+
+A	Code/ui/tempui.py
+COMMIT c8be6fa | 2026-10-22 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT bac92b1 | 2026-10-22 | more overlays for the map
+
+M	Code/ui/ui.py
+COMMIT ef2f0fa | 2026-10-22 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT ed8f864 | 2026-10-22 | remove overlay opacity
+
+M	Code/ui/ui.py
+COMMIT 9e34d6c | 2026-10-22 | Create early_ui_layout_not_polished.png
+
+A	Documentation/early_ui_layout_not_polished.png
+COMMIT ff5a417 | 2026-10-22 | fefwfw
+
+M	Code/ui/ui.py
+COMMIT 355c027 | 2026-10-22 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT 23d808f | 2026-10-22 | set fixed size for manythings and window itself
+
+M	Code/ui/ui.py
+COMMIT 105ed16 | 2026-10-22 | working on the ui, now with buttons
+
+M	.obsidian/workspace.json
+M	Code/ui/ui.py
+M	README.md
+COMMIT 7a74617 | 2026-10-22 | fwefwe
+
+M	Code/ui/ui.py
+COMMIT 30daf16 | 2026-10-22 | fewfewf
+
+M	Code/ui/ui.py
+COMMIT 7bcbb17 | 2026-10-23 | fefwef
+
+A	Code/__pycache__/main.cpython-314.pyc
+A	Code/gps/__pycache__/gps.cpython-314.pyc
+M	Code/main.py
+A	Code/map/__pycache__/loader.cpython-314.pyc
+A	Code/map/__pycache__/osm_import.cpython-314.pyc
+M	Code/map/__pycache__/road_graph.cpython-314.pyc
+M	Code/map/loader.py
+M	Code/navigation/__pycache__/navigation.cpython-314.pyc
+M	Code/navigation/__pycache__/routing.cpython-314.pyc
+M	Code/navigation/navigation.py
+M	Code/ui/ui.py
+A	Code/ui/uitestmain.py
+COMMIT b3ecb48 | 2026-10-23 | fwfew
+
+M	Code/ui/ui.py
+COMMIT 1fbe083 | 2026-10-23 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT bfe52fe | 2026-10-23 | wfffwefe
+
+A	Code/ui/testtemp.py
+A	map.html
+COMMIT 7a92438 | 2026-10-28 | fwef
+
+M	Code/ui/testtemp.py
+M	Code/ui/ui.py
+M	map.html
+COMMIT c1f49a2 | 2026-10-30 | fwefwe
+
+M	Code/ui/ui.py
+M	map.html
+COMMIT e5bcc4e | 2026-10-30 | ewfwf2
+
+M	Code/ui/ui.py
+M	map.html
+COMMIT d350a6a | 2026-10-30 | fewfwef
+
+M	Code/ui/ui.py
+M	map.html
+COMMIT ee76392 | 2026-10-30 | fwef
+
+M	Code/main.py
+M	Code/navigation/navigation.py
+M	map.html
+COMMIT c1bafca | 2026-10-30 | fwfe
+
+M	Code/ui/ui.py
+M	map.html
+COMMIT 7fc438a | 2026-10-30 | Update ui.py
+
+M	Code/ui/ui.py
+COMMIT 56e8481 | 2026-10-30 | fwfwq
+
+M	Code/ui/ui.py
+M	map.html
+COMMIT 814f0b1 | 2026-11-04 | efeerf
+
+M	map.html
+COMMIT 075aead | 2026-11-06 | fefwef
+
+M	Code/Areas/areas.py
+M	Code/gps/__pycache__/gps.cpython-314.pyc
+A	Code/gps/__pycache__/simulate_gps.cpython-314.pyc
+M	Code/gps/gps.py
+A	Code/gps/simulate_gps.py
+M	Code/main.py
+M	Code/map/__pycache__/loader.cpython-314.pyc
+M	Code/map/__pycache__/osm_import.cpython-314.pyc
+M	Code/map/__pycache__/road_graph.cpython-314.pyc
+M	Code/navigation/__pycache__/navigation.cpython-314.pyc
+M	Code/navigation/__pycache__/routing.cpython-314.pyc
+M	Code/navigation/navigation.py
+M	Code/navigation/routing.py
+A	Code/ui/__pycache__/ui.cpython-314.pyc
+M	Code/ui/ui.py
+M	all.py
+M	map.html
+COMMIT 9f636eb | 2026-11-06 | fwfewf
+
+M	Code/gps/__pycache__/simulate_gps.cpython-314.pyc
+M	Code/gps/simulate_gps.py
+M	Code/main.py
+M	Code/ui/__pycache__/ui.cpython-314.pyc
+M	Code/ui/ui.py
+M	map.html
+COMMIT d03e8c4 | 2026-11-06 | fewfwefwe
+
+M	Code/gps/gps.py
+M	Code/gps/simulate_gps.py
+M	Code/main.py
+M	Code/map/road_graph.py
+M	Code/navigation/navigation.py
+M	Code/navigation/routing.py
+M	Code/ui/ui.py
+M	all.py
+COMMIT 5b6e6f1 | 2026-11-06 | fewfwef
+
+M	Code/gps/__pycache__/gps.cpython-314.pyc
+M	Code/gps/__pycache__/simulate_gps.cpython-314.pyc
+M	Code/map/__pycache__/loader.cpython-314.pyc
+M	Code/map/__pycache__/osm_import.cpython-314.pyc
+M	Code/map/__pycache__/road_graph.cpython-314.pyc
+M	Code/navigation/__pycache__/navigation.cpython-314.pyc
+M	Code/navigation/__pycache__/routing.cpython-314.pyc
+M	Code/ui/__pycache__/ui.cpython-314.pyc
+M	map.html
+COMMIT 38d649d | 2026-11-06 | fewfwef
+
+M	Code/main.py
+D	Code/resources/temp.txt
+D	Code/ui/tempui.py
+D	Code/ui/testtemp.py
+D	Code/ui/uitestmain.py
+D	Need to do currently.md
+D	pathtest.py
+D	temp.py
+COMMIT 9434e54 | 2026-11-06 | fwefwefwe
+
+M	Code/map/loader.py
+D	Code/map/map.py
+M	Code/map/osm_import.py
+M	Code/navigation/navigation.py
+COMMIT 6c3eb86 | 2026-11-06 | fwefwe
+
+M	Code/map/__pycache__/loader.cpython-314.pyc
+M	Code/map/__pycache__/osm_import.cpython-314.pyc
+M	Code/navigation/__pycache__/navigation.cpython-314.pyc
+M	Code/ui/__pycache__/ui.cpython-314.pyc
+M	map.html
+COMMIT 2116426 | 2026-11-06 | ewfw
+
+A	Code/TestingInstructions.txt
+M	Code/main.py
+M	map.html
+COMMIT a4794ee | 2026-11-06 | dffwdf
+
+D	Data/ACTGOV_DISTRICTS_-2248938068983619392.geojson
+D	Data/ACTGOV_DIVISIONS_2639814853747302406.geojson
+D	Data/AU-addresses.tsv.gz
+D	Data/AU-houses.tsv.gz
+D	Data/AU-streets.tsv.gz
+D	Data/districts/geojson/BELC.geojson
+D	Data/districts/geojson/BOOT.geojson
+D	Data/districts/geojson/CANB.geojson
+D	Data/districts/geojson/CORE.geojson
+D	Data/districts/geojson/COTT.geojson
+D	Data/districts/geojson/GUNG.geojson
+D	Data/districts/geojson/HALL.geojson
+D	Data/districts/geojson/JERR.geojson
+D	Data/districts/geojson/KOWE.geojson
+D	Data/districts/geojson/MAJU.geojson
+D	Data/districts/geojson/MOLO.geojson
+D	Data/districts/geojson/MOUN.geojson
+D	Data/districts/geojson/PADD.geojson
+D	Data/districts/geojson/REND.geojson
+D	Data/districts/geojson/STRO.geojson
+D	Data/districts/geojson/TENN.geojson
+D	Data/districts/geojson/TUGG.geojson
+D	Data/districts/geojson/WEST.geojson
+D	Data/districts/geojson/WODE.geojson
+D	Data/districts/osm/BELC.osm.pbf
+D	Data/districts/osm/BOOT.osm.pbf
+D	Data/districts/osm/CANB.osm.pbf
+D	Data/districts/osm/CORE.osm.pbf
+D	Data/districts/osm/COTT.osm.pbf
+D	Data/districts/osm/GUNG.osm.pbf
+D	Data/districts/osm/HALL.osm.pbf
+D	Data/districts/osm/JERR.osm.pbf
+D	Data/districts/osm/KOWE.osm.pbf
+D	Data/districts/osm/MAJU.osm.pbf
+D	Data/districts/osm/MOLO.osm.pbf
+D	Data/districts/osm/MOUN.osm.pbf
+D	Data/districts/osm/PADD.osm.pbf
+D	Data/districts/osm/REND.osm.pbf
+D	Data/districts/osm/STRO.osm.pbf
+D	Data/districts/osm/TENN.osm.pbf
+D	Data/districts/osm/TUGG.osm.pbf
+D	Data/districts/osm/WEST.osm.pbf
+D	Data/districts/osm/WODE.osm.pbf
