@@ -183,52 +183,18 @@ This is the step where i fell behind and other assignments took the primary focu
 ## Evaluation and Review
 
 ### 1. Planning
-#### What aspects of your original plan were successful?
 
-- Was the original concept of an offline navigation system achievable using the hardware and software you selected?
-		The original concept was technically achievable although i was unable to, due to the map processing requiring an internet connection to stream the map tiles. But if that wasn't a factor the system could be run offline in the car, but with possible concerns around power supply from a car engine, to a raspberry pi possibly causing problems when the engine is turned off.
-    
-- Which parts of your initial research proved useful during development?
-		Most of the initial research was useful for development, although not all directly, with it giving me the rough info on how to implement systems, but not the specifics.
-    
-- Was choosing Python, PyQt5 and OpenStreetMap appropriate for this project?
-		PyQt5 was suficient for the ui of my app, and was useful due to it already been a library we had worked with in the past, so i didn't have to learn a whole new library, compared to if i had used tkinter or someother python ui.
-    
-- Was dividing the project into five main milestones helpful for organising development?
-	    It was helpful, but I struggled to follow them, as other assignments got in the way, and its distance from due date, made it feel more like a task i could set aside for later. But it was the rough structure of what i developed in order, although not at the planned upon times.
-    
-- Which parts of the original plan did you follow most closely?
-	    Milestone 1 and 2, whith it startin to fall apart around milestone 3, when other assingments drew my attention, and it required me to research how to handle the datasets, and i kept falling into pitfalls of other steps, such as spliting geojsons, and osms so they could be loaded when needed, and making an early loading system, which i was unable to integrate in the end. 
+My original plan for an entirely offline navigation system is and was technically achievable, but  was not actually completed. I was unable to make the final product offline, due to  the map needing to download tiles from  a web socket. Without that limitation which I attempted to solve, but could not in time the system could of achieved my goal. 
 
-#### What aspects were unsuccessful?
+Most of my initial research was useful throughout development, although not always directly, as it provided a general understanding of how the different systems could be implemented, but further research was required for the specifics. I also think the decision to use QT was correct as unlike some of my peers I didn't have to learn a whole new UI library, while also attempting an ambitious project.
 
-- Which parts of the project were more complicated than you originally expected?
-    
-- Did you underestimate how long processing OpenStreetMap data would take?
-		Yes this took almost two weeks of trying to spit the files, geojsons, then making a loading sytem, then also the navigation backend which i used a few libraries for before landing on the final one, after i founf the others didn't have what i needed.
-    
-- Was the original timeline realistic, particularly the plan to complete the MVP by 17 September?
-		It probably wasn't entirely realistic but if i had done more work then i had out of class, i most likely could of finished around when i originally intended.
-    
-- Were there any dependencies between different systems that you failed to account for?
-		As said before, also i intended to have my own map presenting system instead of using an already made library.
-    
-- Did your original planning include enough time for debugging and integration?
-	    I did provide enough for debugging, but failed to see that this type of project requires interconnected systems to be made one by one unable to test in its truth until the end, and unable to integrate.
+One of the main problems with my original planning was underestimating the complexity of processing and managing the OpenStreetMap data. I spent almost two weeks experimenting with dividing the OSM and GeoJSON files into smaller regions, developing a system to load them when required, and researching different libraries for route calculation. Several of these approaches were eventually abandoned, either because they lacked the functionality I required or because I was unable to integrate them into the final system. 
 
-#### What changes did you make and why?
+The original timeline, particularly the intention to complete the minimum viable product by 17 September, was also overly optimistic. Although I believe it could have been achievable if I had dedicated more time outside of class, I failed to properly account for the dependencies between different systems. While I had allocated time for debugging, I underestimated how difficult it would be to test and integrate systems that depended on other components being completed first. This became particularly problematic towards the end of development, when several components had been developed separately but had not yet been connected.
 
-- Why did you decide to divide the ACT's map data into smaller geographic regions?
-		So it wouldn't all be loaded into the raspberry pi's ram, so i though it would be better to load a small region,  which i spent quite a while preparing without any actual turnout, as i didn't have time to connect the system.
-    
-- How did your approach to route calculation change during development?
-	Initially i wanted to make my own route calculation then i wanted to do my own implementation of a known route algorithm, before i ended up using a library.
-    
-- Did you change your intended UI design? What motivated those changes?
-		The ui wasn't defined well from the begining, so i ran a suvey like thing amoung my IT peers having each of the other three draw their favoured ui for a car navigator, which i used as basis to design my own before implementing it.
-    
-- Were these changes improvements to the original design, or compromises made because of time constraints?
-	    compromised for library things, but improvements for the ui.
+One of the first significant changes was my decision to divide the ACT's map data into smaller geographic regions, rather than loading the entire dataset into the Raspberry Pi's RAM. The intention was to reduce memory usage by only loading the region required for navigation. However, despite spending a considerable amount of time preparing the data and developing a loading system, I was ultimately unable to integrate this into the final product.
+
+The user interface was another area that changed significantly, although this was more of an improvement rather than a compromise. My original proposal did not clearly define how the interface would look, so I conducted a small survey among my IT classmates, asking each of them to draw their preferred design for a car navigation interface. I then used these designs as a basis for developing my own interface, incorporating elements that I liked and fit with the project.
 
 ### 2. Development
 
@@ -237,57 +203,63 @@ This is the step where i fell behind and other assignments took the primary focu
 Hardware and GPS
 
 - Were there any difficulties connecting the GPS receiver to the Raspberry Pi?
+		Yeah since i had to learn soldering. I took a good few tries, and the final solder broke while i was testing the device, so it needed frequent re sodlers it. And my solders were quite bad, so i don't think i learnt it well.
     
 - Did you encounter problems interpreting NMEA messages or obtaining accurate location data?
-    
-- Why did you change the GPS program into an object-oriented class?
+		Not with interpreting. But the signal was only good outside or through very thin walls, or near windows.
     
 - Did GPS accuracy vary between indoor, window and outdoor testing?
-    
+	    Already said
 
 Map data
 
 - What happened when you attempted to load the larger OpenStreetMap datasets?
+	I initally tried to load all of australia but that used 34gb of ram on my pc so the raspberry pi's small ram size, compared to loading just canberra of .14gb. All australia also took 10 minutes to load on a pc, while canberra took 1 min
     
 - How did memory usage affect your approach?
+	I decided to split the 'large' area of canberra into its sub divisions.
     
 - What difficulties did you encounter when dividing OSM data using GeoJSON boundaries?
-    
-- Were there problems identifying which geographic region contained the user's location?
-    
+		it took some weird commands with some osm handling programs, which took me a while to figure out.
 
 Navigation
 
 - What difficulties did you encounter converting road data into a usable graph?
+		None acually just needed to find the right library, with me testing two.
     
 - Were there any problems identifying the nearest road node to a GPS location?
+		not really it was just math, you have a rough position, and you find the nearest position in the data
     
 - Did A* initially produce incorrect routes, errors or unexpected results?
+		not that i could see
     
 - What problems occurred when calculating route distances or estimated travel times?
+		i dont think any
     
 
 User interface
 
 - What difficulties did you encounter developing the PyQt5 interface?
+		I am not a graphic designer so starting to figure out a ui design was hard, so i asked my peers to draw their ui and then i used that as a basis for my own. It alos took a while to figure out how i could do the map, i tried to do some stuff with qgis, but then just decided to use a package folium.
     
 - Did you have to redesign any parts of the layout?
+		i wanted to have an animation but couldn't do it in time, i also wanted to do my own oberlays on the map, since folium only had zoom in and out, but i wanted centre, but i couldn't figure out how to have a overlay and be able to interact with the buttons below it.
     
 - What happened when you connected the map display to the navigation backend?
+		It worked, it showed the path to the users desired cordinates (not able to entre adress just the lat and lng, since i couldn't find a way to search though all adresses by the time i got to this point)
     
 - Why did the map zoom reset during updates?
-    
-- Why did the calculated route sometimes remain behind the user's position?
-    
+		i initally reset the enbtire map each time it updated causing any zoomig in or out to reset so instead i updated the old map, 
 
 #### How did you overcome them?
 
 - How did you identify the causes of these problems?
+		
     
 - Did you use separate testing programs to isolate individual systems?
     
 - Which problems required research into documentation or external resources?
-    
+
 - Did you experiment with multiple possible solutions before finding one that worked?
     
 - Were there any problems you couldn't completely resolve?
@@ -297,77 +269,45 @@ User interface
 
 ### 3. Project Management
 
-#### How effectively did you manage your time?
+My time management was relatively successful during the first two milestones, which were completed close to their originally planned dates. However, the third milestone took significantly longer than expected, particularly due to the complications involved in processing the map data and managing the Raspberry Pi's limited RAM. I spent approximately a week and a half working on the map processing alone, roughly equal to the time spent developing the user interface. This delayed the remaining milestones, with the original timeline becoming increasingly difficult to follow.
 
-- How closely did your actual development follow the original milestone dates?
-    
-- Which milestones took significantly longer than expected?
-    
-- How much time did you spend on map data processing compared with navigation and UI development?
-    
-- How did other assignments affect your available development time?
-    
-- What happened during the period between 23 September and 13 October when there were no recorded commits?
-    
-- Did you work consistently throughout the semester, or did most progress occur closer to the deadline?
-    
-- How did falling behind affect the quality or completeness of the final product?
-    
-- Did you leave enough time for testing and documentation?
-    
+Although I worked relatively consistently throughout the semester, most of this was confined to class time, with occasional work at home and on weekends. Unlike previous IT assignments, where I would often spend considerable amounts of time working on them during the final weeks, this project was frequently interrupted by other assignments, particularly my Year 12 report towards the end. The school holidays also contributed to this, as I was working most days, resulting in no recorded commits between 23 September and 13 October. Additionally, the relatively distant due date made the assignment feel less urgent, until I had already fallen significantly behind. While I continued testing individual systems throughout development, the final integration was largely completed during the day before and the day of submission, leaving insufficient time to properly test and polish the completed product.
 
-#### What would you do differently?
+If I were to undertake this project again, I would divide it into more milestones, each with smaller and more specific goals, rather than necessarily allocating more time to any particular stage. I would also reconsider how the different systems were designed, particularly their dependencies on one another. While I attempted to develop several systems independently, the way they were structured made it difficult to integrate and test them together until towards the end of development. Developing the GPS, navigation and interface systems with integration in mind from the beginning, alongside more frequent testing checkpoints, would have helped identify these problems earlier.
 
-- Would you allocate more time to any particular milestone?
-    
-- Would you develop a basic working version using a small map before attempting the entire ACT?
-    
-- Would you begin integrating the GPS, navigation and UI systems earlier?
-    
-- Would you establish more frequent testing checkpoints?
-    
-- How could you improve your Git commit messages and development documentation?
-    
-- Would you change how you prioritised this project against your other assignments?
-    
-- How would you organise the project differently to avoid leaving so much work until the final weeks?
-    
+I would also change how I prioritised the project against my other assignments. In hindsight, I could have dedicated more time to this project rather than prioritising assignments that were unlikely to contribute to my ATAR. My motivation towards schoolwork had also decreased during the final semester, particularly after receiving confirmed early entry to uni, which reduced the pressure I previously felt to spend considerable amounts of time on assignments. Combined with the relatively distant deadline, this contributed to me putting off work that could have been completed earlier, ultimately limiting how much of the original project I was able to complete and polish.
 
 ### 4. Skills
 
 #### What new skills did you learn?
 
 - What did you learn about configuring and programming a Raspberry Pi?
+		It was intresting to work with a non lego mindstorms robot system, having to consider things like ram, and computational power, along with power and connectors, andthe more intricite things such as soldering
     
 - How did working with a GPS receiver improve your understanding of serial communication and NMEA data?
+		As said before it was intreeting dealing with connecotors, one of which been the gps, which had to be managed with care, it only works outside or in thin walls, and it was intresting using pythons serial library to get the stream of data, 
     
 - What did you learn about OpenStreetMap, OSM PBF files and GeoJSON?
-    
-- How did your understanding of geographic coordinates and spatial data develop?
-    
-- What did implementing A* teach you about graphs and pathfinding algorithms?
+		Its cool how much data is just out there which anyone can use free and open source, And that there are somany opensource libraries to handle thses sorts of data, each with their limitations
     
 - What did you learn about building graphical interfaces using PyQt5?
-    
+	    By surveting my peers i learnt what others want their ui to look like and that the minimal thing most sites use, isn;t what eveyone wants, and how to combine suggestions from others to make a singular ui
 - What did you learn about connecting multiple independent software components into one application?
-    
+	    That there are benifits and detriments to making mutliple independtn secions, so they can be tested on their own, and work, but then at the end there is a large amout of integrating that needs to be done and that needs a large amount of time to be set for it
 
 #### Which skills improved most?
 
 - How did your Python programming abilities change between the beginning and end of the project?
-    
-- Did your understanding of classes and object-oriented programming improve?
-    
-- Did you become better at debugging errors and identifying their causes?
+		i learn some new things such as isisntance of and some other python things, mostly from learning new libraries, but since python has been the primary language for soo long it didn't make me learn much
     
 - Did you improve at researching unfamiliar libraries and understanding their documentation?
-    
+	    A large portion of this assigment i spent researchin libraries and their alternatives, testing things with each before making the full feature with the library
+	    
 - How did your approach to testing change during development?
-    
-- Did you become better at breaking large technical problems into smaller tasks?
-    
+	    I created test files whic htested the functionality of some of my features, but i didn't do this for each feature.
+	    
 - Which skill do you think improved the most, and what specific part of CarNav demonstrates that improvement?
-    
+	    Even though its quite small my design thinking for the ui, due to not having sought others opinions in the past for ui, it was cool seeing what every one wanted, and how to incorporate the best of each
 
 ### 5. Evaluation
 
