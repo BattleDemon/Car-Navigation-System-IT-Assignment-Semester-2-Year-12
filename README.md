@@ -279,35 +279,13 @@ I would also change how I prioritised the project against my other assignments. 
 
 ### 4. Skills
 
-#### What new skills did you learn?
+One of the more interesting aspects of this project was working with a Raspberry Pi, rather than the LEGO Mindstorms systems we had previously used in IT. This required me to consider things such as RAM, computational power, power supply and the different connectors, along with more intricate tasks such as soldering. Working with the GPS receiver was particularly interesting, as it required me to manage the physical connections, while also considering its limitations, such as only being able to receive a reliable signal outdoors or through thinner walls. I also learnt how to use Python's serial library to read the stream of NMEA data being sent by the GPS receiver.
 
-- What did you learn about configuring and programming a Raspberry Pi?
-		It was intresting to work with a non lego mindstorms robot system, having to consider things like ram, and computational power, along with power and connectors, andthe more intricite things such as soldering
-    
-- How did working with a GPS receiver improve your understanding of serial communication and NMEA data?
-		As said before it was intreeting dealing with connecotors, one of which been the gps, which had to be managed with care, it only works outside or in thin walls, and it was intresting using pythons serial library to get the stream of data, 
-    
-- What did you learn about OpenStreetMap, OSM PBF files and GeoJSON?
-		Its cool how much data is just out there which anyone can use free and open source, And that there are somany opensource libraries to handle thses sorts of data, each with their limitations
-    
-- What did you learn about building graphical interfaces using PyQt5?
-	    By surveting my peers i learnt what others want their ui to look like and that the minimal thing most sites use, isn;t what eveyone wants, and how to combine suggestions from others to make a singular ui
-- What did you learn about connecting multiple independent software components into one application?
-	    That there are benifits and detriments to making mutliple independtn secions, so they can be tested on their own, and work, but then at the end there is a large amout of integrating that needs to be done and that needs a large amount of time to be set for it
+Working with OpenStreetMap also showed me how much geographic data is freely available for anyone to use, along with the large number of open-source libraries designed to process it. However, I also learnt that each library has its own limitations, which became particularly apparent when working with OSM PBF and GeoJSON files, as I had to experiment with several libraries before finding ones that suited my needs.
 
-#### Which skills improved most?
+Another skill I developed was gathering and incorporating feedback into my user interface design. By surveying my IT classmates, I learnt that the minimalistic approach commonly used in modern interfaces is not necessarily what everyone prefers. It was interesting seeing the different designs people came up with, and considering how to combine their suggestions into a single interface. I also learnt about the benefits and drawbacks of developing software components independently. While this allowed me to test individual systems before they were completed, it also created a significant amount of integration work towards the end of development, which required more time than I had originally anticipated.
 
-- How did your Python programming abilities change between the beginning and end of the project?
-		i learn some new things such as isisntance of and some other python things, mostly from learning new libraries, but since python has been the primary language for soo long it didn't make me learn much
-    
-- Did you improve at researching unfamiliar libraries and understanding their documentation?
-	    A large portion of this assigment i spent researchin libraries and their alternatives, testing things with each before making the full feature with the library
-	    
-- How did your approach to testing change during development?
-	    I created test files whic htested the functionality of some of my features, but i didn't do this for each feature.
-	    
-- Which skill do you think improved the most, and what specific part of CarNav demonstrates that improvement?
-	    Even though its quite small my design thinking for the ui, due to not having sought others opinions in the past for ui, it was cool seeing what every one wanted, and how to incorporate the best of each
+Although I learnt some new Python features, such as `isinstance()`, along with the functionality of several new libraries, I do not think my general Python programming abilities improved significantly. A large portion of this assignment was spent researching unfamiliar libraries and their alternatives, reading documentation, and creating small tests to determine whether they would be suitable before developing the full feature.
 
 ### 5. Evaluation
 
