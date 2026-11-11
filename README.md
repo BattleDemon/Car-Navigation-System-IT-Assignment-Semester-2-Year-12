@@ -199,9 +199,11 @@ This stage involved processing the OpenStreetMap data into a format that could b
 
 ###### Ram usage when loading osm data
 Loading All of Australia osm data ram usage, on PC, with base line of 6Gb ram usage prior to loading.
+
 ![[Australia_ramusage_osmloading_screenshot.png|342]]
 
 Loading just Canberra osm data ram usage, on Laptop, with base line of  3.12Gb ram usage prior to loading.
+
 ![[canberra_ramusage_osmloading_screenshot.png]]
 ###### Challenges and Changes
 
@@ -249,7 +251,11 @@ The next stage was to develop the navigation backend, converting the processed r
 
 ###### Description of Development
 
+This stage involved developing the navigation backend, allowing the system to calculate routes between two locations. I used Pyrosm to extract the road network from the OpenStreetMap data and convert it into a NetworkX graph. I then developed a routing class which finds the closest road nodes to the starting and destination coordinates, before using NetworkX's implementation of the A* algorithm to calculate the shortest route. I also added functions to retrieve the route's coordinates, road lengths and speed limits, which could then be used to display the route and estimate travel times.
+
 ###### Challenges and changes
+
+Originally, I intended to develop my own routing system, before considering implementing an existing routing algorithm myself. However, after experimenting with different libraries, I decided to use NetworkX, as it already provided the functionality I required. Testing was relatively successful, with the system calculating routes between locations within the loaded map data. I also created separate testing programs to check the road graph, calculated routes and returned coordinates before connecting them to the rest of the application. Although using an existing library meant I had less control over the routing algorithm itself, it allowed me to focus on integrating navigation into the application.
 
 ###### Next steps
 
@@ -259,17 +265,39 @@ The next stage was to develop the user interface and map display, allowing the c
 
 ###### Description of Development
 
+This stage involved designing and developing the user interface using PyQt5. As I had not clearly defined the interface in my original proposal, I asked my classmates to draw their preferred designs for a car navigation system. I then used elements from each of their designs to create my own, before implementing it using PyQt5. The interface was divided into three main sections, displaying information such as speed, location, the map, destination selection and estimated travel time.
+
+###### Peer UI Design
+
+Designs from each of my IT peers,showing what they want in their vision of a car navigation systems UI, which provided the foundation for my own design.
+
+![[IMG20261016124519.jpg|208]]![[IMG20261016124512.jpg|207]]![[IMG20261016124522.jpg|208]]
+###### My own design
+
+This is the design i made following the examples from my peers. 
+
+![[IMG20261016124538.jpg|530]]
 ###### Challenges and changes
 
+One of the main challenges was displaying the map, as I initially experimented with QGIS before deciding to use Folium, which could be displayed within PyQt5 using QWebEngineView. Although this allowed me to display the map and calculated routes, it also introduced limitations, particularly requiring an internet connection to load map tiles. I also attempted to add interactive overlays, such as a recentering button, but had difficulties getting the buttons to work over the map. While the final interface included most of the elements from my design, it was not as aesthetically polished as I had originally envisioned.
+
 ###### Next steps
+
+The next stage was to connect the interface to the GPS and navigation systems, allowing it to display the user's current location and calculated routes, before completing the final testing.
 
 #### Stage 5: Integration and final testing
 
 ###### Description of Development
 
+The final stage involved connecting the previously developed systems into a single application using the `CarNavApp` class. This managed the GPS, road graph, navigation controller and user interface, allowing them to communicate with one another. I also implemented a simulated GPS, allowing me to test the application on my computer without needing the physical receiver. This allowed the system to calculate and display routes, update the user's simulated location and speed, and display their progress through the route.
+
 ###### Challenges and changes
 
+One of the main challenges was integrating the different systems, as they had largely been developed and tested independently. This resulted in problems that were not apparent during their individual testing. For example, the map originally reset its zoom level whenever the user's location updated, as I was recreating the entire map each time. I resolved this by using JavaScript to update the existing map, allowing the user's position and route to change without resetting the zoom. However, I was unable to integrate the geographic region loading system, meaning the final application could only navigate within the map data that was initially loaded, for the submitted version this defaulted to Weston.. 
+
 ###### Next steps
+
+Although the application was functioning on my computer, I was unable to complete testing on the Raspberry Pi before submission. Further development would involve testing the application on the intended hardware, resolving any performance problems and implementing the remaining features, particularly offline map tiles and the geographic region loading system.
 
 ## Evaluation and Review
 
