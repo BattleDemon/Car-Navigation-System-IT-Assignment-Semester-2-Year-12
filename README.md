@@ -293,7 +293,7 @@ The final stage involved connecting the previously developed systems into a sing
 
 ###### Challenges and changes
 
-One of the main challenges was integrating the different systems, as they had largely been developed and tested independently. This resulted in problems that were not apparent during their individual testing. For example, the map originally reset its zoom level whenever the user's location updated, as I was recreating the entire map each time. I resolved this by using JavaScript to update the existing map, allowing the user's position and route to change without resetting the zoom. However, I was unable to integrate the geographic region loading system, meaning the final application could only navigate within the map data that was initially loaded, for the submitted version this defaulted to Weston.. 
+One of the main challenges was integrating the different systems, as they had largely been developed and tested independently. This resulted in problems that were not apparent during their individual testing. For example, the map originally reset its zoom level whenever the user's location updated, as I was recreating the entire map each time. I resolved this by using JavaScript to update the existing map, allowing the user's position and route to change without resetting the zoom. However, I was unable to integrate the geographic region loading system, meaning the final application could only navigate within the map data that was initially loaded, for the submitted version this defaulted to Weston.
 
 ###### Next steps
 
