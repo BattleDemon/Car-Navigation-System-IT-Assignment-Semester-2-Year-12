@@ -230,61 +230,17 @@ Although I learnt some new Python features, such as `isinstance()`, along with t
 
 ### 5. Evaluation
 
-#### How well does the final product meet user needs?
+I originally started this project to develop a car navigation system that I could use in my car, as it does not have an existing navigation system. The main requirements were that it needed to operate offline, be usable within my car, and only needed to provide mapping and navigation for Canberra. I generally managed to complete the minimum viable product, although several features required compromises, particularly the ability to operate entirely offline. The system can determine and display the user's current location when the GPS receiver has a good connection, although this requires the antenna to be positioned under the windscreen. It can also calculate and display a route to a destination, but the destination must be entered using latitude and longitude coordinates, rather than searching for an address, like I intended.
 
-- What were your original needs as a provisional driver without an existing in-car navigation system?
-		I started this project to make a car navigation system in to have in my car, It needed to be offline, and usable within my car. It only needed to include mapping and navigation for canberra.
+I believe the user interface communicates the navigation information relatively well, displaying the map, calculated route, estimated travel time and progress through the route. The interface was also designed to fit the resolution of the seven-inch touchscreen, with PyQt5 supporting touchscreen interaction natively. However, I have only tested the completed application on my computer, rather than the Raspberry Pi itself, so I cannot confirm how well it would perform on the intended hardware. The navigation system appears relatively reliable within the region loaded, such as the ACT or Weston, although the map tiles sometimes fail to stream correctly, leaving sections of the map unloaded. While the navigation calculations themselves can operate offline, the map display still requires an internet connection, making the system impractical for my original intended use.
 
-- Which of the original MVP features were successfully implemented?
-		I generally completed the MVP features, athough did need to change or compromise on somethings, such as offline ect.
-    
-- Can the system determine and display the user's current location?
-		It can when connection is good, but requires the antenna to be positioned under the glass of  the windshield
-    
-- Can it calculate and display a route to a destination?
-		yes it can calculate and display a route to a destination, although it cannot look up the destination as if it were an address, instead needing latitude and longitude
-    
-- Does the system function without an internet connection?
-		Technically the navigation does, but you won't see anything on the map.
-    
-- How successfully does the UI communicate navigation information to the user?
-		I believe it does well, showing the user the map and the route needed, it shows the estimated time, and how far through the route they are.
-    
-- Is the interface practical to operate using a seven-inch touchscreen?
-		Qt naturally supports a touch screen interface, and i have designed it to fit within the resolution of the screen.
-    
-- Was the final system tested on the Raspberry Pi hardware, or primarily on your desktop?
-		Although i have only tested on my computer and not the raspberry pi system.
-    
-- How reliable is the navigation system compared with existing commercial alternatives?
-		It is reliable but only for the region inputed so ACT or Weston, but can sometimes have unreliable map streaming preventing some of the map from loading
-    
-- What limitations would prevent you from using the current version for everyday driving?
-		I was unable to 3d print a chasiss, and mout it in my car so it can't be used. Also it would need an internet connection which i don't want to bother with, but if i spent some more time working on it i could setup a local server and keep the map tiles on there for canberra.
-    
-- Overall, would you consider the project successful when compared with your original objectives? Why?
-	    It was generally successful but did need to compromise in aspects, and didn't go as far as i originally planed, barely making the MVP.
+Another major limitation is that I was unable to 3D print a chassis or mount the system inside my car, making unusable for my original intention. If I had more time, I could potentially resolve the internet requirement by setting up a local map tile server on the Raspberry Pi, allowing the map to be displayed without an external connection. Along with also been able to model, and print the chassis to mount in my car. Overall, I would consider the project generally successful from a technical perspective, as I managed to develop most of the core functionality. However, it did not fully achieve my original objectives, with several compromises being required and the final product only just reaching the intended MVP. 
 
-#### What would you improve if given another month?
+If I were given another month to continue development especially if it was free from other assignments, I would focus primarily on refining and completing the existing systems, rather than immediately adding new functionality. One of my first priorities would be integrating the geographic region loading system I had previously developed, and resolving any problems that occurred when connecting it to the main application. I would then work on setting up a local map tile server on the Raspberry Pi, allowing the navigation system to operate entirely offline as originally intended.
 
-- Would you prioritise fixing existing problems or adding new functionality?
-		I would refine and fix existing systems, and actually connect my area loading system, and fix anyproblems with it, before making a map tile server (locally on the raspberry pi).
+I would also spend more time improving the user interface, as although it contains most of the elements from my original design, it is not as aesthetically polished as I had envisioned. Another feature I would like to implement is automatic rerouting when the driver leaves the calculated route. I would not prioritise changing the existing route calculation system, as the library I used already provides relatively efficient and accurate routes, and replacing it would require a significant amount of additional work.
 
-- Would you improve the interface, particularly navigation controls and information display?
-		My current interface although including the parts from my design, is not as aesthetically good for the ui i was envisioning.
-
-- Would you implement automatic rerouting when the driver leaves the calculated route?
-		It would be good to implement, but might not be an instant thing, it might be a periodic check to reduce load on the raspbery pi. 
-
-- Would you improve the efficiency or accuracy of the route calculation?
-		No since i have used a library it is already quite efficient and accurate, if i were to change it i would need to build it from scratch.
-
-- Would you revisit any of your original stretch goals, such as voice navigation or a 3D-printed chassis?
-		It would be good to revisit all the stretch goals and implement them especially yhe ones which allow it to be mouted in my car.
-
-- Which improvement would provide the greatest benefit to the user?
-		Mostlikely UI improvements, as it improves every users experience instantly.
-
+Finally, I would revisit some of the original stretch goals, particularly the 3D-printed chassis and mounting system, as these would allow the device to actually be installed and used within my car. Voice navigation would also be a useful addition, although I would prioritise getting the existing systems fully functional first. Of the possible improvements, I think refining the user interface would provide the greatest immediate benefit to the user, as it would improve the overall experience of interacting with the system, regardless of which navigation features were being used.
 ## Bibliography
 
 Australian Government 2026, _Actgov division_, Arcgis.com, viewed 11 September 2026, <https://actmapi-actgov.opendata.arcgis.com/datasets/ACTGOV::actgov-division/explore?location=-35.520000,149.085000,9>.
