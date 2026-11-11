@@ -160,25 +160,116 @@ Waze 2026, _Driving directions, live traffic & road conditions updates_, _Waze_,
 
 ## Development and Design Thinking
 
-### Developing Minimum Viable Project
+#### Stage 1: Raspberry Pi and GPS
+###### Description of Development
 
-#### Milestone 1: Initial set up of the Raspberry Pi 
+The first stage involved setting up the Raspberry Pi and connecting the GPS receiver through its GPIO pins. This required configuring the Raspberry Pi's serial port, and developing a GPS manager using Python's `serial` and `pynmea2` libraries to read and interpret NMEA messages. The GPS manager was also designed to run in a separate thread, allowing it to continuously update the user's location and speed without interrupting the main application.
 
-This milestone was the simplest to complete as it only involved, the ordering of parts and their initial setup. 
+###### Challenges and Changes
+
+The first stage involved setting up the Raspberry Pi and connecting the GPS receiver through its GPIO pins. This required configuring the Raspberry Pi's serial port, and developing a GPS manager using Python's `serial` and `pynmea2` libraries to read and interpret NMEA messages. The GPS manager was also designed to run in a separate thread, allowing it to continuously update the user's location and speed without interrupting the main application.
+
+###### Image of soldered GPS
+![[IMG20260808211141.jpg|423]]
 
 
-#### Milestone 2: Gathering and Extraction of data and GPS System
+###### Example of GPS data
 
-This is where the actual development and coding began, along with the gathering of data that will allow for the future systems. This began with finding the 
+Indoors  - Containing almost no information and not telling the GPS where it is.
+```
+$GNGGA,,,,,,0,00,25.5,,,,,,*64
+$GNRMC,,V,,,,,,,,,,M*4E
+$GNVTG,,,,,,,,,M*2D
+```
+Outdoors and near windows - Now containing the correct information and usable for its purpose
+```
+$GNGGA,224632.000,3519.60311,S,14903.48190,E,1,10,1.3,592.1,M,0.0,M,,*60
+$GNRMC,224632.000,A,3519.60311,S,14903.48190,E,0.04,0.00,130826,,,A*64
+$GNVTG,0.00,T,,M,0.04,N,0.07,K,A*20
+```
+###### Next steps
 
-#### Milestone 3: Navigation and Backend
+The next stage was to begin processing the OpenStreetMap data, so that the GPS coordinates could eventually be used to display the user's location on a map.
 
-This is the step where i fell behind and other assignments took the primary focus of my attention
+#### Stage 2: Map data processing
 
-#### Milestone 4: UI 
+###### Description of Development
 
-#### Milestone 5: Stress Testing
-### Expanding on Minimum Viable Project
+This stage involved processing the OpenStreetMap data into a format that could be used by the navigation system. Initially, I attempted to load the entirety of Australia's map data, which required approximately 34 GB of RAM and took ten minutes on my computer, compared to Canberra which only required 0.14 GB and took around a minute. Due to the Raspberry Pi's limited RAM, I decided to divide the ACT into its 19 districts, using GeoJSON boundaries and Osmium to create individual OSM PBF files.
+
+###### Ram usage when loading osm data
+Loading All of Australia osm data ram usage, on PC, with base line of 6Gb ram usage prior to loading.
+![[Australia_ramusage_osmloading_screenshot.png|342]]
+
+Loading just Canberra osm data ram usage, on Laptop, with base line of  3.12Gb ram usage prior to loading.
+![[canberra_ramusage_osmloading_screenshot.png]]
+###### Challenges and Changes
+
+Dividing the data required researching several unfamiliar tools and commands before I was able to successfully extract the individual districts. I also began developing an area loading system, which would use the user's coordinates to determine their current district and identify adjacent districts to load. This was intended to reduce memory usage while still allowing navigation between regions. Although I successfully divided the data, the automatic loading system remained incomplete and was never integrated into the final application. In hindsight, I spent too much time developing this system before confirming how it would connect to the navigation backend.
+
+###### Extract from the extraction config
+
+This part of the JSON I made to extract, the wider Canberra region's OSM, into smaller more manageable areas.
+```
+"extracts": [
+
+{
+
+"output": "belc.osm.pbf",
+
+"polygon": {
+
+"file_name": "Data/districts/geojson/BELC.geojson",
+
+"file_type": "geojson"
+
+}
+
+},
+
+{
+
+"output": "boot.osm.pbf",
+
+"polygon": {
+
+"file_name": "Data/districts/geojson/BOOT.geojson",
+
+"file_type": "geojson"
+
+}
+
+},
+```
+###### Next steps
+
+The next stage was to develop the navigation backend, converting the processed road data into a graph that could be used to calculate routes between locations.
+
+#### Stage 3: Navigation backend
+
+###### Description of Development
+
+###### Challenges and changes
+
+###### Next steps
+
+The next stage was to develop the user interface and map display, allowing the calculated routes to be displayed visually rather than only as coordinates in the console.
+
+#### Stage 4: User interface and map display
+
+###### Description of Development
+
+###### Challenges and changes
+
+###### Next steps
+
+#### Stage 5: Integration and final testing
+
+###### Description of Development
+
+###### Challenges and changes
+
+###### Next steps
 
 ## Evaluation and Review
 
